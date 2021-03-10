@@ -1,0 +1,21 @@
+{
+  "name": "buildtool",
+  "version": "2.5.0",
+  "description": "Buildtowol",
+  "scripts": {
+    "build": "onelua . --no-minify --prepend-meta",
+    "minify": "onelua . -o buildtool-minified.lua"
+  },
+  "onelua": {
+    "main": "main.lua",
+    "output": "buildtool.lua"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "transformice": "file:../transformice"
+  },
+  "devDependencies": {
+    "onelua": "file:../one-lua"
+  }
+}
