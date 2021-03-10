@@ -7,13 +7,12 @@
     "minify": "onelua . -o buildtool-minified.lua"
   },
   "onelua": {
-    "main": "main.lua",
+    "main": "src/main.lua",
     "output": "buildtool.lua"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "transformice": "file:../transformice"
   },
   "devDependencies": {
     "onelua": "file:../one-lua"

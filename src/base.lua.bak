@@ -1,0 +1,7 @@
+return {
+    Api = require("base_files.Api"),
+
+    Class = require("base_files.Class"),
+    EventEmitter = require("base_files.EventEmitter"),
+    TfmEvent = require("base_files.TfmEvent"),
+}
