@@ -17,6 +17,32 @@ do
         end
         return raw_print(table.concat(segments, "\t"))
     end
+
+    dumptbl = function(tbl, indent, cb)
+        if not indent then indent = 0 end
+        if not cb then cb = print end
+        for k, v in pairs(tbl) do
+            formatting = string.rep("  ", indent) .. k .. ": "
+            if type(v) == "table" then
+                cb(formatting)
+                dumptbl(v, indent+1, cb)
+            elseif type(v) == 'boolean' then
+                cb(formatting .. tostring(v))
+            elseif type(v) == "function" then
+                cb(formatting .. "()")
+            else
+                cb(formatting .. v)
+            end
+        end
+    end
+
+    local raw_xpcall = xpcall
+    xpcall = function(f, msgh, ...)
+        local args, nargs = {...}, select("#", ...)
+        return raw_xpcall(function()
+            return f(table.unpack(args, 1, nargs))
+        end, msgh)
+    end
 end
 
 tfmEvent:on("ChatMessage", function(pn, message)
@@ -26,6 +52,14 @@ end)
 tfmEvent:on("Keyboard", function(pn, k, down, x, y)
     if k == 72 then
         WindowManager.toggle(WindowEnums.HELP, pn)
+    end
+    if k==32 then  --tmp test
+        local w =WindowManager.getWindow(WindowEnums.HELP, pn)
+        if w then
+            if w.focused then
+                w:unfocus()
+            else w:focus() end
+        end
     end
 end)
 
@@ -40,6 +74,12 @@ api:on("newPlayer", function(p)
     globals.players[p.name] = p
     tfm.exec.chatMessage("player ".. p.name)
     system.bindKeyboard(p.name, 72, true, true)
+    system.bindKeyboard(p.name, 32, true, true)  -- tmp
 end)
+
+for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do
+    tfm.exec['disable'..v](true)
+end
+system.disableChatCommandDisplay(nil,true)
 
 api:start()

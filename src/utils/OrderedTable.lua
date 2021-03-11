@@ -1,5 +1,7 @@
 -- Ordered table (dictionary) implementation
--- Preserves order in the insertion of keys when traversing through the table.
+-- Preserves order in the insertion of keys when traversing through the table,
+-- similar to JavaScript objects
+--
 -- Example usage:
 -- ```
 -- local myOdt = OrderedTable:new()
@@ -7,16 +9,27 @@
 -- myOdt["Two"] = true
 -- myOdt["Three"] = true
 -- myOdt["Two"] = true
--- for key in myOdt:pairs() do
+-- for key, v  in OrderedTable.pairs(myOdt) do
+--   print(key, v)
+-- end
+-- for key in OrderedTable.iterkeys(myOdt) do
 --   print(key)
 -- end
 -- -- One
 -- -- Two
 -- -- Three
 -- ```
--- The table can accept any standard index key except the following which are
--- reserved:
--- a. pairs
+--
+-- The OrderedTable class exposes two different static methods to traverse
+-- the table:
+-- a. keys - returns a list of keys within the table, and a `length` property
+--           within it to expose the number of keys
+-- b. pairs - returns an key-value iterator for convenient looping similar to
+--            pairs()
+-- c. iterkeys - similar to pairs() but does not provide the value of the item
+--
+-- If you only need to manipulate the keys and not the item value, keys() and
+-- iterkeys() will perform better than pairs() due to no indexing involved.
 
 local OrderedTable = {}
 do
@@ -24,7 +37,9 @@ do
         local next_key
         if not index then
             -- First item
-            next_key = tbl._keys._front._item
+            local front = tbl._keys._front
+            if not front then return nil end
+            next_key = front._item
         else
             local node = tbl._keyNodes[index]
             if not node then return nil end
@@ -35,7 +50,28 @@ do
         return next_key, tbl._items[next_key]
     end
     local odtPairs = function(tbl)
+        if not (tbl and tbl._keys) then
+            error("Exepected table of type OrderedTable, got " .. type(tbl))
+            return
+        end
         return nextOdt, tbl, nil
+    end
+
+    local nextOdtKey = function(tbl, index)
+        local next_key
+        if not index then
+            -- First item
+            local front = tbl._keys._front
+            if not front then return nil end
+            next_key = front._item
+        else
+            local node = tbl._keyNodes[index]
+            if not node then return nil end
+            local next_node = node._next
+            if not next_node then return nil end
+            next_key = next_node._item
+        end
+        return next_key
     end
 
     local mt = {
@@ -79,13 +115,38 @@ do
             tbl._items[index] = val
         end,
         __index = function(tbl, index)
-            if index == "pairs" then return odtPairs end
             return tbl._items[index]
         end,
         --__pairs = odtPairs
     }
 
-    OrderedTable.new = function(odt)
+    OrderedTable.pairs = odtPairs
+
+    OrderedTable.keys = function(tbl)
+        if not (tbl and tbl._keys) then
+            error("Exepected table of type OrderedTable, got " .. type(tbl))
+            return
+        end
+        local curr = tbl._keys._front
+        local keys, klen = {}, 0
+        while curr do
+            klen = klen + 1
+            keys[klen] = curr._item
+            curr = curr._next
+        end
+        keys.length = klen
+        return keys
+    end
+
+    OrderedTable.iterkeys = function(tbl)
+        if not (tbl and tbl._keys) then
+            error("Exepected table of type OrderedTable, got " .. type(tbl))
+            return
+        end
+        return nextOdtKey, tbl, nil
+    end
+
+    OrderedTable.new = function(_)
         tbl = {}
         tbl._items = {}
         tbl._keys = { _front = nil, _back = nil, length = 0 }
@@ -94,11 +155,4 @@ do
     end
 end
 
-local myOdt = OrderedTable:new()
-myOdt["One"] = true
- myOdt["Two"] = nil
- myOdt["Three"] = true
- myOdt["Two"] = true
- for key in myOdt:pairs() do
-   print(key)
- end
+return OrderedTable
