@@ -13,6 +13,10 @@ local onFunc = function(events, eventName, listener, options)
     event[event._sz] = { listener, options }
 end
 
+local errCallback = function(err)
+    print("Runtime Error : " .. tostring(err) .. "\n" .. debug.traceback(nil, 2))
+end
+
 local emitFunc = function(listeners, eventName, ...)
     if not listeners then return end
 
@@ -20,17 +24,31 @@ local emitFunc = function(listeners, eventName, ...)
 
     for i = 1, listeners._sz do
         local listener, options = listeners[i][1], listeners[i][2]
-        listener(...)
+        xpcall(listener, errCallback, ...)
         if options and options.once then
-            listenersIndexToRemove._sz = listenersIndexToRemove._sz + 1
-            listenersIndexToRemove[listenersIndexToRemove._sz] = i
+            listeners[i] = nil
         end
     end
 
-    -- TODO: probably less expensive to create a new table as the size of the list grows
-    for i = 1, listenersIndexToRemove._sz do
-        table.remove(listeners, listenersIndexToRemove[i])
-        listeners._sz = listeners._sz - 1
+    -- Compact listeners list
+    do
+        local found_spot = false
+        local last_empty = nil
+        for i = 1, listeners._sz do
+            if not found_spot then
+                if listeners[i] == nil then
+                    last_empty = i
+                    found_spot = true
+                end
+            elseif listeners[i] then
+                listeners[last_empty] = listeners[i]
+                listeners[i] = nil
+                last_empty = last_empty + 1
+            end
+        end
+        if last_empty then
+            listeners._sz = last_empty - 1
+        end
     end
 end
 
