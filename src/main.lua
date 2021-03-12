@@ -81,6 +81,9 @@ api:on("newPlayer", function(p)
     system.bindKeyboard(p.name, 79, true, true)
 end)
 
+-- External Init
+require("commands.init")
+
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do
     tfm.exec['disable'..v](true)
 end
