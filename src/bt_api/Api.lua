@@ -11,7 +11,7 @@ local createApi = function()
     local TfmEvent = require("TfmEvent")
     local players = {}
 
-    local Api = require("EventEmitter"):extend("Api")
+    local Api = require("base.EventEmitter"):extend("Api")
 
     Api._init = function(self)
         Api._parent._init(self)

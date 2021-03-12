@@ -45,7 +45,7 @@
 --   TfmEvent:on("Loop", function() print("looping") end)
 -- end)
 
-local TfmEvents = require("EventEmitter"):extend("TfmEvents")
+local TfmEvents = require("base.EventEmitter"):extend("TfmEvents")
 
 local hookedEvs = {}
 
