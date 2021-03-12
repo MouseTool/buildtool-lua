@@ -61,6 +61,9 @@ tfmEvent:on("Keyboard", function(pn, k, down, x, y)
             else w:focus() end
         end
     end
+    if k == 79 then
+        WindowManager.toggle(WindowEnums.SETTINGS, pn)
+    end
 end)
 
 tfmEvent:onCrucial("PlayerLeft", function(pn)
@@ -75,6 +78,7 @@ api:on("newPlayer", function(p)
     tfm.exec.chatMessage("player ".. p.name)
     system.bindKeyboard(p.name, 72, true, true)
     system.bindKeyboard(p.name, 32, true, true)  -- tmp
+    system.bindKeyboard(p.name, 79, true, true)
 end)
 
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do
