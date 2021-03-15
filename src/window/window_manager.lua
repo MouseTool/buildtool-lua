@@ -2,11 +2,14 @@ local globals = require("bt-vars")
 local api = globals.api
 local WindowEnums = require("bt-enums").Window
 local WindowOverlayEnums = require("bt-enums").WindowOverlay
+
 local HelpWindow = require("HelpWindow")
+local SettingsWindow = require("SettingsWindow")
 
 local windows = {}
 local CLASS_MAP = {
-    [WindowEnums.HELP] = HelpWindow
+    [WindowEnums.HELP] = HelpWindow,
+    [WindowEnums.SETTINGS] = SettingsWindow
 }
 
 local window_manager = {}

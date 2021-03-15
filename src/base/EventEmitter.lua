@@ -1,5 +1,7 @@
 --- Event emitter.
 --- @class EventEmitter:Class
+--- @field protected _crucialListeners table
+--- @field protected _listeners table
 local EventEmitter = require("Class"):extend("EventEmitter")
 
 local onFunc = function(events, eventName, listener, options)
@@ -52,20 +54,18 @@ local emitFunc = function(listeners, eventName, ...)
     end
 end
 
---- @function EventEmitter:new
 --- Creates a new event emitter.
---- @treturn EventEmitter The instance of the EventEmitter
+--- @return EventEmitter @The instance of the EventEmitter
 EventEmitter._init = function(self)
     self._listeners = { _sz = 0 }
     self._crucialListeners = { _sz = 0 }
 end
 
---- @function EventEmitter:on
 --- Adds the listener function to the end of the listeners array for the event named eventName.
 --- No checks are made to see if the listener has already been added.
---- @tparam eventName The name of the event
---- @tparam eventName The callback function
---- @tparam table options
+--- @param eventName string The name of the event
+--- @param listener function The callback function
+--- @param options table
 --- @return EventEmitter
 EventEmitter.on = function(self, eventName, listener, options)
     onFunc(self._crucialListeners, eventName, listener, options)

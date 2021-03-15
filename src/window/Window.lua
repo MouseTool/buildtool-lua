@@ -44,7 +44,7 @@ Window.removeImage = function(self, imageId)
 end
 
 --- Adds a text area bound to the window. If nil textAreaId, will use a generated ID.
---- @treturn Number The ID of the text area created
+--- @return integer The ID of the text area created
 Window.addTextArea = function(self, textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
     textAreaId = textAreaId or idGen.getNewTextAreaId()
     ui.addTextArea(textAreaId, text, self.pn, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
