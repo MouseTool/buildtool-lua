@@ -68,7 +68,7 @@ end
 --- @param options table
 --- @return EventEmitter
 EventEmitter.on = function(self, eventName, listener, options)
-    onFunc(self._crucialListeners, eventName, listener, options)
+    onFunc(self._listeners, eventName, listener, options)
     return self
 end
 
