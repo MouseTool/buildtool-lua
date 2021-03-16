@@ -8,7 +8,7 @@ tfmcmd.initCommands({
             tfmcmd.ArgString { lower = true, optional = true },
             tfmcmd.ArgString { lower = true, optional = true },
         },
-        func = function( pn , w2 , w3 )
+        func = function(ctx, w2, w3)
             if w2 == 'history' then
             elseif w2 == 'back' then
             else

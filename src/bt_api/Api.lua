@@ -26,7 +26,7 @@ local createApi = function()
 
     Api.hookTfmEvents = function(self)
         TfmEvent:onCrucial("NewPlayer", function(pn)
-            local p = Player:new(pn)
+            local p = Player:new(pn, true)
             players[pn] = p
 
             self:emit("newPlayer", p)
@@ -36,6 +36,7 @@ local createApi = function()
             local p = players[pn]
             if not p then return end
 
+            p.inRoom = false
             players[pn] = nil
         end)
 
@@ -65,7 +66,7 @@ local createApi = function()
 
     Api.emitExistingPlayers = function(self)
         for name, rp in pairs(tfm.get.room.playerList) do
-            local p = Player:new(name)
+            local p = Player:new(name, true)
             players[name] = p
 
             self:emit("newPlayer", p)

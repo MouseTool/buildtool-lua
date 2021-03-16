@@ -2,7 +2,16 @@ local idGen = require("bt-ids")
 local OrderedTable = require("utils.OrderedTable")
 local WindowOverlayEnums = require("bt-enums").WindowOverlay
 
--- A basic window.
+--- A basic window.
+--- @class Window:EventEmitter
+--- @field public running boolean @Whether or not the window is running (false if not yet created/destroyed)
+--- @field public focused boolean @Whether or not the window is focused
+--- @field protected state table @Persistent state stored by WindowManager before the old instance was destroyed.
+--- @field protected images OrderedTable
+--- @field protected textAreas OrderedTable
+--- @field protected pn string @The player whom the window belongs to
+--- @field private _should_refocus_next boolean
+--- @field private _cached_textAreas table
 local Window = require("base.EventEmitter"):extend("Window")
 
 Window.OVERLAY = WindowOverlayEnums.UNFOCUS
@@ -31,7 +40,7 @@ Window._init = function(self, pn, state)
 end
 
 --- Adds an image bound to the window.
---- @return Number The image ID created from tfm.exec.addImage
+--- @return integer The image ID created from tfm.exec.addImage
 Window.addImage = function(self, imageUid, target, xPosition, yPosition)
     local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn)
     self.images[imageId] = {imageUid, target, xPosition, yPosition}
@@ -53,7 +62,7 @@ Window.addTextArea = function(self, textAreaId, text, x, y, width, height, backg
 end
 
 --- Updates the content of a text area bound to the window.
---- @treturn bool Whether the text area was updated
+--- @return boolean Whether the text area was updated
 Window.updateTextArea = function(self, textAreaId, text)
     if not self.textAreas[textAreaId] then return false end
     ui.updateTextArea(textAreaId, text, self.pn)
@@ -61,12 +70,13 @@ Window.updateTextArea = function(self, textAreaId, text)
     return true
 end
 
+--- Removes a text area bound to the window.
 Window.removeTextArea = function(self, textAreaId)
     ui.removeTextArea(textAreaId, self.pn)
-    self.textArea[textAreaId] = nil
+    self.textAreas[textAreaId] = nil
 end
 
--- Removes all text areas and images bound to the window
+--- Removes all text areas and images bound to the window.
 Window.removeAllElements = function(self)
     -- Remove all images
     for img_id in OrderedTable.iterkeys(self.images) do
@@ -83,15 +93,18 @@ end
 
 --- Called on create before `created` event is emitted. 
 --- @virtual
+--- @protected
 Window.doCreate = function(self) end
 
 --- Called on destroy before `destroyed` event is emitted. Default behavior
 --- is to call removeAllElements.
 --- @virtual
+--- @protected
 Window.doDestroy = function(self)
     self:removeAllElements()
 end
 
+--- Draws the window. Emits `created` event.
 Window.create = function(self)
     self:doCreate()
     self.running = true
@@ -99,6 +112,8 @@ Window.create = function(self)
     self:emit("created")
 end
 
+--- Destroys the window. Emits `destroyed` event with the window's persistent
+--- state.
 Window.destroy = function(self)
     self:doDestroy()
     self.destroyed = true

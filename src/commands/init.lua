@@ -5,7 +5,7 @@ local globals = require("bt-vars")
 local api = globals.api
 local tfmEvent = api.tfmEvent
 
-tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
+--tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
 
 require("commands.MapNp")
 

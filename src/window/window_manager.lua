@@ -15,7 +15,7 @@ local CLASS_MAP = {
 local window_manager = {}
 
 --- Opens the window associated with the type and player.
---- @param window_id WindowEnums Window type
+--- @param window_id WindowEnum Window type
 --- @param pn string Player name
 --- @return Window
 window_manager.open = function(window_id, pn)
@@ -48,7 +48,7 @@ window_manager.open = function(window_id, pn)
 end
 
 --- Closes the window associated with the type and player.
---- @param window_id WindowEnums Window type
+--- @param window_id WindowEnum Window type
 --- @param pn string Player name
 window_manager.close = function(window_id, pn)
     if not globals.players[pn] then
@@ -69,9 +69,9 @@ window_manager.close = function(window_id, pn)
 end
 
 --- Checks if the window associated with the type and player is opened.
---- @param window_id WindowEnums Window type
+--- @param window_id WindowEnum Window type
 --- @param pn string Player name
---- @return bool
+--- @return boolean
 window_manager.isOpen = function(window_id, pn)
     if not globals.players[pn] then
         print("Tried to check window ID " .. window_id .." but player not registered:" .. pn)
@@ -89,7 +89,7 @@ window_manager.isOpen = function(window_id, pn)
 end
 
 --- Convenience method to toggle open or close a window.
---- @param window_id WindowEnums Window type
+--- @param window_id WindowEnum Window type
 --- @param pn string Player name
 --- @return Window?
 window_manager.toggle = function(window_id, pn)
@@ -100,7 +100,7 @@ window_manager.toggle = function(window_id, pn)
 end
 
 --- Gets the opened `Window` associated with the type and player.
---- @param window_id WindowEnums Window type
+--- @param window_id WindowEnum Window type
 --- @param pn string Player name
 --- @return Window? The window, null if no such window is opened
 window_manager.getWindow = function(window_id, pn)

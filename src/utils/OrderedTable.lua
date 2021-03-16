@@ -31,6 +31,7 @@
 -- If you only need to manipulate the keys and not the item value, keys() and
 -- iterkeys() will perform better than pairs() due to no indexing involved.
 
+--- @class OrderedTable:table
 local OrderedTable = {}
 do
     local nextOdt = function(tbl, index)
