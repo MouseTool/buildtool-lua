@@ -21,6 +21,10 @@ do
     dumptbl = function(tbl, indent, cb)
         if not indent then indent = 0 end
         if not cb then cb = print end
+        if indent > 6 then
+            cb(string.rep("  ", indent) .. "...")
+            return
+        end
         for k, v in pairs(tbl) do
             formatting = string.rep("  ", indent) .. k .. ": "
             if type(v) == "table" then
@@ -54,12 +58,7 @@ tfmEvent:on("Keyboard", function(pn, k, down, x, y)
         WindowManager.toggle(WindowEnums.HELP, pn)
     end
     if k==32 then  --tmp test
-        local w =WindowManager.getWindow(WindowEnums.HELP, pn)
-        if w then
-            if w.focused then
-                w:unfocus()
-            else w:focus() end
-        end
+        WindowManager.refocus(WindowEnums.SETTINGS, pn)
     end
     if k == 79 then
         WindowManager.toggle(WindowEnums.SETTINGS, pn)

@@ -4,7 +4,7 @@ local WindowOverlayEnums = require("bt-enums").WindowOverlay
 
 --- A basic window.
 --- @class Window:EventEmitter
---- @field public running boolean @Whether or not the window is running (false if not yet created/destroyed)
+--- @field public running boolean @Whether or not the window is running (false if not yet rendered/destroyed)
 --- @field public focused boolean @Whether or not the window is focused
 --- @field protected state table @Persistent state stored by WindowManager before the old instance was destroyed.
 --- @field protected images OrderedTable
@@ -20,7 +20,7 @@ Window._init = function(self, pn, state)
     Window._parent._init(self)
     self.pn = pn
 
-    -- Whether or not the window is running (false if not yet created/destroyed)
+    -- Whether or not the window is running (false if not yet rendered/destroyed)
     self.running = false
 
     -- Whether or not the window is focused
@@ -91,29 +91,27 @@ Window.removeAllElements = function(self)
     self.textAreas = OrderedTable:new()
 end
 
---- Called on create before `created` event is emitted. 
+--- Called on render before `rendered` event is emitted. 
 --- @virtual
 --- @protected
-Window.doCreate = function(self) end
+Window.doRender = function(self) end
 
---- Called on destroy before `destroyed` event is emitted. Default behavior
---- is to call removeAllElements.
+--- Called on destroy before `destroyed` event is emitted. Default behavior is to call removeAllElements.
 --- @virtual
 --- @protected
 Window.doDestroy = function(self)
     self:removeAllElements()
 end
 
---- Draws the window. Emits `created` event.
-Window.create = function(self)
-    self:doCreate()
+--- Draws the window. Emits `rendered` event.
+Window.render = function(self)
+    self:doRender()
     self.running = true
     self.focused = true
-    self:emit("created")
+    self:emit("rendered")
 end
 
---- Destroys the window. Emits `destroyed` event with the window's persistent
---- state.
+--- Destroys the window. Emits `destroyed` event with the window's persistent state.
 Window.destroy = function(self)
     self:doDestroy()
     self.destroyed = true
@@ -122,15 +120,12 @@ Window.destroy = function(self)
     self:emit("destroyed", self.state)
 end
 
---- Called on focus before `focused` event is emitted. Default behavior
---- does nothing.
+--- Called on focus before `focused` event is emitted. Default behavior does nothing.
 --- @virtual
 Window.doFocus = function(self)
 end
 
---- Called on unfocus before `unfocused` event is emitted. Default behavior
---- is to remove all textareas, and stage them for readdition for the next
---- focus() call.
+--- Called on unfocus before `unfocused` event is emitted. Default behavior is to remove all textareas, and stage them for readdition for the next focus() call.
 --- @virtual
 Window.doUnfocus = function(self)
     local cached_textArea, ctalen = {}, 0
@@ -148,8 +143,8 @@ Window.doUnfocus = function(self)
     self.textAreas = OrderedTable:new()
 end
 
---- Focus on the window. Will emit the `focused` event when successfully
---- transitioned from unfocused --> focused.
+--- Partially focus on the window. Restores all text areas if doUnfocus was not overloaded (default behavior). Subsequently calls doFocus.
+--- Will emit the `focused` event when successfully transitioned from unfocused --> focused.
 Window.focus = function(self)
     if self.focused then return end  -- already focused
     self:doFocus()
@@ -167,8 +162,8 @@ Window.focus = function(self)
     self:emit("focused")
 end
 
---- Unfocus the window. Will emit the `unfocused` event when successfully
---- transitioned from focused --> unfocused.
+--- Unfocus the window. Calls doUnfocus().
+--- Will emit the `unfocused` event when successfully transitioned from focused --> unfocused.
 Window.unfocus = function(self)
     if not self.focused then return end  -- already unfocused
     self:doUnfocus()
@@ -176,4 +171,37 @@ Window.unfocus = function(self)
     self:emit("unfocused")
 end
 
+--- Re-focus the window. Similar to focus(), except that it also readds all images.
+--- The difference with focus() is that this is mostly used when the unfocused window needs to be re-rendered over other windows. 
+--- Will emit both `focused` and `refocused` events when successfully transitioned from unfocused --> focused.
+Window.refocus = function(self)
+    if self.focused then return end  -- already focused
+    self:doFocus()
+
+    -- Readd all existing images.
+    local cached_images, ci_len = {}, 0
+    for img_id, args in OrderedTable.pairs(self.images) do
+        ci_len = ci_len + 1
+        cached_images[ci_len] = args
+        tfm.exec.removeImage(img_id)
+    end
+    self.images = OrderedTable:new()
+
+    for i = 1, ci_len do
+        self:addImage(table.unpack(cached_images[i], 1, 4))
+    end
+
+    -- Text area elements staged for readdition by doUnfocus()
+    if self._should_refocus_next then
+        for i = 1, self._cached_textAreas.length do
+            self:addTextArea(table.unpack(self._cached_textAreas[i], 1, 10))
+        end
+        self._should_refocus_next = nil
+        self._cached_textAreas = nil
+    end
+
+    self.focused = true
+    self:emit("focused")
+    self:emit("refocused")
+end
 return Window

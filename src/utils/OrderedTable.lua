@@ -28,6 +28,10 @@
 --            pairs()
 -- c. iterkeys - similar to pairs() but does not provide the value of the item
 --
+-- d. revpairs - pairs() but in reverse (starts from back)
+--
+-- e. reviterkeys - iterkeys() but in reverse (starts from back)
+--
 -- If you only need to manipulate the keys and not the item value, keys() and
 -- iterkeys() will perform better than pairs() due to no indexing involved.
 
@@ -75,6 +79,40 @@ do
         return next_key
     end
 
+    local prevOdtPairs = function(tbl, index)
+        local prev_key
+        if not index then
+            -- First item
+            local back = tbl._keys._back
+            if not back then return nil end
+            prev_key = back._item
+        else
+            local node = tbl._keyNodes[index]
+            if not node then return nil end
+            local prev_node = node._prev
+            if not prev_node then return nil end
+            prev_key = prev_node._item
+        end
+        return prev_key, tbl._items[prev_key]
+    end
+
+    local prevOdtKey = function(tbl, index)
+        local prev_key
+        if not index then
+            -- First item
+            local back = tbl._keys._back
+            if not back then return nil end
+            prev_key = back._item
+        else
+            local node = tbl._keyNodes[index]
+            if not node then return nil end
+            local prev_node = node._prev
+            if not prev_node then return nil end
+            prev_key = prev_node._item
+        end
+        return prev_key
+    end
+
     local mt = {
         __newindex = function(tbl, index, val)
             if not tbl._items[index] then
@@ -106,7 +144,9 @@ do
                     -- This node is the front, set the front to the next
                     keys._front = node._next
                 end
-                if not node._next then
+                if node._next then
+                    node._next._prev = node._prev
+                else
                     -- This node is the back, set the back to the prev
                     keys._back = node._prev
                 end
@@ -125,7 +165,7 @@ do
 
     OrderedTable.keys = function(tbl)
         if not (tbl and tbl._keys) then
-            error("Exepected table of type OrderedTable, got " .. type(tbl))
+            error("Expected table of type OrderedTable, got " .. type(tbl))
             return
         end
         local curr = tbl._keys._front
@@ -141,10 +181,26 @@ do
 
     OrderedTable.iterkeys = function(tbl)
         if not (tbl and tbl._keys) then
-            error("Exepected table of type OrderedTable, got " .. type(tbl))
+            error("Expected table of type OrderedTable, got " .. type(tbl))
             return
         end
         return nextOdtKey, tbl, nil
+    end
+
+    OrderedTable.revpairs = function(tbl)
+        if not (tbl and tbl._keys) then
+            error("Expected table of type OrderedTable, got " .. type(tbl))
+            return
+        end
+        return prevOdtPairs, tbl, nil
+    end
+
+    OrderedTable.reviterkeys = function(tbl)
+        if not (tbl and tbl._keys) then
+            error("Expected table of type OrderedTable, got " .. type(tbl))
+            return
+        end
+        return prevOdtKey, tbl, nil
     end
 
     OrderedTable.new = function(_)
