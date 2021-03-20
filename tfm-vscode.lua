@@ -1,8 +1,11 @@
 --- @class float:number @Floating-point precision decimal number
 --- @class XYString:string @String coordinates in the `x,y` format
 
----@class debuglibtfm
+--- @class debuglibtfm
 debug = {}
+
+--- @class oslibtfm
+os = {}
 
 --- Global Transformice namespace
 tfm = {}
@@ -12,7 +15,7 @@ tfm.enum = {}
 
 --- @class TfmMisc
 --- @field apiVersion string
---- @field transformiceVersion string
+--- @field transformiceVersion float
 
 --- @class TfmShamanObject
 --- @field angle integer
@@ -580,7 +583,7 @@ function ui.updateTextArea(id,text,targetPlayer) end
 --- @see ui.setMapName
 function tfm.exec.setUIMapName(text) end
 
--- Sets the shaman name. This function is **deprecated**, see `ui.setShamanName`.
+--- Sets the shaman name. This function is **deprecated**, see `ui.setShamanName`.
 --- @param text string the text to display as the shaman name
 --- @deprecated
 --- @see ui.setShamanName
@@ -596,3 +599,52 @@ function tfm.exec.setUIShamanName(text) end
 --- @deprecated
 --- @see system.bindKeyboard
 function tfm.exec.bindKeyboard(playerName,keyCode,down,activate) end
+
+--- @class osdatetfm
+--- four digits
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.year"])
+--- @field year integer
+--- 1-12
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.month"])
+--- @field month integer
+--- 1-31
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.day"])
+--- @field day integer
+--- 0-23
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.hour"])
+--- @field hour integer
+--- 0-59
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.min"])
+--- @field min integer
+--- 0-61
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.sec"])
+--- @field sec integer
+--- weekday, 1–7, Sunday is 1
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.wday"])
+--- @field wday integer
+--- day of the year, 1–366
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.yday"])
+--- @field yday integer
+--- daylight saving flag, a boolean
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-osdate.isdst"])
+--- @field isdst boolean
+
+--- Returns a string or a table containing date and time, formatted according to the given string `format`.
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-os.date"])
+--- @param format? string
+--- @param time? integer time in milliseconds
+--- @return string|osdatetfm
+function os.date(format, time) end
+
+--- Returns the difference, in milliseconds, from time `t1` to time `t2`.
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-os.difftime"])
+--- @param t2 integer time in milliseconds
+--- @param t1 integer time in milliseconds
+--- @return integer @time in milliseconds
+function os.difftime(t2, t1) end
+
+--- Returns the current time when called without arguments, or a time representing the local date and time specified by the given table.
+--- [View documents](command:extension.lua.doc?["en-us/52/manual.html/pdf-os.time"])
+--- @param date? osdatetfm
+--- @return integer @time in milliseconds
+function os.time(date) end
