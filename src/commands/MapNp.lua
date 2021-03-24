@@ -1,6 +1,7 @@
+local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
-tfmcmd.initCommands({
+btcmd.addCommand(
     tfmcmd.Main {
         name = "map",
         aliases = {"np"},
@@ -21,4 +22,4 @@ tfmcmd.initCommands({
             end
         end
     }
-})
+)

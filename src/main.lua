@@ -72,6 +72,7 @@ tfmEvent:onCrucial("PlayerLeft", function(pn)
     globals.players[pn] = nil
 end)
 
+--- @param p Player
 api:on("newPlayer", function(p)
     globals.players[p.name] = p
     tfm.exec.chatMessage("player ".. p.name)

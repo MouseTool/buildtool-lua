@@ -139,27 +139,41 @@ tfmcmd.EOTHER   = 7  -- Other unknown errors
 tfmcmd.ALL_WORDS = 1
 
 --- This command context is passed as the first argument in the commands' callback.
---- @class CmdContext
+--- @class tfmcmd.CmdContext
 --- @field playerName string @The player who invoked the command
 --- @field commandName string @The name of the command invoked
 --- @field args table|nil @Contains a key-value association of arguments that have `name` defined, and also all the arguments according to their positional index. This is `nil` when arguments type is set to tfmcmd.ALL_WORDS
 
---- @class CmdCommonAttr
+--- @class tfmcmd.CmdCommonAttr
 --- @field allowed boolean|fun(playerName:string) @Override the default permission rule set by tfmcmd.setDefaultAllow [Optional]
 --- @field args table Arguments specification (see code docs for supported types)
---- @field func fun(ctx:CmdContext, ...)
+--- @field func fun(ctx:tfmcmd.CmdContext, ...)
 
---- @class CmdMainAttr:CmdCommonAttr
+--- @class tfmcmd.CmdMainAttr:tfmcmd.CmdCommonAttr
 --- @field name string @The command name
 --- @field aliases string[] @Numeric table containing alias names for the command
 
---- @class CmdInterfaceAttr:CmdCommonAttr
+--- @class tfmcmd.CmdInterfaceAttr:tfmcmd.CmdCommonAttr
 --- @field commands string[] @Numeric table containing names for the commands that will use this interface
+
+--- @alias tfmcmd.CmdType
+---| 'tfmcmd.Main'
+---| 'tfmcmd.Interface'
+
+--- @alias tfmcmd.ErrType
+---| 'tfmcmd.OK'
+---| 'tfmcmd.ENOCMD'
+---| 'tfmcmd.EPERM'
+---| 'tfmcmd.EINVAL'
+---| 'tfmcmd.EMISSING'
+---| 'tfmcmd.ETYPE'
+---| 'tfmcmd.ERANGE'
+---| 'tfmcmd.EOTHER'
 
 --- Command types
 local MT_CommonCmd = { __index = {
     call = function(self, pn, a)
-        --- @type CmdContext
+        --- @type tfmcmd.CmdContext
         local cmd_ctx = {
             playerName = pn,
             commandName = self.name
@@ -222,7 +236,7 @@ do
             end
         end
     }, MT_CommonCmd) }
-    --- @param attr CmdMainAttr
+    --- @param attr tfmcmd.CmdMainAttr
     tfmcmd.Main = function(attr)
         return setmetatable(attr or {}, MT_Main)
     end
@@ -245,7 +259,7 @@ do
             end
         end
     }, MT_CommonCmd) }
-    --- @param attr CmdInterfaceAttr
+    --- @param attr tfmcmd.CmdInterfaceAttr
     tfmcmd.Interface = function(attr)
         return setmetatable(attr or {}, MT_Interface)
     end
@@ -333,12 +347,20 @@ do
 end
 
 --- Methods
+
+--- @param cmd tfmcmd.CmdType
+tfmcmd.initCommand = function(cmd)
+    cmd:register()
+end
+
+--- @param cmds tfmcmd.CmdType[]
 tfmcmd.initCommands = function(cmds)
     for i = 1, #cmds do
         cmds[i]:register()
     end
 end
 
+--- @param allow boolean|fun(playerName:string)
 tfmcmd.setDefaultAllow = function(allow)
     default_allowed = allow
 end
@@ -370,6 +392,9 @@ local execute_command = function(pn, words)
     end
 end
 
+--- @param pn string The player who invoked the command
+--- @param msg string Command string to be passed
+--- @return tfmcmd.ErrType, ...
 tfmcmd.executeChatCommand = function(pn, msg)
     local words = { current = 2, _len = 0 }  -- current = index of argument which is to be accessed first in the next arg type
     for word in msg:gmatch("[^ ]+") do

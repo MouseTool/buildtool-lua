@@ -45,7 +45,12 @@
 --   TfmEvent:on("Loop", function() print("looping") end)
 -- end)
 
-local TfmEvents = require("base.EventEmitter"):extend("TfmEvents")
+--- EventEmitter extension to interact directly with Transformice events.
+--- The eventName used in the methods on() and emit() are equivalent to the
+--- original name of events used in TFM API, except
+---   a. without the "event" keyword in front.
+--- @class TfmEvent:EventEmitter
+local TfmEvents = require("base.EventEmitter"):extend("TfmEvent")
 
 local hookedEvs = {}
 

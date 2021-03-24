@@ -1,7 +1,7 @@
 --- @class Class @A skeleton class template that can be inherited from.
 --- @field public className string String representation of the class' name
---- @field protected _class Class This current Class.
---- @field protected _parent Class The parent Class.
+--- @field protected _class any This current Class.
+--- @field protected _parent any The parent Class.
 --- @field protected _isInstance boolean Whether the object is an instance of the Class.
 local Class = {}
 do

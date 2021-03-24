@@ -1,10 +1,12 @@
 --- Main API initializer for Transformice.
 --- @class Api:EventEmitter
+--- @field tfmEvent TfmEvent
 
 local Player = require("entities.Player")
 
 local cached_api
 
+--- @return Api
 local createApi = function()
     -- Private vars
     local options
