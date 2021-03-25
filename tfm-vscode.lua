@@ -211,8 +211,12 @@ function tfm.exec.addConjuration(xPosition,yPosition,duration) end
 --- @param xPosition integer the horizontal offset of the top-left corner of the image (0 being the middle of the game element) (default 0)
 --- @param yPosition integer the vertical offset of the top-left corner of the image (0 being the middle of the game element) (default 0)
 --- @param targetPlayer string the player who will see the image (if nil, applies to all players) (default nil)
+--- @param xScale integer the horizontal (width) scale of the image (default 1)
+--- @param yScale integer the vertical (height) scale of the image (default 1)
+--- @param angle integer the rotation angle about the top-left corner of the image, in radians (default 0)
+--- @param alpha integer the opacity of the image, from 0 (transparent) to 1 (opaque) (default 1)
 --- @return integer @the image identifier
-function tfm.exec.addImage(imageId,target,xPosition,yPosition,targetPlayer) end
+function tfm.exec.addImage(imageId,target,xPosition,yPosition,targetPlayer,xScale,yScale,angle,alpha) end
 
 --- @alias JointType
 ---| '0' # distance joint

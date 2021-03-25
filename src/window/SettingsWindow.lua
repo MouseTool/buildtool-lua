@@ -1,6 +1,6 @@
 ------- Images enum --------
--- interface/settings/settings_bg.png 288x326
-local IMG_BG = "177b6b15e5e.png"
+-- interface/settings/settings_bg.png 280x316
+local IMG_BG = "1786a49d034.png"
 
 ------- Tabs enum --------
 local TAB_ID = {

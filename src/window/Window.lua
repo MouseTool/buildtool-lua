@@ -41,9 +41,9 @@ end
 
 --- Adds an image bound to the window.
 --- @return integer The image ID created from tfm.exec.addImage
-Window.addImage = function(self, imageUid, target, xPosition, yPosition)
-    local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn)
-    self.images[imageId] = {imageUid, target, xPosition, yPosition}
+Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha)
+    local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha)
+    self.images[imageId] = {imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha}
     return imageId
 end
 
@@ -188,7 +188,7 @@ Window.refocus = function(self)
     self.images = OrderedTable:new()
 
     for i = 1, ci_len do
-        self:addImage(table.unpack(cached_images[i], 1, 4))
+        self:addImage(table.unpack(cached_images[i], 1, 8))
     end
 
     -- Text area elements staged for readdition by doUnfocus()
