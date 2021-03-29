@@ -4,6 +4,8 @@ local tfmEvent = api.tfmEvent
 local WindowManager = require("window.window_manager")
 local BtEnums = require("bt-enums")
 local WindowEnums = BtEnums.Window
+local btPerms = require("permissions.bt_perms")
+local BT_CAP = btPerms.CAP
 
 -- Override print function
 do
@@ -75,7 +77,7 @@ end)
 --- @param p Player
 api:on("newPlayer", function(p)
     globals.players[p.name] = p
-    tfm.exec.chatMessage("player ".. p.name)
+    tfm.exec.chatMessage("player ".. p.name .. ";isAdmin:" .. tostring(p.capabilities:hasFlag(BT_CAP.ADMIN)) )
     system.bindKeyboard(p.name, 72, true, true)
     system.bindKeyboard(p.name, 32, true, true)  -- tmp
     system.bindKeyboard(p.name, 79, true, true)
