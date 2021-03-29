@@ -15,10 +15,6 @@ local onFunc = function(events, eventName, listener, options)
     event[event._sz] = { listener, options }
 end
 
-local errCallback = function(err)
-    print("Runtime Error : " .. tostring(err) .. "\n" .. debug.traceback(nil, 2))
-end
-
 local emitFunc = function(listeners, eventName, ...)
     if not listeners then return end
 
@@ -26,7 +22,9 @@ local emitFunc = function(listeners, eventName, ...)
 
     for i = 1, listeners._sz do
         local listener, options = listeners[i][1], listeners[i][2]
-        xpcall(listener, errCallback, ...)
+        xpcall(listener, function(err)
+            print("Runtime Error : event" .. eventName .. ": ".. tostring(err) .. "\n" .. debug.traceback(nil, 2))
+        end, ...)
         if options and options.once then
             listeners[i] = nil
         end
