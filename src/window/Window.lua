@@ -40,10 +40,10 @@ Window._init = function(self, pn, state)
 end
 
 --- Adds an image bound to the window.
---- @return integer The image ID created from tfm.exec.addImage
-Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha)
-    local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha)
-    self.images[imageId] = {imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha}
+--- @return integer @The image ID created from tfm.exec.addImage
+Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor)
+    local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha, xAnchor, yAnchor)
+    self.images[imageId] = {imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor}
     return imageId
 end
 
@@ -53,7 +53,7 @@ Window.removeImage = function(self, imageId)
 end
 
 --- Adds a text area bound to the window. If nil textAreaId, will use a generated ID.
---- @return integer The ID of the text area created
+--- @return integer @The ID of the text area created
 Window.addTextArea = function(self, textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
     textAreaId = textAreaId or idGen.getNewTextAreaId()
     ui.addTextArea(textAreaId, text, self.pn, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
@@ -62,7 +62,7 @@ Window.addTextArea = function(self, textAreaId, text, x, y, width, height, backg
 end
 
 --- Updates the content of a text area bound to the window.
---- @return boolean Whether the text area was updated
+--- @return boolean @Whether the text area was updated
 Window.updateTextArea = function(self, textAreaId, text)
     if not self.textAreas[textAreaId] then return false end
     ui.updateTextArea(textAreaId, text, self.pn)
@@ -188,7 +188,7 @@ Window.refocus = function(self)
     self.images = OrderedTable:new()
 
     for i = 1, ci_len do
-        self:addImage(table.unpack(cached_images[i], 1, 8))
+        self:addImage(table.unpack(cached_images[i], 1, 10))
     end
 
     -- Text area elements staged for readdition by doUnfocus()
