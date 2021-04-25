@@ -51,10 +51,11 @@ do
     end
 end
 
-tfmEvent:on("ChatMessage", function(pn, message)
-    print(message)
-end)
+--[[ External Init ]]
+require("commands.bt-init")
+require("translations.bt-init")
 
+--[[ Main Init ]]
 tfmEvent:on("Keyboard", function(pn, k, down, x, y)
     if k == 72 then
         WindowManager.toggle(WindowEnums.HELP, pn)
@@ -78,13 +79,13 @@ end)
 api:on("newPlayer", function(p)
     globals.players[p.name] = p
     tfm.exec.chatMessage("player ".. p.name .. ";isAdmin:" .. tostring(p.capabilities:hasFlag(BT_CAP.ADMIN)) )
+
+    p:tlChatMsg("player_welcome")
+
     system.bindKeyboard(p.name, 72, true, true)
     system.bindKeyboard(p.name, 32, true, true)  -- tmp
     system.bindKeyboard(p.name, 79, true, true)
 end)
-
--- External Init
-require("commands.init")
 
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do
     tfm.exec['disable'..v](true)
