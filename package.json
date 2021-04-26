@@ -14,9 +14,8 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "onelua": "file:../one-lua"
+    "onelua": "git+https://github.com/MouseTool/onelua.git#1.0.7"
   }
 }
