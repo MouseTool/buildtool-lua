@@ -16,6 +16,6 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "onelua": "git+https://github.com/MouseTool/onelua.git#1.0.7"
+    "@mousetool/onelua": "^1.0.8"
   }
 }
