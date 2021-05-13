@@ -4,6 +4,7 @@ local WindowOverlayEnums = require("bt-enums").WindowOverlay
 
 --- A basic window.
 --- @class Window:EventEmitter
+--- @field new fun(self:Window, pn:string, state:table):Window
 --- @field public running boolean @Whether or not the window is running (false if not yet rendered/destroyed)
 --- @field public focused boolean @Whether or not the window is focused
 --- @field protected state table @Persistent state stored by WindowManager before the old instance was destroyed.
@@ -12,7 +13,7 @@ local WindowOverlayEnums = require("bt-enums").WindowOverlay
 --- @field protected pn string @The player whom the window belongs to
 --- @field private _should_refocus_next boolean
 --- @field private _cached_textAreas table
-local Window = require("base.EventEmitter"):extend("Window")
+local Window = require("@mousetool/mousebase").EventEmitter:extend("Window")
 
 Window.OVERLAY = WindowOverlayEnums.UNFOCUS
 

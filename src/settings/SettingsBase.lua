@@ -2,7 +2,7 @@
 --- @class SettingsBase:EventEmitter
 --- @field private currentFieldValues table<string, any> @Field name, Field value
 --- @field private fieldOpts table<string, SettingsBase.FieldOpts>
-local SettingsBase = require("base.EventEmitter"):extend("SettingsBase")
+local SettingsBase = require("@mousetool/mousebase").EventEmitter:extend("SettingsBase")
 
 local TYPE_ANY = 0
 local TYPE_BOOL = 1
@@ -58,6 +58,7 @@ SettingsBase.addField = function(self, fieldName, fieldType, defaultVal, verifyF
     self.fieldOpts[fieldName] = { fieldType = fieldType, verifyFn = verifyFn, defaultVal = defaultVal }
 end
 
+--- @diagnostic disable-next-line: undefined-field
 local addField = SettingsBase.addField
 
 --- Adds a boolean setting field.

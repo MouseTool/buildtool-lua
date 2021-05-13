@@ -11,8 +11,9 @@
 --- local ROOT_USER = Capabilities:new(CAP_ADMIN, CAP_ROOT) 
 --- ```
 --- @class Capabilities:Class
+--- @field new fun(self:Capabilities, ...):Capabilities
 --- @field private flag integer
-local Capabilities = require("base.Class"):extend("Capabilities")
+local Capabilities = require("@mousetool/mousebase").Class:extend("Capabilities")
 
 local bit    = bit32
 local band   = bit.band

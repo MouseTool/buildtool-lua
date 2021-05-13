@@ -14,8 +14,10 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@mousetool/mousebase": "^1.0.1"
+  },
   "devDependencies": {
-    "@mousetool/onelua": "^1.0.8"
+    "@mousetool/onelua": "^1.0.9"
   }
 }

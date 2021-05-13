@@ -1,9 +1,13 @@
 local globals = require("bt-vars")
 local api = globals.api
 local tfmEvent = api.tfmEvent
+
+local BtPlayer = require("entities.BtPlayer")
 local WindowManager = require("window.window_manager")
+
 local BtEnums = require("bt-enums")
 local WindowEnums = BtEnums.Window
+
 local btPerms = require("permissions.bt_perms")
 local BT_CAP = btPerms.CAP
 
@@ -69,22 +73,23 @@ tfmEvent:on("Keyboard", function(pn, k, down, x, y)
 end)
 
 tfmEvent:onCrucial("PlayerLeft", function(pn)
-    local p = globals.players[pn]
-    if not p then return end
+    local btp = globals.players[pn]
+    if not btp then return end
 
     globals.players[pn] = nil
 end)
 
---- @param p Player
-api:on("newPlayer", function(p)
-    globals.players[p.name] = p
-    tfm.exec.chatMessage("player ".. p.name .. ";isAdmin:" .. tostring(p.capabilities:hasFlag(BT_CAP.ADMIN)) )
+--- @param mbp MbPlayer
+api:on("newPlayer", function(mbp)
+    local btp = BtPlayer:new(mbp)
+    globals.players[mbp.name] = btp
+    tfm.exec.chatMessage("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
 
-    p:tlChatMsg("player_welcome")
+    btp:tlChatMsg("player_welcome")
 
-    system.bindKeyboard(p.name, 72, true, true)
-    system.bindKeyboard(p.name, 32, true, true)  -- tmp
-    system.bindKeyboard(p.name, 79, true, true)
+    system.bindKeyboard(btp.name, 72, true, true)
+    system.bindKeyboard(btp.name, 32, true, true)  -- tmp
+    system.bindKeyboard(btp.name, 79, true, true)
 end)
 
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do

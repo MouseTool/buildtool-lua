@@ -30,6 +30,8 @@ npm run-script minify
 # Coding Environment
 We recommend using [Visual Studio Code](https://code.visualstudio.com) which is supported on all major platforms, with the following extension installed – [Lua Language Server (sumneko.lua)](https://marketplace.visualstudio.com/items?itemName=sumneko.lua). This is to harness auto-completion and other features like type hinting based on Lua docs (Emmylua format).
 
+You should run an `npm install` before starting, so that necessary dependencies are updated and picked up by the extension.
+
 # Contributors
 Special tribute and shoutout to the original creator of BuildTool – `Emeryaurora#0000`, who had also authored the first and second generation of BuildTool; `Leafileaf#0000` for providing assistance since the beginning and contributing to serveral crucial portions of the database system.
 

@@ -16,6 +16,13 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
+# VSCode folder
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 # Buildtool build output
 buildtool.lua
 buildtool-minified.lua
