@@ -18,6 +18,7 @@
     "@mousetool/mousebase": "^1.0.1"
   },
   "devDependencies": {
-    "@mousetool/onelua": "^1.0.9"
+    "@mousetool/onelua": "^1.0.9",
+    "@mousetool/tfm-vscode": "^1.0.1"
   }
 }
