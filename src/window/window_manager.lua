@@ -5,7 +5,7 @@
 
 local globals = require("bt-vars")
 local api = globals.api
-local OrderedTable = require("utils.OrderedTable")
+local OrderedTable = require("@mousetool/ordered-table")
 local WindowEnums = require("bt-enums").Window
 local WindowOverlayEnums = require("bt-enums").WindowOverlay
 

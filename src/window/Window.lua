@@ -1,5 +1,5 @@
 local idGen = require("bt-ids")
-local OrderedTable = require("utils.OrderedTable")
+local OrderedTable = require("@mousetool/ordered-table")
 local WindowOverlayEnums = require("bt-enums").WindowOverlay
 
 --- A basic window.
