@@ -15,5 +15,8 @@
         "node_modules/?/init.lua",
         "node_modules/?/?.lua"
     ],
-    "Lua.workspace.useGitIgnore": false
+    "Lua.workspace.useGitIgnore": false,
+    "Lua.diagnostics.neededFileStatus": {
+        "duplicate-doc-class": "Opened"
+    }
 }
