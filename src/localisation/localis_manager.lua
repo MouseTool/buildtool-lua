@@ -13,15 +13,15 @@ end
 
 --- Add language data
 --- @param language string
---- @param langData table<string, string> Table <LocKey , LocString>
+--- @param langData table<string, string> # Table <LocKey , LocString>
 LocalisManager.addLanguageData = function(language, langData)
     translations[language] = langData
 end
 
 --- Override a translation string
---- @param language string @The language
---- @param locKey string @Localisation key
---- @param locString string|nil @Localisation string, `nil` to unset
+--- @param language string # The language
+--- @param locKey string # Localisation key
+--- @param locString string|nil # Localisation string, `nil` to unset
 LocalisManager.overrideLanguageString = function(language, locKey, locString)
     local t = translations[language]
     if not t then
@@ -33,8 +33,8 @@ LocalisManager.overrideLanguageString = function(language, locKey, locString)
 end
 
 --- @class LocalisManager.LangMap
---- @field 1 string The target language to map from
---- @field 2 string|nil The base language to map to
+--- @field 1 string # The target language to map from
+--- @field 2 string|nil # The base language to map to
 
 --- Maps languages to another.
 --- Example to map `zh` and `tw` to `cn`:
@@ -55,8 +55,8 @@ end
 
 --- Gets the translated string from the key. The fallback condition is as follows:
 --- language -> fallback_lang -> locKey
---- @param language string|nil @The language. If `nil` will use the fallback language.
---- @return string @The translated string
+--- @param language string|nil # The language. If `nil` will use the fallback language.
+--- @return string # The translated string
 LocalisManager.get = function(language, locKey)
     local langData = translations[language]
 

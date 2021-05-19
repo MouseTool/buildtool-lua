@@ -2,6 +2,8 @@ local globals = require("bt-vars")
 local api = globals.api
 local tfmEvent = api.tfmEvent
 
+local btRoom = require("entities.bt_room")
+
 local BtPlayer = require("entities.BtPlayer")
 local WindowManager = require("window.window_manager")
 
@@ -9,7 +11,7 @@ local BtEnums = require("bt-enums")
 local WindowEnums = BtEnums.Window
 
 local btPerms = require("permissions.bt_perms")
-local BT_CAP = btPerms.CAP
+local BT_CAP = btPerms.CAPFLAG
 
 -- Override print function
 do
@@ -83,7 +85,7 @@ end)
 api:on("newPlayer", function(mbp)
     local btp = BtPlayer:new(mbp)
     globals.players[mbp.name] = btp
-    tfm.exec.chatMessage("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
+    btRoom.moduleMsgDirect("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
 
     btp:tlChatMsg("player_welcome")
 

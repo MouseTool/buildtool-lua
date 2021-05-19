@@ -16,7 +16,10 @@ local ROLE_TRUSTEE = ROLE_SUPERADMIN:export(CAPS.TRUSTEE)
 local ROLE_DEV = ROLE_TRUSTEE:export(CAPS.DEV)
 
 return {
-    CAP = CAPS,
+    --- Represents the individual capability (flag)
+    CAPFLAG = CAPS,
+
+    --- Represents the sets of capabilities
     --- @type table<string, Capabilities>
     ROLE = {
         ADMIN = ROLE_ADMIN,

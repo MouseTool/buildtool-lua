@@ -1,11 +1,12 @@
 local tfmcmd = require("commands.tfmcmd")
 local cmdPerms = require("commands.perms")
 
+local btRoom = require("entities.bt_room")
 local globals = require("bt-vars")
 local api = globals.api
 local tfmEvent = api.tfmEvent
 
---tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
+tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
 
 require("commands.MapNp")
 
@@ -18,7 +19,7 @@ tfmEvent:on("ChatCommand", function(pn, msg)
             [tfmcmd.EMISSING] = "missing argument",
             [tfmcmd.EINVAL] = "invalid argument"
         }
-        tfm.exec.chatMessage(retmsg or default_msgs[ret] or "", pn)
+        btRoom.moduleMsgDirect(retmsg or default_msgs[ret] or "", pn)
     end
-    tfm.exec.chatMessage(("<J>[%s] !%s"):format(pn, msg))
+    btRoom.moduleMsgDirect(("<G>[%s] !%s"):format(pn, msg))
 end)

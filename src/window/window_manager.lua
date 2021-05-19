@@ -19,7 +19,7 @@ local SettingsWindow = require("SettingsWindow")
 
 --- @class PlayerWindows
 --- @field all table<WindowEnum, WindowData> @Stores all windows opened and closed (with persistent data)
---- @field opened table<WindowEnum, WindowData> @Stores an ordered table of windows (by Z index) rendered
+--- @field opened OrderedTable<WindowEnum, WindowData> @Stores an ordered table of windows (by Z index) rendered
 
 --- @type table<string, PlayerWindows>
 local windows = {}
