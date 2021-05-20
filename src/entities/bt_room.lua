@@ -1,4 +1,6 @@
 --- BuildTool Room module
+--- @class BtRoom
+--- @field currentRound BtRound|nil
 local bt_room = {}
 
 local globals = require("bt-vars")

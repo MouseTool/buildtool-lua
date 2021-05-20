@@ -3,8 +3,8 @@ local api = globals.api
 local tfmEvent = api.tfmEvent
 
 local btRoom = require("entities.bt_room")
-
 local BtPlayer = require("entities.BtPlayer")
+local BtRound = require("entities.BtRound")
 local WindowManager = require("window.window_manager")
 
 local BtEnums = require("bt-enums")
@@ -12,6 +12,9 @@ local WindowEnums = BtEnums.Window
 
 local btPerms = require("permissions.bt_perms")
 local BT_CAP = btPerms.CAPFLAG
+
+-- Poor man's micro optimization
+local roomGet = tfm.get.room
 
 -- Add custom globals
 do
@@ -46,7 +49,7 @@ require("commands.bt-init")
 require("translations.bt-init")
 
 --[[ Main Init ]]
-tfmEvent:on("Keyboard", function(pn, k, down, x, y)
+tfmEvent:on('Keyboard', function(pn, k, down, x, y)
     if k == 72 then
         WindowManager.toggle(WindowEnums.HELP, pn)
     end
@@ -58,7 +61,7 @@ tfmEvent:on("Keyboard", function(pn, k, down, x, y)
     end
 end)
 
-tfmEvent:onCrucial("PlayerLeft", function(pn)
+tfmEvent:onCrucial('PlayerLeft', function(pn)
     local btp = globals.players[pn]
     if not btp then return end
 
@@ -66,7 +69,7 @@ tfmEvent:onCrucial("PlayerLeft", function(pn)
 end)
 
 --- @param mbp MbPlayer
-api:on("newPlayer", function(mbp)
+api:on('newPlayer', function(mbp)
     local btp = BtPlayer:new(mbp)
     globals.players[mbp.name] = btp
     btRoom.moduleMsgDirect("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
@@ -76,6 +79,34 @@ api:on("newPlayer", function(mbp)
     system.bindKeyboard(btp.name, 72, true, true)
     system.bindKeyboard(btp.name, 32, true, true)  -- tmp
     system.bindKeyboard(btp.name, 79, true, true)
+end)
+
+tfmEvent:on('NewGame', function()
+    if btRoom.currentRound then
+        btRoom.currentRound:deactivate()
+        btRoom.currentRound = nil
+    end
+
+    local xmlMapInfo = roomGet.xmlMapInfo
+    local round = BtRound:new(
+        tonumber(roomGet.currentMap:match("@?(%d+)")) or 0,
+        roomGet.mirroredMap,
+        xmlMapInfo and xmlMapInfo.author,
+        xmlMapInfo and xmlMapInfo.permCode,
+        xmlMapInfo and xmlMapInfo.xml
+    )
+
+    round:once('ready', function ()
+        btRoom.currentRound = round
+
+        local props = round.mapProp
+        btRoom.tlChatMsg(nil, "mapinfo_summary",
+            "@" .. round.mapCode, round.author,  -- @map, author
+            props.wind, props.gravity,           -- wind, gravity
+            props.mgoc)                          -- mgoc
+    end)
+
+    round:activate()
 end)
 
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do

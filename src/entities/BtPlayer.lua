@@ -39,7 +39,13 @@ end
 --- @param keyName string # The key name of the translation string
 --- @vararg string # Translation string parameters
 BtPlayer.tlChatMsg = function(self, keyName, ...)
-    moduleMsgDirect(localis.get(self.language, keyName):format(...), self.name)
+    local args, n = {...}, select('#', ...)
+
+    for i = 1, n do
+        args[i] = tostring(args[i])
+    end
+
+    moduleMsgDirect(localis.get(self.language, keyName):format(table.unpack(args, 1, n)), self.name)
 end
 
 return BtPlayer
