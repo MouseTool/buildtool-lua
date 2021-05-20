@@ -2,6 +2,7 @@
   "name": "buildtool",
   "version": "2.5.0",
   "description": "Buildtowol",
+  "main": "dummy.js",
   "scripts": {
     "build": "node build-translations.js && onelua . --no-minify --prepend-meta",
     "minify": "node build-translations.js && onelua . -o buildtool-minified.lua",
