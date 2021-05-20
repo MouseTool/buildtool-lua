@@ -16,7 +16,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mousetool/mousebase": "1.0.3",
+    "@mousetool/mousebase": "1.0.4",
     "@mousetool/ordered-table": "^1.0.1"
   },
   "devDependencies": {

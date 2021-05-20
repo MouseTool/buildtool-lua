@@ -4,6 +4,7 @@ coverage/coverage.json
 # Installed npm modules
 node_modules
 package-lock.json
+*.log
 
 # Folder view configuration files
 .DS_Store

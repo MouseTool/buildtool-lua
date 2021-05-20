@@ -13,19 +13,8 @@ local WindowEnums = BtEnums.Window
 local btPerms = require("permissions.bt_perms")
 local BT_CAP = btPerms.CAPFLAG
 
--- Override print function
+-- Add custom globals
 do
-    local raw_print = print
-    print = function(...)
-        local args = {...}
-        local nargs = select('#', ...)
-        local segments = {}
-        for i = 1, nargs do
-            segments[i] = tostring(args[i])
-        end
-        return raw_print(table.concat(segments, "\t"))
-    end
-
     dumptbl = function(tbl, indent, cb)
         if not indent then indent = 0 end
         if not cb then cb = print end
@@ -48,13 +37,8 @@ do
         end
     end
 
-    local raw_xpcall = xpcall
-    xpcall = function(f, msgh, ...)
-        local args, nargs = {...}, select("#", ...)
-        return raw_xpcall(function()
-            return f(table.unpack(args, 1, nargs))
-        end, msgh)
-    end
+    -- Apply patched globals
+    require("@mousetool/mousebase").overloads.applyGlobal()
 end
 
 --[[ External Init ]]
