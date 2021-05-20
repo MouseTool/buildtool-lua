@@ -14,23 +14,24 @@ Report any bugs/issues/suggestions to the issues tab of this repository. ~~If yo
 You will need to install [Node.js](https://nodejs.org/). After that, clone this repository and run the following commands in the command line. This will install the required Node.js and Lua dependencies needed to build this module.
 ```
 cd buildtool
-npm install
+npm install -g yarn
+yarn install
 ```
 
 You can then compile the BuildTool script directly from the command line:
 ```
-npm run-script build
+yarn run build
 ```
 
 Or alternatively, a minified version:
 ```
-npm run-script minify
+yarn run minify
 ```
 
 # Coding Environment
 We recommend using [Visual Studio Code](https://code.visualstudio.com) which is supported on all major platforms, with the following extension installed – [Lua Language Server (sumneko.lua)](https://marketplace.visualstudio.com/items?itemName=sumneko.lua). This is to harness auto-completion and other features like type hinting based on Lua docs (Emmylua format).
 
-You should run an `npm install` before starting, so that necessary dependencies are updated and picked up by the extension.
+You should run an `yarn install` before starting, so that necessary dependencies are updated and picked up by the extension.
 
 # Contributors
 Special tribute and shoutout to the original creator of BuildTool – `Emeryaurora#0000`, who had also authored the first and second generation of BuildTool; `Leafileaf#0000` for providing assistance since the beginning and contributing to serveral crucial portions of the database system.
