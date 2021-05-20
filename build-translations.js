@@ -15,7 +15,7 @@ fs.readdirSync(DIRNAME).forEach(filename => {
 
     let m;
     while (m = REGX_TL.exec(content)) {
-        lang_data[m[1]] = m[2].trim().replace('\n', '\\n').replace('"', '\\"');
+        lang_data[m[1]] = m[2].trim().replace(/(\r\n|\n|\r)/gm, '\\n').replace('"', '\\"');
     }
 
     //console.dir(lang_data)
