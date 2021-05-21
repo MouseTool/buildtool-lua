@@ -47,15 +47,15 @@ _parseXml = function(self, xml)
     local prop_attr = prop_node.attributes
 
     local wind, grav = 0, 10
-    if prop_attr.G then
-        wind, grav = prop_attr.G:match("(%-?%S+),(%-?%S+)")
+    if prop_attr['G'] then
+        wind, grav = prop_attr['G']:match("(%-?%S+),(%-?%S+)")
         wind = tonumber(wind) or wind
         grav = tonumber(grav) or grav
     end
     mapProp.wind = wind
     mapProp.gravity = grav
 
-    mapProp.mgoc = tonumber(prop_attr.mgoc) or 0
+    mapProp.mgoc = tonumber(prop_attr['mgoc']) or 0
 end
 
 return BtRound

@@ -12,18 +12,10 @@
   resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.1/b495c3730f969a93b190c8a3c05745e8ab1de5785dcf795081018941a20cdae4#daa5dabaa4a11694aad95bfd2df565891a8afdbb"
   integrity sha512-F5+GHSvnsLgxQykBbXiiHJVyA0PmSZMuEUuiK8rE6iYf1bBiwcwgLDTYhv+xOWodEuL5F5pjP90K8WSUfzdK0g==
 
-"@mousetool/mousebase@1.0.4":
+"@mousetool/mousebase@1.0.4", "@mousetool/mousebase@^1.0.2":
   version "1.0.4"
   resolved "https://npm.pkg.github.com/download/@mousetool/mousebase/1.0.4/a6b870e22e6440e9b5ed3dbc0f00cb352498f50fce1085ae069a1ccb7487802f#b50a0943fd0699c46e67c8e9bdf60ac79ae4fa34"
   integrity sha512-pvxZrahp1ud6iOAKu4jfd2IdWboVijR1l2B6uvymMFeIsVm+5PuSbNNpFA8LJQMkRHWMkakoEM6BCmmLp0rFrA==
-  dependencies:
-    "@mousetool/class" "^1.0.0"
-    "@mousetool/nickname801" "^1.0.0"
-
-"@mousetool/mousebase@^1.0.2":
-  version "1.0.5"
-  resolved "https://npm.pkg.github.com/download/@mousetool/mousebase/1.0.5/f709b5f6101f823838f8c4a3bebe15fb0f515779056e55d3b48f2f90ac692a67#2eef7fbeafd38648c132f0c382fbfa15fd3590ab"
-  integrity sha512-iJI7jOkD1H2QnKiAKUWWekF8VfqUH1CsN97j+YkxCexZ5DQLjCE9V8e+Qy50YercbDP3n1suso04n+BcZq9IGg==
   dependencies:
     "@mousetool/class" "^1.0.0"
     "@mousetool/nickname801" "^1.0.0"
