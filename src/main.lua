@@ -93,16 +93,26 @@ tfmEvent:on('NewGame', function()
     round:once('ready', function()
         btRoom.currentRound = round
 
-        local props = round.mapProp
-        btRoom.tlChatMsg(nil, "mapinfo_summary",
-            -- @map, author
-            "@" .. round.mapCode, round.author,
-            -- [, (mirrored)]
-            round.isMirrored and localis.builder:new("mapinfo_mirrored"),
+        local mapinfo_joins = {
+            localis.evaluator:new("mapinfo_summary",
+                -- @map, author
+                "@" .. round.mapCode, round.author)
+        }
+
+        if round.isMirrored then
+            mapinfo_joins[#mapinfo_joins + 1] = " "
+            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_mirrored")
+        end
+
+        local _props = round.mapProp
+        mapinfo_joins[#mapinfo_joins + 1] = "\n"
+        mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_summary_properties",
             -- wind, gravity
-            props.wind, props.gravity,
+            _props.wind, _props.gravity,
             -- mgoc
-            props.mgoc)
+            _props.mgoc)
+
+        btRoom.tlbChatMsg(localis.joiner:new(mapinfo_joins))
     end)
 
     round:activate()

@@ -54,7 +54,7 @@ end
 --- @vararg string[]|LocalisBuilder[] # Translation string parameters
 --- @return string
 BtPlayer.tlGet = function(self, keyName, ...)
-    return localis.builder:new(keyName, ...):exec(self.language, false)
+    return localis.evaluator:new(keyName, ...):exec(self.language, false)
 end
 
 return BtPlayer

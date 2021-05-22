@@ -6,8 +6,9 @@ translations.cn = {
 
 translations.en = {
     player_welcome = "<J>Welcome to BuildTool Beta Testing! Type !help or press H to see the help window.",
-    mapinfo_summary = "<ROSE>[Map Info] <J>%s <N>by %s%s\nWind: %s | Gravity: %s | MGOC: %s",
-    mapinfo_mirrored = "mirrored",
+    mapinfo_summary = "<ROSE>[Map Info] <J>%s <N>by %s",
+    mapinfo_summary_properties = "Wind: %s | Gravity: %s | MGOC: %s",
+    mapinfo_mirrored = "(mirrored)",
     mapinfo_tags = "Tags",
     mapinfo_tag_portals = "Portals",
     mapinfo_tag_opportunist = "Opportunist",

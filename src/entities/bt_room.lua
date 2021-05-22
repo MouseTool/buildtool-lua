@@ -40,7 +40,19 @@ end
 --- @param keyName string # The key name of the translation string
 --- @vararg string # Translation string parameters
 bt_room.tlChatMsg = function(group, keyName, ...)
-    local builder = localis.builder:new(keyName, ...)
+    local evaluator = localis.evaluator:new(keyName, ...)
+    for _, btp in pairs(globals.players) do
+        if not group or btp.capabilities:hasCaps(group) then
+            btp:tlbChatMsg(evaluator)
+        end
+    end
+end
+
+--- Sends a translated module message to a capabilities group. Similar to `tlChatMsg`, but accepts a localisation builder and caches the language string.
+--- @see bt_room.tlChatMsg
+--- @param builder LocalisBuilder
+--- @param group? Capabilities # The players whom have the set group will get the message (if nil applies to all players)
+bt_room.tlbChatMsg = function(builder, group)
     for _, btp in pairs(globals.players) do
         if not group or btp.capabilities:hasCaps(group) then
             btp:tlbChatMsg(builder)
