@@ -1,4 +1,5 @@
 local mousexml = require("@mousetool/mousexml")
+local roomGet = tfm.get.room
 
 --- @class BtXmlMapProp
 --- @field wind number
@@ -56,6 +57,22 @@ _parseXml = function(self, xml)
     mapProp.gravity = grav
 
     mapProp.mgoc = tonumber(prop_attr['mgoc']) or 0
+end
+
+BtRound.fromRoom = function()
+    local map_code = tonumber(roomGet.currentMap:match("@?(%d+)")) or 0
+    local xmlMapInfo = roomGet.xmlMapInfo
+
+    if xmlMapInfo and map_code ~= xmlMapInfo.mapCode then
+        -- Map has no XML map info
+        xmlMapInfo = nil
+    end
+
+    return BtRound:new(map_code,
+        roomGet.mirroredMap,
+        xmlMapInfo and xmlMapInfo.author,
+        xmlMapInfo and xmlMapInfo.permCode,
+        xmlMapInfo and xmlMapInfo.xml)
 end
 
 return BtRound

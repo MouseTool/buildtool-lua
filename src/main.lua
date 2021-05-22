@@ -87,16 +87,9 @@ tfmEvent:on('NewGame', function()
         btRoom.currentRound = nil
     end
 
-    local xmlMapInfo = roomGet.xmlMapInfo
-    local round = BtRound:new(
-        tonumber(roomGet.currentMap:match("@?(%d+)")) or 0,
-        roomGet.mirroredMap,
-        xmlMapInfo and xmlMapInfo.author,
-        xmlMapInfo and xmlMapInfo.permCode,
-        xmlMapInfo and xmlMapInfo.xml
-    )
+    local round = BtRound.fromRoom()
 
-    round:once('ready', function ()
+    round:once('ready', function()
         btRoom.currentRound = round
 
         local props = round.mapProp
