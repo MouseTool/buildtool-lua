@@ -25,7 +25,7 @@ btcmd.addCommand(tfmcmd.Main {
     func = function(ctx, language)
         local btp = globals.players[ctx.playerName]
         if localis.getLanguageData(language) == nil then
-            btp:chatMsg("<R>Warning: There is currently no translation for the chosen language")
+            btp:chatMsg("<R>Warning: there is currently no translation for the chosen language")
         end
 
         btp:once('languageChanged', function()

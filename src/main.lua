@@ -7,6 +7,7 @@ local localis = require("localisation.localis_manager")
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
 local WindowManager = require("window.window_manager")
+local roomSets = require("settings.RoomSettings")
 
 local BtEnums = require("bt-enums")
 local WindowEnums = BtEnums.Window
@@ -70,7 +71,7 @@ tfmEvent:onCrucial('PlayerLeft', function(pn)
 end)
 
 --- @param mbp MbPlayer
-api:on('newPlayer', function(mbp)
+api:onCrucial('newPlayer', function(mbp)
     local btp = BtPlayer:new(mbp)
     globals.players[mbp.name] = btp
     btRoom.moduleMsgDirect("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
@@ -80,9 +81,11 @@ api:on('newPlayer', function(mbp)
     system.bindKeyboard(btp.name, 72, true, true)
     system.bindKeyboard(btp.name, 32, true, true)  -- tmp
     system.bindKeyboard(btp.name, 79, true, true)
+
+    btp:normalRespawn()
 end)
 
-tfmEvent:on('NewGame', function()
+tfmEvent:onCrucial('NewGame', function()
     if btRoom.currentRound then
         btRoom.currentRound:deactivate()
         btRoom.currentRound = nil
@@ -117,6 +120,13 @@ tfmEvent:on('NewGame', function()
     end)
 
     round:activate()
+end)
+
+tfmEvent:on('PlayerDied', function(pn)
+    local btp = globals.players[pn]
+    if not btp then return end
+
+    btp:normalRespawn()
 end)
 
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do

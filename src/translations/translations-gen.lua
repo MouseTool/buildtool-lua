@@ -18,7 +18,8 @@ translations.en = {
     mapinfo_tag_opportunist = "Opportunist",
     mapinfo_tag_noballoon = "No Balloon",
     mapinfo_tag_no_b = "No-B",
-    mapinfo_tag_no_motor = "No Motor"
+    mapinfo_tag_no_motor = "No Motor",
+    err_score_not_ranged = "<R>Error: Score not within range (%s-%s)"
 }
 
 return translations

@@ -232,3 +232,5 @@ SettingsBase.setNum = function(self, fieldName, val)
 
     return true
 end
+
+return SettingsBase

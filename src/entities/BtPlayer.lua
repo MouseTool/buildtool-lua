@@ -14,7 +14,8 @@ local moduleMsgDirect = require("entities.bt_room").moduleMsgDirect
 local Capabilities = require("permissions.Capabilities")
 local btPerms = require("permissions.bt_perms")
 local BT_ROLE = btPerms.ROLE
-
+local BT_CAP = btPerms.CAPFLAG
+local roomSets = require("settings.RoomSettings")
 local localis = require("localisation.localis_manager")
 
 local DEFAULT_LANGUAGE = "en"
@@ -50,7 +51,7 @@ end
 --- @see BtPlayer.tlChatMsg
 --- @param locBuilder LocalisBuilder # The localisation builder
 BtPlayer.tlbChatMsg = function(self, locBuilder)
-    moduleMsgDirect(locBuilder:exec(self.language))
+    moduleMsgDirect(locBuilder:exec(self.language), self.name)
 end
 
 --- Retrives a translated module string for the player. If the `keyName` supplied is not found in the translations, the `keyName` will be displayed instead.
@@ -66,6 +67,18 @@ end
 BtPlayer.setLanguage = function(self, language)
     self.language = language or DEFAULT_LANGUAGE
     self:emit('languageChanged')
+end
+
+--- Respawns the player with the standard conditions:
+---  - Not banned
+---  - Dead
+---  - Auto-revive on
+BtPlayer.normalRespawn = function(self)
+    if self.capabilities:hasFlag(BT_CAP.BANNED) then return end
+    if not self.mbp:getTfmPlayer().isDead then return end
+    if roomSets:getBool('autorev') then
+        tfm.exec.respawnPlayer(self.name)
+    end
 end
 
 return BtPlayer

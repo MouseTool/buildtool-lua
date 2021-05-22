@@ -2,7 +2,6 @@
 --- @class RoomSettings:SettingsBase
 local RoomSettings = require("settings.SettingsBase"):new()
 
-RoomSettings:addBoolField("autorev")
-
+RoomSettings:addBoolField("autorev", true)
 
 return RoomSettings

@@ -9,8 +9,11 @@ local tfmEvent = api.tfmEvent
 tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
 
 -- Init commands
-require("commands.MapNp")
-require("commands.Debug")
+require("commands.cmd_map")
+require("commands.cmd_debug")
+require("commands.cmd_respawn_mort")
+require("commands.cmd_sham")
+require("commands.cmd_score")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
     btRoom.moduleMsgDirect(("<G>[%s] !%s"):format(pn, msg))
