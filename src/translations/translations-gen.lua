@@ -19,7 +19,8 @@ translations.en = {
     mapinfo_tag_noballoon = "No Balloon",
     mapinfo_tag_no_b = "No-B",
     mapinfo_tag_no_motor = "No Motor",
-    err_score_not_ranged = "<R>Error: Score not within range (%s-%s)"
+    err_score_not_ranged = "<R>Error: score not within range (%s-%s)",
+    err_round_not_loaded = "<R>Error: round is not loaded"
 }
 
 return translations

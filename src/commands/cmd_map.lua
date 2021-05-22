@@ -1,6 +1,9 @@
 local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
+local globals = require("bt-vars")
+local btRoom = require("entities.bt_room")
+
 btcmd.addCommand(
     tfmcmd.Main {
         name = "map",
@@ -23,6 +26,24 @@ btcmd.addCommand(
                     --mapsched.load(settings.maps.leisure[math.random(1,#settings.maps.leisure)]) roundvars.maptype = 'leisure'
                 end
             end
+        end
+    }
+)
+
+btcmd.addCommand(
+    tfmcmd.Main {
+        name = "rst",
+        --- @param ctx tfmcmd.CmdContext
+        func = function(ctx)
+            local currentRound = btRoom.currentRound
+            if not currentRound then
+                local btp = globals.players[ctx.playerName]
+                if btp then
+                    btp:tlChatMsg("err_round_not_loaded")
+                end
+                return
+            end
+            tfm.exec.newGame(currentRound.mapCode)
         end
     }
 )
