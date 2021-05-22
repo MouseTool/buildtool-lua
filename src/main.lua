@@ -3,6 +3,7 @@ local api = globals.api
 local tfmEvent = api.tfmEvent
 
 local btRoom = require("entities.bt_room")
+local localis = require("localisation.localis_manager")
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
 local WindowManager = require("window.window_manager")
@@ -94,9 +95,14 @@ tfmEvent:on('NewGame', function()
 
         local props = round.mapProp
         btRoom.tlChatMsg(nil, "mapinfo_summary",
-            "@" .. round.mapCode, round.author,  -- @map, author
-            props.wind, props.gravity,           -- wind, gravity
-            props.mgoc)                          -- mgoc
+            -- @map, author
+            "@" .. round.mapCode, round.author,
+            -- [, (mirrored)]
+            round.isMirrored and localis.builder:new("mapinfo_mirrored"),
+            -- wind, gravity
+            props.wind, props.gravity,
+            -- mgoc
+            props.mgoc)
     end)
 
     round:activate()

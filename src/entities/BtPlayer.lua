@@ -37,15 +37,24 @@ end
 
 --- Sends a translated module message to the player. If the `keyName` supplied is not found in the translations, the `keyName` will be displayed instead.
 --- @param keyName string # The key name of the translation string
---- @vararg string # Translation string parameters
+--- @vararg string[]|LocalisBuilder[] # Translation string parameters
 BtPlayer.tlChatMsg = function(self, keyName, ...)
-    local args, n = {...}, select('#', ...)
+    moduleMsgDirect(self:tlGet(keyName, ...), self.name)
+end
 
-    for i = 1, n do
-        args[i] = tostring(args[i])
-    end
+--- Sends a translated module message to the player. Similar to `tlChatMsg`, but accepts a localisation builder and caches the language string.
+--- @see BtPlayer.tlChatMsg
+--- @param locBuilder LocalisBuilder # The localisation builder
+BtPlayer.tlbChatMsg = function(self, locBuilder)
+    moduleMsgDirect(locBuilder:exec(self.language))
+end
 
-    moduleMsgDirect(localis.get(self.language, keyName):format(table.unpack(args, 1, n)), self.name)
+--- Retrives a translated module string for the player. If the `keyName` supplied is not found in the translations, the `keyName` will be displayed instead.
+--- @param keyName string # The key name of the translation string
+--- @vararg string[]|LocalisBuilder[] # Translation string parameters
+--- @return string
+BtPlayer.tlGet = function(self, keyName, ...)
+    return localis.builder:new(keyName, ...):exec(self.language, false)
 end
 
 return BtPlayer

@@ -6,6 +6,8 @@ local bt_room = {}
 local globals = require("bt-vars")
 local ROLE = require("permissions.bt_perms").ROLE
 
+local localis = require("localisation.localis_manager")
+
 --- Chat prefix
 local C_PRE = "<V>[&#926;] <N>"
 
@@ -38,9 +40,10 @@ end
 --- @param keyName string # The key name of the translation string
 --- @vararg string # Translation string parameters
 bt_room.tlChatMsg = function(group, keyName, ...)
+    local builder = localis.builder:new(keyName, ...)
     for _, btp in pairs(globals.players) do
         if not group or btp.capabilities:hasCaps(group) then
-            btp:tlChatMsg(keyName, ...)
+            btp:tlbChatMsg(builder)
         end
     end
 end

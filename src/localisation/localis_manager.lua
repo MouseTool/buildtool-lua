@@ -2,6 +2,53 @@
 --- @class LocalisManager
 local LocalisManager = {}
 
+--- A localisations string builder
+--- @class LocalisBuilder:Class
+--- @field new fun(keyName:string, ...):LocalisBuilder
+--- @field keyName string
+--- @field localisArgs string[]|LocalisBuilder[]
+--- @field localisArgsCount number
+--- @field cache table<string, string> # { [language:string] = translated:string }
+local LocalisBuilder = require("@mousetool/mousebase").Class:extend("LocalisBuilder")
+LocalisBuilder._init = function(self, keyName, ...)
+    self.keyName = keyName
+    self.localisArgs = {...}
+    self.localisArgsCount = select('#', ...)
+    self.cache = {}
+end
+
+--- Returns a translated string that has been resolved with all substrings or sub-builders.
+--- @param language string
+--- @param shouldCache? boolean # Whether the result should be cached for future queries (default true)
+--- @return string
+LocalisBuilder.exec = function(self, language, shouldCache)
+    local cache = self.cache[language]
+    if cache then return cache end
+
+    local args, n = {}, self.localisArgsCount
+    local localisArgs = self.localisArgs
+
+    for i = 1, n do
+        local arg = localisArgs[i]
+        local argType = type(arg)
+        if argType == "table" and arg['isSubClass'] and arg['isSubClass'](LocalisBuilder) then
+            --- @type LocalisBuilder
+            local subbuilder = arg
+            args[i] = subbuilder:exec(language, false)
+        elseif argType == "string" then
+            args[i] = arg
+        else
+            args[i] = tostring(arg)
+        end
+    end
+
+    cache = LocalisManager.get(language, self.keyName):format(table.unpack(args, 1, n))
+    if shouldCache == false then
+        self.cache[language] = cache
+    end
+    return cache
+end
+
 local translations = {}
 local fallback_lang = "en"
 
@@ -70,5 +117,7 @@ LocalisManager.get = function(language, locKey)
 
     return langData[locKey] or locKey
 end
+
+LocalisManager.builder = LocalisBuilder
 
 return LocalisManager
