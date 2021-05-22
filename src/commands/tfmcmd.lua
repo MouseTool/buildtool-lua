@@ -243,6 +243,10 @@ do
 end
 
 do
+    --- @class tfmcmd.ArgCommonOptions
+    --- @field name string
+    --- @field optional boolean
+
     local MT_Interface = { __index = setmetatable({
         register = function(self)
             if not self.commands or not self.func then
@@ -270,6 +274,10 @@ tfmcmd.ArgCommon = function(attr)
 end
 
 do
+    --- @class tfmcmd.ArgStringOptions:tfmcmd.ArgCommonOptions
+    --- @field default string
+    --- @field lower boolean
+
     local MT_ArgString = { __index = {
         verify = function(self, a)
             local str = a[a.current]
@@ -284,12 +292,19 @@ do
             return tfmcmd.OK, self.lower and str:lower() or str
         end,
     }}
+    
+
+    --- @param attr tfmcmd.ArgStringOptions
     tfmcmd.ArgString = function(attr)
         return setmetatable(attr or {}, MT_ArgString)
     end
 end
 
 do
+    --- @class tfmcmd.ArgJoinedStringOptions:tfmcmd.ArgCommonOptions
+    --- @field default string
+    --- @field length number
+
     local MT_ArgJoinedString = { __index = {
         verify = function(self, a)
             local join = {}
@@ -311,12 +326,19 @@ do
             return tfmcmd.OK, table.concat(join, " ")
         end,
     }}
+
+    --- @param attr tfmcmd.ArgJoinedStringOptions
     tfmcmd.ArgJoinedString = function(attr)
         return setmetatable(attr or {}, MT_ArgJoinedString)
     end
 end
 
 do
+    --- @class tfmcmd.ArgNumberOptions:tfmcmd.ArgCommonOptions
+    --- @field default number
+    --- @field min number
+    --- @field max number
+
     local MT_ArgNumber = { __index = {
         verify = function(self, a)
             local word = a[a.current]
@@ -341,6 +363,8 @@ do
             return tfmcmd.OK, res
         end,
     }}
+
+    --- @param attr tfmcmd.ArgNumberOptions
     tfmcmd.ArgNumber = function(attr)
         return setmetatable(attr or {}, MT_ArgNumber)
     end
