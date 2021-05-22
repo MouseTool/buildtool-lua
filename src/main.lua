@@ -93,6 +93,7 @@ tfmEvent:on('NewGame', function()
     round:once('ready', function()
         btRoom.currentRound = round
 
+        --- @type table<number, string|LocalisBuilder>
         local mapinfo_joins = {
             localis.evaluator:new("mapinfo_summary",
                 -- @map, author

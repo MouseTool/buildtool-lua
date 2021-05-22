@@ -72,6 +72,7 @@ LocalisManager.get = function(language, locKey)
 end
 
 -- [[Localis Builder]]
+
 --- Abstract localisations string builder
 --- @class LocalisBuilder:Class
 local LocalisBuilder = require("@mousetool/mousebase").Class:extend("LocalisBuilder")
@@ -105,7 +106,7 @@ end
 --- @class LocalisEvaluator:LocalisBuilder
 --- @field new fun(keyName:string, ...):LocalisBuilder
 --- @field keyName string
---- @field localisArgs string[]|LocalisBuilder[]
+--- @field localisArgs table<number, string|LocalisBuilder>
 --- @field localisArgsCount number
 --- @field cache table<string, string> # { [language:string] = translated:string }
 local LocalisEvaluator = LocalisBuilder:extend("LocalisEvaluator")
@@ -137,14 +138,14 @@ end
 
 --- A localisations string joiner
 --- @class LocalisJoiner:LocalisBuilder
---- @field new fun(joins:string[]|LocalisBuilder[], delimiter?:string):LocalisJoiner
---- @field localisJoins string[]|LocalisBuilder[]
+--- @field new fun(joins:table<number, string|LocalisBuilder>, delimiter?:string):LocalisJoiner
+--- @field localisJoins table<number, string|LocalisBuilder>
 --- @field localisJoinsCount number
 --- @field delimiter string
 --- @field cache table<string, string> # { [language:string] = translated:string }
 local LocalisJoiner = LocalisBuilder:extend("LocalisJoiner")
 
---- @param joins string[]|LocalisBuilder[]
+--- @param joins table<number, string|LocalisBuilder>
 LocalisJoiner._init = function(self, joins, delimiter)
     self.localisJoins = joins
     self.localisJoinsCount = #joins
