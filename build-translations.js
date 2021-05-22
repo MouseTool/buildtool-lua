@@ -7,7 +7,7 @@ const REGX_TL = /^\s*(\S+)\s*=\s*\[\[([\S\s]*?)\]\]/gm;
 var lua_data = {};
 
 fs.readdirSync(DIRNAME).forEach(filename => {
-    console.log(DIRNAME + filename);
+    console.log(" - Reading " + DIRNAME + filename);
     let content = fs.readFileSync(DIRNAME + filename, 'utf-8')
 
     let lang_name = path.parse(filename).name;
