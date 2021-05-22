@@ -1,3 +1,4 @@
 src/translations/translations-gen.lua linguist-generated=true
 yarn.lock linguist-generated=true
 package-lock.json linguist-generated=true
+translations-assets/*.txt linguist-generated=true

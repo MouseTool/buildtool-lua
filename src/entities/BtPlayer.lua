@@ -1,6 +1,8 @@
 --- BuildTool specific player
 --- @class BtPlayer:EventEmitter
---- @field new fun(self:BtPlayer, mbPlayer:MbPlayer, inRoom:boolean|nil):BtPlayer
+--- @field new fun(mbPlayer:MbPlayer, inRoom:boolean|nil):BtPlayer
+--- @field on fun(eventName:'"languageChanged"', listener:fun()) # Fired when the player's language changes
+---
 --- @field name string # The player's A801 name
 --- @field mbp MbPlayer # The MouseBase player object tied to the player
 --- @field inRoom boolean # Whether the player is currently in the room
@@ -15,6 +17,8 @@ local BT_ROLE = btPerms.ROLE
 
 local localis = require("localisation.localis_manager")
 
+local DEFAULT_LANGUAGE = "en"
+
 --- @param mbPlayer MbPlayer # The MouseBase player object tied to the player
 --- @param inRoom boolean|nil # Whether the player is in the room (default true)
 BtPlayer._init = function(self, mbPlayer, inRoom)
@@ -24,7 +28,7 @@ BtPlayer._init = function(self, mbPlayer, inRoom)
     self.mbp = mbPlayer
     self.inRoom = inRoom or true
     self.capabilities = Capabilities:new()
-    self.language = "en"
+    self.language = DEFAULT_LANGUAGE
 
     self.capabilities:addCaps(BT_ROLE.OWNER)  -- tmp test
 end
@@ -55,6 +59,13 @@ end
 --- @return string
 BtPlayer.tlGet = function(self, keyName, ...)
     return localis.evaluator:new(keyName, ...):exec(self.language, false)
+end
+
+--- Sets the player's language
+--- @param language? string # The language to set (default "en")
+BtPlayer.setLanguage = function(self, language)
+    self.language = language or DEFAULT_LANGUAGE
+    self:emit('languageChanged')
 end
 
 return BtPlayer

@@ -9,6 +9,9 @@ btcmd.addCommand(
             tfmcmd.ArgString { lower = true, optional = true },
             tfmcmd.ArgString { lower = true, optional = true },
         },
+        --- @param ctx tfmcmd.CmdContext
+        --- @param w2? string
+        --- @param w3? string
         func = function(ctx, w2, w3)
             if w2 == 'history' then
             elseif w2 == 'back' then

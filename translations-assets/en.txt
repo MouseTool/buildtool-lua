@@ -1,3 +1,7 @@
+# General
+language_english = [[English]]
+language_native = [[English]]
+
 # Chat Messages
 player_welcome = [[<J>Welcome to BuildTool Beta Testing! Type !help or press H to see the help window.]]
 

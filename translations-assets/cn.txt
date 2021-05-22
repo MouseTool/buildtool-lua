@@ -1,2 +1,6 @@
+# General
+language_english = [[Chinese]]
+language_native = [[中文]]
+
 # Chat Messages
 player_welcome = [[<J>欢迎来到 BuildTool Beta Testing！键入 !help 或按 H 开放帮助窗口。]]

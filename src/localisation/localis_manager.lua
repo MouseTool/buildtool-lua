@@ -18,6 +18,14 @@ LocalisManager.addLanguageData = function(language, langData)
     translations[language] = langData
 end
 
+
+--- Retrieves the language data
+--- @param language string
+--- @return table<string, string> langData
+LocalisManager.getLanguageData = function(language)
+    return translations[language]
+end
+
 --- Override a translation string
 --- @param language string # The language
 --- @param locKey string # Localisation key
@@ -125,12 +133,15 @@ end
 --- @return string
 LocalisEvaluator.exec = function(self, language, shouldCache)
     local cache = self.cache[language]
-    if cache then return cache end
+    if cache then
+        --print(("use cache (key: %s, lang: %s)"):format(self.keyName, language))
+        return cache
+    end
 
     local args = _processArgs(self.localisArgs, self.localisArgsCount, language)
 
     cache = LocalisManager.get(language, self.keyName):format(table.unpack(args, 1, self.localisArgsCount))
-    if shouldCache == false then
+    if shouldCache ~= false then
         self.cache[language] = cache
     end
     return cache
@@ -159,12 +170,15 @@ end
 --- @return string
 LocalisJoiner.exec = function(self, language, shouldCache)
     local cache = self.cache[language]
-    if cache then return cache end
+    if cache then
+        --print(("joiner use cache (lang: %s) : %s"):format(language, cache))
+        return cache
+    end
 
     local args = _processArgs(self.localisJoins, self.localisJoinsCount, language)
 
     cache = table.concat(args, self.delimiter, 1, self.localisJoinsCount)
-    if shouldCache == false then
+    if shouldCache ~= false then
         self.cache[language] = cache
     end
     return cache
