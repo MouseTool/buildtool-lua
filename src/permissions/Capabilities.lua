@@ -84,7 +84,7 @@ end
 --- @param caps Capabilities
 --- @return boolean
 Capabilities.hasCaps = function(self, caps)
-    return band(self.flag, caps.flag) ~= 0
+    return band(bnot(self.flag), caps.flag) == 0
 end
 
 --- Checks if a single flag is contained within (subset).
