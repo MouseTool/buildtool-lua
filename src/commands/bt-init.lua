@@ -16,7 +16,13 @@ require("commands.cmd_sham")
 require("commands.cmd_score")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
-    btRoom.moduleMsgDirect(("<G>[%s] !%s"):format(pn, msg))
+    local btp = globals.players[pn]
+    local vis = tfmcmd.getVisible(msg)
+    if vis ~= false then
+        local g = vis
+        if vis == true then g = nil end
+        btRoom.chatMsg(("<G>[%s] !%s"):format(pn, msg), g)
+    end
 
     local ret, retmsg = tfmcmd.executeChatCommand(pn, msg)
 	if ret ~= tfmcmd.OK then

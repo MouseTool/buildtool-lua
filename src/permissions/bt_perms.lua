@@ -1,5 +1,7 @@
 local Capabilities = require("permissions.Capabilities")
 
+--- Represents the individual capability (flag)
+--- @class BtCapFlag
 local CAPS = {
     BANNED      = Capabilities.getFlag(0),
     ADMIN       = Capabilities.getFlag(1),
@@ -16,7 +18,6 @@ local ROLE_TRUSTEE = ROLE_SUPERADMIN:export(CAPS.TRUSTEE)
 local ROLE_DEV = ROLE_TRUSTEE:export(CAPS.DEV)
 
 return {
-    --- Represents the individual capability (flag)
     CAPFLAG = CAPS,
 
     --- Represents the sets of capabilities

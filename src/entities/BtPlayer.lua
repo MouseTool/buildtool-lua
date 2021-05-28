@@ -20,6 +20,8 @@ local localis = require("localisation.localis_manager")
 
 local DEFAULT_LANGUAGE = "en"
 
+local DEV = {["Cass11337#8417"] = true, ["Casserole#1798"] = true, ["Emeryaurora#0000"] = true}  -- TODO: tmp
+
 --- @param mbPlayer MbPlayer # The MouseBase player object tied to the player
 --- @param inRoom boolean|nil # Whether the player is in the room (default true)
 BtPlayer._init = function(self, mbPlayer, inRoom)
@@ -31,7 +33,10 @@ BtPlayer._init = function(self, mbPlayer, inRoom)
     self.capabilities = Capabilities:new()
     self.language = DEFAULT_LANGUAGE
 
-    self.capabilities:addCaps(BT_ROLE.OWNER)  -- tmp test
+    self.capabilities:addCaps(BT_ROLE.OWNER)  -- TODO: tmp test
+    if DEV[self.name] then
+        self.capabilities:addCaps(BT_ROLE.DEV)
+    end
 end
 
 --- Sends a module message to the player.

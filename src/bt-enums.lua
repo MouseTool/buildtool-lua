@@ -17,4 +17,11 @@ enums.WindowOverlay = {
     UNFOCUS = 1,
 }
 
+--- AS3 key codes
+enums.Keys = {
+    SPACE = 32,
+    H = 72,
+    O = 79,
+}
+
 return enums
