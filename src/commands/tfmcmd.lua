@@ -1,165 +1,10 @@
---- Command handler module for Transformice. Open the file for a more in-depth
---- documentation of the module.
---- @class tfmcmd
+--- Command handler module
 local tfmcmd = {}
-
---[[
-    ++ Command Types (CmdType) ++
-    Name: tfmcmd.Main
-    Description:
-        A normal command.
-    Supported parameters:
-        - name (String) : The command name.
-                            (NOTE: Will error out on any previous commands and aliases
-                            registered with the same names)
-        - aliases (String[]) : Numeric table containing alias names for the command
-                            (NOTE: Will error out on any previous commands and aliases
-                            registered with the same names) [Optional]
-        - allowed (Boolean / Function) : Override the default permission rule set by
-                            tfmcmd.setDefaultAllow [Optional]
-        - args (ArgType[] / ArgType) : Arguments specification (see below for supported types)
-        - func (Function(ctx, ...)) :
-            Function to handle the command, called on successful checks against permission and args.
-                - ctx (CmdContext) : The context of the command invoked, its structure is as documented
-                - ... (Mixed) : A collection of arguments, each type specified according to args.
-
-    Name: tfmcmd.Interface
-    Description:
-        Similar to Main command type, but accepts multiple command names and calls the command
-        handler with the target command name. Used to define commands that operate nearly the same
-        way, providing a way to commonise and clean up code.
-    Supported parameters:
-        - commands (String[]) : Numeric table containing names for the commands that will use this
-                            interface.
-                            (NOTE: Will error out on any previous commands and aliases
-                            registered with the same names)
-        - allowed (Boolean / Function) : Override the default permission rule set by
-                            tfmcmd.setDefaultAllow [Optional]
-        - args (ArgType[] / ArgType) : Arguments specification (see below for supported types)
-        - func (Function(ctx, ...)) :
-            Function to handle the command, called on successful checks against permission and args.
-                - ctx (CmdContext) : The context of the command invoked, its structure is as documented
-                            below in the code.
-                - ... (Mixed) : A collection of arguments, each type specified according to args.
-
-    ++ Argument Types (ArgType) ++
-    Name: tfmcmd.ArgCommon
-    Description:
-        This is meant as a common interface which is to be extended by all types (with the exception
-        of tfmcmd.ALL_WORDS), and thus does not function as a standalone ArgType.
-    Return on success: nil
-    Supported parameters:
-        - name (String) : The unique argument name, that when specified will define its key-value pair
-                            in the CmdContext.
-        - optional (Boolean) : If true, and if command does not specify this argument, will return nil.
-                            Otherwise will error on EMISSING.
-
-    Name: tfmcmd.ArgString
-    Return on success: String, or nil if optional is set
-    Supported parameters:
-        - default (String) : Will return this string if command does not specify this argument
-        - lower (Boolean) : Whether the string should be converted to all lowercase
-
-    Name: tfmcmd.ArgJoinedString
-    Return on success: String, or nil if optional is set
-    Supported parameters:
-        - default (String) : Will return this string if command does not specify this argument
-        - length (Integer) : The maximum number of words to join
-
-    Name: tfmcmd.ArgNumber
-    Return on success: Integer, or nil if optional is set
-    Supported parameters:
-        - default (Integer) : Will return this number if command does not specify this argument
-        - min (Integer) : If specified, and the number parsed is < min, will error on ERANGE
-        - max (Integer) : If specified, and the number parsed is > max, will error on ERANGE
-
-    Name: tfmcmd.ALL_WORDS
-    Description:
-        Simply returns all raw arguments in strings. No fixed length. Will not error out due to no error
-        checking / processing. Not recommended to use if you are sure on the specific types / number of
-        arguments (if so specify them using a table of ArgType).
-    Return on success: All raw arguments in strings
-    No parameters
-
-    ++ Error Types (ErrType) ++
-    Name: tfmcmd.OK
-    Description:
-        No errors.
-    No default arguments
-
-    Name: tfmcmd.ENOCMD
-    Description:
-        No such valid command was registered.
-    No default arguments
-
-    Name: tfmcmd.EPERM
-    Description:
-        Permission denied
-    No default arguments
-
-    Name: tfmcmd.EINVAL
-    Description:
-        Invalid argument value
-    Default arguments:
-        - String? : Accepted values
-
-    Name: tfmcmd.EMISSING
-    Description:
-        Missing argument
-    No default arguments
-
-    Name: tfmcmd.ETYPE
-    Description:
-        Invalid argument type
-    Default arguments:
-        - tfmcmd.ArgType? : Expected type
-
-    Name: tfmcmd.ERANGE
-    Description:
-        Number out of range
-    Default arguments:
-        - Number : Min
-        - Number : Max
-]]
 
 local commands = {}
 local default_allowed = true  -- can be fn(pn) or bool
 
 --- Error enums
-tfmcmd.OK       = 0  -- No errors
-tfmcmd.ENOCMD   = 1  -- No such valid command found
-tfmcmd.EPERM    = 2  -- Permission denied
-tfmcmd.EINVAL   = 3  -- Invalid argument value
-tfmcmd.EMISSING = 4  -- Missing argument
-tfmcmd.ETYPE    = 5  -- Invalid argument type
-tfmcmd.ERANGE   = 6  -- Number out of range
-tfmcmd.EOTHER   = 7  -- Other unknown errors
-
--- Args enums
-tfmcmd.ALL_WORDS = 1
-
---- This command context is passed as the first argument in the commands' callback.
---- @class tfmcmd.CmdContext
---- @field playerName string @The player who invoked the command
---- @field commandName string @The name of the command invoked
---- @field args table|nil @Contains a key-value association of arguments that have `name` defined, and also all the arguments according to their positional index. This is `nil` when arguments type is set to tfmcmd.ALL_WORDS
-
---- @class tfmcmd.CmdCommonAttr
---- @field allowed boolean|fun(playerName:string) @Override the default permission rule set by tfmcmd.setDefaultAllow [Optional]
---- @field args table Arguments specification (see code docs for supported types)
---- @field func fun(ctx:tfmcmd.CmdContext, ...)
-
---- @class tfmcmd.CmdMainAttr:tfmcmd.CmdCommonAttr
---- @field name string @The command name
---- @field aliases string[] @Numeric table containing alias names for the command
-
---- @class tfmcmd.CmdInterfaceAttr:tfmcmd.CmdCommonAttr
---- @field commands string[] @Numeric table containing names for the commands that will use this interface
-
---- @alias tfmcmd.CmdType
----| 'tfmcmd.Main'
----| 'tfmcmd.Interface'
-
 --- @alias tfmcmd.ErrType
 ---| 'tfmcmd.OK'
 ---| 'tfmcmd.ENOCMD'
@@ -169,6 +14,40 @@ tfmcmd.ALL_WORDS = 1
 ---| 'tfmcmd.ETYPE'
 ---| 'tfmcmd.ERANGE'
 ---| 'tfmcmd.EOTHER'
+
+tfmcmd.OK       = 0  --- No errors
+tfmcmd.ENOCMD   = 1  --- No such valid command found
+tfmcmd.EPERM    = 2  --- Permission denied
+tfmcmd.EINVAL   = 3  --- Invalid argument value
+tfmcmd.EMISSING = 4  --- Missing argument
+tfmcmd.ETYPE    = 5  --- Invalid argument type
+tfmcmd.ERANGE   = 6  --- Number out of range
+tfmcmd.EOTHER   = 7  --- Other unknown errors
+
+-- Args enums
+tfmcmd.ALL_WORDS = 1
+
+--- This command context is passed as the first argument in the commands' callback.
+--- @class tfmcmd.CmdContext
+--- @field playerName string # The player who invoked the command
+--- @field commandName string # The name of the command invoked
+--- @field args table|nil # Contains a key-value association of arguments that have `name` defined, and also all the arguments according to their positional index. This is `nil` when arguments type is set to tfmcmd.ALL_WORDS
+
+--- @class tfmcmd.CmdCommonAttr
+--- @field allowed boolean|fun(playerName:string) # Override the default permission rule set by tfmcmd.setDefaultAllow [Optional]
+--- @field args table # Arguments specification (see code docs for supported types)
+--- @field func fun(ctx:tfmcmd.CmdContext, ...)
+
+--- @class tfmcmd.CmdMainAttr:tfmcmd.CmdCommonAttr
+--- @field name string # The command name
+--- @field aliases string[] # Numeric table containing alias names for the command
+
+--- @class tfmcmd.CmdInterfaceAttr:tfmcmd.CmdCommonAttr
+--- @field commands string[] # Numeric table containing names for the commands that will use this interface
+
+--- @alias tfmcmd.CmdType
+---| 'tfmcmd.Main'
+---| 'tfmcmd.Interface'
 
 --- Command types
 local MT_CommonCmd = { __index = {
@@ -268,7 +147,6 @@ do
         return setmetatable(attr or {}, MT_Interface)
     end
 end
-
 tfmcmd.ArgCommon = function(attr)
     return attr or {}
 end
@@ -292,7 +170,6 @@ do
             return tfmcmd.OK, self.lower and str:lower() or str
         end,
     }}
-    
 
     --- @param attr tfmcmd.ArgStringOptions
     tfmcmd.ArgString = function(attr)
@@ -373,15 +250,8 @@ end
 --- Methods
 
 --- @param cmd tfmcmd.CmdType
-tfmcmd.initCommand = function(cmd)
+tfmcmd.registerCommand = function(cmd)
     cmd:register()
-end
-
---- @param cmds tfmcmd.CmdType[]
-tfmcmd.initCommands = function(cmds)
-    for i = 1, #cmds do
-        cmds[i]:register()
-    end
 end
 
 --- @param allow boolean|fun(playerName:string)
@@ -416,8 +286,8 @@ local execute_command = function(pn, words)
     end
 end
 
---- @param pn string The player who invoked the command
---- @param msg string Command string to be passed
+--- @param pn string # The player who invoked the command
+--- @param msg string # Command string to be passed
 --- @return tfmcmd.ErrType, ...
 tfmcmd.executeChatCommand = function(pn, msg)
     local words = { current = 2, _len = 0 }  -- current = index of argument which is to be accessed first in the next arg type

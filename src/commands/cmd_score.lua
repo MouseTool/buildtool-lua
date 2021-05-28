@@ -1,9 +1,8 @@
-local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
 local globals = require("bt-vars")
 
-btcmd.addCommand(tfmcmd.Main {
+tfmcmd.registerCommand(tfmcmd.Main {
     name = "score",
     args = {
         tfmcmd.ArgString { optional = true },
@@ -31,8 +30,7 @@ btcmd.addCommand(tfmcmd.Main {
         end
     end
 })
-
-btcmd.addCommand(tfmcmd.Main {
+tfmcmd.registerCommand(tfmcmd.Main {
     name = "s",
     args = {
         tfmcmd.ArgString { optional = true },

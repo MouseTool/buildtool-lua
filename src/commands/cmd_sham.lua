@@ -1,9 +1,8 @@
-local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
 local globals = require("bt-vars")
 
-btcmd.addCommand(tfmcmd.Interface {
+tfmcmd.registerCommand(tfmcmd.Interface {
     commands = {"sham", "unsham"},
     args = {
         tfmcmd.ArgString { optional = true },

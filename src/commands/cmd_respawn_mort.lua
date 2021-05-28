@@ -1,9 +1,8 @@
-local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
 local globals = require("bt-vars")
 
-btcmd.addCommand(tfmcmd.Main {
+tfmcmd.registerCommand(tfmcmd.Main {
     name = "respawn",
     aliases = {"r"},
     args = {
@@ -23,8 +22,7 @@ btcmd.addCommand(tfmcmd.Main {
         btp:normalRespawn()
     end
 })
-
-btcmd.addCommand(tfmcmd.Main {
+tfmcmd.registerCommand(tfmcmd.Main {
     name = "mort",
     aliases = {"m"},
     allowed = true,
@@ -35,8 +33,7 @@ btcmd.addCommand(tfmcmd.Main {
         tfm.exec.killPlayer(ctx.playerName)
     end
 })
-
-btcmd.addCommand(tfmcmd.Main {
+tfmcmd.registerCommand(tfmcmd.Main {
     name = "kill",
     args = {
         tfmcmd.ArgString { optional = true },

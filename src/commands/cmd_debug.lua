@@ -1,4 +1,3 @@
-local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
 local globals = require("bt-vars")
@@ -13,8 +12,7 @@ do
     }
     LOCBUILDER_CHANGED_LANG = localis.joiner:new(_joins, " ")
 end
-
-btcmd.addCommand(tfmcmd.Main {
+tfmcmd.registerCommand(tfmcmd.Main {
     name = "langue",
     allowed = true,
     args = {

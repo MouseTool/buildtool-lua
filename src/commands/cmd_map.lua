@@ -1,10 +1,9 @@
-local btcmd = require("commands.btcmd")
 local tfmcmd = require("commands.tfmcmd")
 
 local globals = require("bt-vars")
 local btRoom = require("entities.bt_room")
 
-btcmd.addCommand(
+tfmcmd.registerCommand(
     tfmcmd.Main {
         name = "map",
         aliases = {"np"},
@@ -29,8 +28,7 @@ btcmd.addCommand(
         end
     }
 )
-
-btcmd.addCommand(
+tfmcmd.registerCommand(
     tfmcmd.Main {
         name = "rst",
         --- @param ctx tfmcmd.CmdContext
