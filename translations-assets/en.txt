@@ -3,8 +3,8 @@ language_english = [[English]]
 language_native = [[English]]
 
 # Chat Messages
-player_entered = [[<J>%s has entered the room.]]
-player_left = [[<J>%s has left the room.]]
+player_entered = [[<T>%s has entered the room.]]
+player_left = [[<T>%s has left the room.]]
 player_welcome = [[<J>Welcome to BuildTool Beta Testing! Type !help or press H to see the help window.]]
 
 mapinfo_summary = [[<ROSE>[Map Info] <J>%s <N>by %s]]
