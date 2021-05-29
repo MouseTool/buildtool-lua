@@ -6,11 +6,13 @@ local string_ext = {}
 --- @param delimiter? string # The delimiter pattern (same format used by `string.match`) (default "%s")
 --- @return string[]
 string_ext.split = function(str, delimiter)
-    local delimiter, a = delimiter or ',', {}
-	for part in str:gmatch('[^'..delimiter..']+') do
-		a[#a+1] = part
-	end
-	return a
+    delimiter = delimiter or '%s'
+    local parts, sz = {}, 0
+    for part in str:gmatch("[^" .. delimiter .. "]+") do
+        sz = sz + 1
+        parts[sz] = part
+    end
+    return parts
 end
 
 return string_ext

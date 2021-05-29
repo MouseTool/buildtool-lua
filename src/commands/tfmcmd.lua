@@ -37,7 +37,7 @@ tfmcmd.ALL_WORDS = 1
 --- @field allowed boolean|fun(playerName:string) # Override the default permission rule set by tfmcmd.setDefaultAllow [Optional]
 --- @field args table # Arguments specification (see code docs for supported types)
 --- @field func fun(ctx:tfmcmd.CmdContext, ...)
---- @field visible Capabilities
+--- @field visible Capabilities|boolean
 
 --- @class tfmcmd.CmdMainAttr:tfmcmd.CmdCommonAttr
 --- @field name string # The command name
@@ -292,7 +292,14 @@ end
 -- TODO: REEEEEE this is ugly, we'll definitely need to abstract this away
 tfmcmd.getVisible = function(msg)
     local cmd = msg:match("[^ ]+")
-    return commands[cmd] and false or (commands[cmd].visible or true)
+    if commands[cmd] == nil then
+        return false
+    end
+    local vis = commands[cmd].visible
+    if vis == nil then
+        return true
+    end
+    return vis
 end
 
 --- @param pn string # The player who invoked the command

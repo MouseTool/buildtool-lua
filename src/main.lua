@@ -38,6 +38,6 @@ require("translations.bt-init")
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do
     tfm.exec['disable'..v](true)
 end
-system.disableChatCommandDisplay(nil,true)
+system.disableChatCommandDisplay(nil, true)
 
 api:start()
