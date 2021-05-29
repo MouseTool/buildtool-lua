@@ -2,7 +2,7 @@ local tfmcmd = require("commands.tfmcmd")
 local perms = require("commands.perms")
 local ROLE = require("permissions.bt_perms").ROLE
 
-local globals = require("bt-vars")
+local btRoom = require("entities.bt_room")
 local localis = require("localisation.localis_manager")
 local string_split = require("util.stringlib").split
 
@@ -25,7 +25,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
     --- @param ctx tfmcmd.CmdContext
     --- @param language? string
     func = function(ctx, language)
-        local btp = globals.players[ctx.playerName]
+        local btp = btRoom.players[ctx.playerName]
         if localis.getLanguageData(language) == nil then
             btp:chatMsg("<R>Warning: there is currently no translation for the chosen language")
         end
@@ -89,7 +89,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
             end
             tfm.exec[argv[1]](table.unpack(args, 1, sz))
         else
-            local btp = globals.players[ctx.playerName]
+            local btp = btRoom.players[ctx.playerName]
             btp:chatMsg('no such exec '..(argv[1] and argv[1] or 'nil'))
         end
     end

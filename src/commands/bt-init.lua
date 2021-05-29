@@ -2,8 +2,7 @@ local tfmcmd = require("commands.tfmcmd")
 local cmdPerms = require("commands.perms")
 
 local btRoom = require("entities.bt_room")
-local globals = require("bt-vars")
-local api = globals.api
+local api = btRoom.api
 local tfmEvent = api.tfmEvent
 
 tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
@@ -17,7 +16,7 @@ require("commands.cmd_score")
 require("commands.cmd_clear")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
-    local btp = globals.players[pn]
+    local btp = btRoom.players[pn]
     local vis = tfmcmd.getVisible(msg)
     if vis ~= false then
         local g = vis

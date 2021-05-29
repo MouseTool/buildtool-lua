@@ -1,10 +1,11 @@
--- Manager for windows.
--- Due to how text areas and images are positioned in TFM, it is neccessary to
--- ensure that windows render properly over one another when multiple layers
--- of elements coexist. This window manager serves to handle them.
+--- Manager for UI windows.
+--- Due to how text areas and images are positioned in TFM, it is neccessary to
+--- ensure that windows render properly over one another when multiple layers
+--- of elements coexist. This window manager serves to handle them.
+local window_manager = {}
 
-local globals = require("bt-vars")
-local api = globals.api
+local btRoom = require("entities.bt_room")
+local api = btRoom.api
 local OrderedTable = require("@mousetool/ordered-table")
 local WindowEnums = require("bt-enums").Window
 local WindowOverlayEnums = require("bt-enums").WindowOverlay
@@ -30,8 +31,6 @@ local CLASS_MAP = {
     [WindowEnums.SETTINGS] = SettingsWindow
 }
 
-local window_manager = {}
-
 --- Called when a new window is going to be in ultimate focus, and the old top window (if any) has to be unfocused.
 --- @param pn string
 local function unfocusTop(pn)
@@ -55,7 +54,7 @@ end
 --- @param pn string Player name
 --- @return Window
 window_manager.open = function(window_id, pn)
-    if not globals.players[pn] then
+    if not btRoom.players[pn] then
         print("Tried to open window ID " .. window_id .." but player not registered:" .. pn)
         return
     end
@@ -114,7 +113,7 @@ end
 --- @param window_id WindowEnum Window type
 --- @param pn string Player name
 window_manager.close = function(window_id, pn)
-    if not globals.players[pn] then
+    if not btRoom.players[pn] then
         print("Tried to close window ID " .. window_id .." but player not registered:" .. pn)
         return
     end
@@ -134,7 +133,7 @@ end
 --- @param pn string Player name
 --- @return boolean
 window_manager.isOpen = function(window_id, pn)
-    if not globals.players[pn] then
+    if not btRoom.players[pn] then
         print("Tried to check window ID " .. window_id .." but player not registered:" .. pn)
         return
     end
@@ -152,7 +151,7 @@ end
 --- @param window_id WindowEnum Window type
 --- @param pn string Player name
 window_manager.refocus = function(window_id, pn)
-    if not globals.players[pn] then
+    if not btRoom.players[pn] then
         print("Tried to close window ID " .. window_id .." but player not registered:" .. pn)
         return
     end
@@ -188,7 +187,7 @@ end
 --- @param pn string Player name
 --- @return Window? The window, null if no such window is opened
 window_manager.getWindow = function(window_id, pn)
-    if not globals.players[pn] then
+    if not btRoom.players[pn] then
         print("Tried to get window ID " .. window_id .." but player not registered:" .. pn)
         return nil
     end

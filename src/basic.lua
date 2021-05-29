@@ -1,24 +1,19 @@
 -- Controls the room's basic lifecycle
 
-local globals = require("bt-vars")
-local api = globals.api
-local tfmEvent = api.tfmEvent
-
 local btRoom = require("entities.bt_room")
 local localis = require("localisation.localis_manager")
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
 local WindowManager = require("window.window_manager")
 
+local api = btRoom.api
+local tfmEvent = api.tfmEvent
 local BtEnums = require("bt-enums")
 local WindowEnums = BtEnums.Window
 local Keys = BtEnums.Keys
 
 local btPerms = require("permissions.bt_perms")
 local BT_CAP = btPerms.CAPFLAG
-
--- Poor man's micro optimization
-local roomGet = tfm.get.room
 
 -- Key trigger types
 local DOWN_ONLY = 1
@@ -53,7 +48,7 @@ local KEY_EVENTS = {
 }
 
 tfmEvent:on('Keyboard', function(pn, k, down, x, y)
-    local btp = globals.players[pn]
+    local btp = btRoom.players[pn]
     if not btp then return end
     if not KEY_EVENTS[k] then return end
 
@@ -61,18 +56,18 @@ tfmEvent:on('Keyboard', function(pn, k, down, x, y)
 end)
 
 tfmEvent:onCrucial('PlayerLeft', function(pn)
-    local btp = globals.players[pn]
+    local btp = btRoom.players[pn]
     if not btp then return end
 
     btRoom.tlChatMsg(nil, "player_left", btp.name)
 
-    globals.players[pn] = nil
+    btRoom.players[pn] = nil
 end)
 
 --- @param mbp MbPlayer
 api:onCrucial('newPlayer', function(mbp)
     local btp = BtPlayer:new(mbp)
-    globals.players[mbp.name] = btp
+    btRoom.players[mbp.name] = btp
     print("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
 
     btRoom.tlChatMsg(nil, "player_entered", btp.name)
@@ -132,7 +127,7 @@ tfmEvent:onCrucial('NewGame', function()
 end)
 
 tfmEvent:on('PlayerDied', function(pn)
-    local btp = globals.players[pn]
+    local btp = btRoom.players[pn]
     if not btp then return end
 
     btp:normalRespawn()

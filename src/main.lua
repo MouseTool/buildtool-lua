@@ -1,5 +1,5 @@
-local globals = require("bt-vars")
-local api = globals.api
+local btRoom = require("entities.bt_room")
+local api = btRoom.api
 
 -- Patch globals with custom vars
 do

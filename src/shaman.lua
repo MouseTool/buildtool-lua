@@ -1,9 +1,8 @@
 -- Controls shaman-related gameplay
 
 local linkedlist = require("@mousetool/linkedlist")
-local globals = require("bt-vars")
 local btRoom = require("entities.bt_room")
-local api = globals.api
+local api = btRoom.api
 local tfmEvent = api.tfmEvent
 
 --- @param pn string

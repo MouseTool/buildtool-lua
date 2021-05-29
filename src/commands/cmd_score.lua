@@ -1,6 +1,6 @@
 local tfmcmd = require("commands.tfmcmd")
 
-local globals = require("bt-vars")
+local btRoom = require("entities.bt_room")
 
 tfmcmd.registerCommand(tfmcmd.Main {
     name = "score",
@@ -12,7 +12,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
     --- @param w2? string
     --- @param w3? string
     func = function(ctx, w2, w3)
-        local invoker = globals.players[ctx.playerName]
+        local invoker = btRoom.players[ctx.playerName]
         if not invoker then return end
 
         local score = tonumber(w2) or tonumber(w3) or 0
@@ -20,7 +20,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
         if score < 0 or score > 999 then
             invoker:tlChatMsg("err_score_not_ranged", 0, 999)
         elseif w2 == "all" or w3 == "all" then
-            for name, btp in pairs(globals.players) do
+            for name, btp in pairs(btRoom.players) do
                 tfm.exec.setPlayerScore(name, score)
             end
         elseif w2 == "me" or w3 == "me" then
@@ -38,11 +38,11 @@ tfmcmd.registerCommand(tfmcmd.Main {
     --- @param ctx tfmcmd.CmdContext
     --- @param target? string
     func = function(ctx, target)
-        local targetp = globals.players[target or ctx.playerName]
+        local targetp = btRoom.players[target or ctx.playerName]
         if not targetp then return end
 
         local highest_score = nil
-        for _, btp in pairs(globals.players) do
+        for _, btp in pairs(btRoom.players) do
             local score = btp.mbp:getTfmPlayer().score
             if not highest_score or score > highest_score then
                 highest_score = score

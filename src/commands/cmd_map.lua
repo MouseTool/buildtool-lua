@@ -1,6 +1,5 @@
 local tfmcmd = require("commands.tfmcmd")
 
-local globals = require("bt-vars")
 local btRoom = require("entities.bt_room")
 
 tfmcmd.registerCommand(
@@ -35,7 +34,7 @@ tfmcmd.registerCommand(
         func = function(ctx)
             local currentRound = btRoom.currentRound
             if not currentRound then
-                local btp = globals.players[ctx.playerName]
+                local btp = btRoom.players[ctx.playerName]
                 if btp then
                     btp:tlChatMsg("err_round_not_loaded")
                 end

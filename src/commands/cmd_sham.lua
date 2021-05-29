@@ -1,6 +1,6 @@
 local tfmcmd = require("commands.tfmcmd")
 
-local globals = require("bt-vars")
+local btRoom = require("entities.bt_room")
 
 tfmcmd.registerCommand(tfmcmd.Interface {
     commands = {"sham", "unsham"},
@@ -12,12 +12,12 @@ tfmcmd.registerCommand(tfmcmd.Interface {
     func = function(ctx, target)
         local should_set = ctx.commandName ~= "unsham"
         if target == "all" then
-            for name, btp in pairs(globals.players) do
+            for name, btp in pairs(btRoom.players) do
                 tfm.exec.setShaman(name, should_set)
             end
             return
         end
-        local btp = globals.players[target or ctx.playerName]
+        local btp = btRoom.players[target or ctx.playerName]
         if not btp then return end
         tfm.exec.setShaman(btp.name, should_set)
     end

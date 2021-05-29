@@ -1,6 +1,6 @@
 local tfmcmd = require("commands.tfmcmd")
 
-local globals = require("bt-vars")
+local btRoom = require("entities.bt_room")
 
 tfmcmd.registerCommand(tfmcmd.Main {
     name = "respawn",
@@ -12,12 +12,12 @@ tfmcmd.registerCommand(tfmcmd.Main {
     --- @param target? string
     func = function(ctx, target)
         if target == "all" then
-            for _, btp in pairs(globals.players) do
+            for _, btp in pairs(btRoom.players) do
                 btp:normalRespawn()
             end
             return
         end
-        local btp = globals.players[target or ctx.playerName]
+        local btp = btRoom.players[target or ctx.playerName]
         if not btp then return end
         btp:normalRespawn()
     end
@@ -28,7 +28,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
     allowed = true,
     --- @param ctx tfmcmd.CmdContext
     func = function(ctx)
-        local btp = globals.players[ctx.playerName]
+        local btp = btRoom.players[ctx.playerName]
         if not btp then return end
         tfm.exec.killPlayer(ctx.playerName)
     end
@@ -42,12 +42,12 @@ tfmcmd.registerCommand(tfmcmd.Main {
     --- @param target? string
     func = function(ctx, target)
         if target == "all" then
-            for name, btp in pairs(globals.players) do
+            for name, btp in pairs(btRoom.players) do
                 tfm.exec.killPlayer(name)
             end
             return
         end
-        local btp = globals.players[target or ctx.playerName]
+        local btp = btRoom.players[target or ctx.playerName]
         if not btp then return end
         tfm.exec.killPlayer(btp.name)
     end

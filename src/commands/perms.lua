@@ -2,7 +2,7 @@ local perms = {}
 
 local btPerms = require("permissions.bt_perms")
 local CAPFLAG = btPerms.CAPFLAG
-local players = require("bt-vars").players
+local players = require("entities.bt_room").players
 
 perms.IS_DEV = function(pn) return players[pn].capabilities:hasFlag(CAPFLAG.DEV) end
 perms.IS_STAFF = function(pn) return players[pn].capabilities:hasFlag(CAPFLAG.SUPERADMIN) end
