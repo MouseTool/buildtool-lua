@@ -22,6 +22,7 @@ enums.Keys = {
     SPACE = 32,
     H = 72,
     O = 79,
+    U = 85,
 }
 
 return enums

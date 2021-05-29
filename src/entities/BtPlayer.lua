@@ -10,13 +10,15 @@
 --- @field language string # The player's language
 local BtPlayer = require("@mousetool/mousebase").EventEmitter:extend("BtPlayer")
 
-local moduleMsgDirect = require("entities.bt_room").moduleMsgDirect
+local btRoom = require("entities.bt_room")
 local Capabilities = require("permissions.Capabilities")
 local btPerms = require("permissions.bt_perms")
 local BT_ROLE = btPerms.ROLE
 local BT_CAP = btPerms.CAPFLAG
 local roomSets = require("settings.RoomSettings")
 local localis = require("localisation.localis_manager")
+
+local moduleMsgDirect = require("entities.bt_room").moduleMsgDirect
 
 local DEFAULT_LANGUAGE = "en"
 
@@ -84,6 +86,17 @@ BtPlayer.normalRespawn = function(self)
     if roomSets:getBool('autorev') then
         tfm.exec.respawnPlayer(self.name)
     end
+end
+
+--- Undo the player's last spawned object in the current round.
+--- Must be a shaman.
+BtPlayer.undoObject = function(self)
+    local round = btRoom.currentRound
+    if not self.mbp:getTfmPlayer().isShaman
+    or not btRoom.currentRound then
+        return
+    end
+    round:undoObject(self.name)
 end
 
 return BtPlayer

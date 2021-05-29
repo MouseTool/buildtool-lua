@@ -64,12 +64,23 @@ _parseXml = function(self, xml)
     mapProp.mgoc = tonumber(prop_attr['mgoc']) or 0
 end
 
+--- Undo the player's last spawned object in the round
+--- @param playerName string # The player to target
+BtRound.undoObject = function(self, playerName)
+    local pspawned = self.spawnedObjects[playerName]
+    if not pspawned or pspawned.size <= 0 then return end
+
+    --- @type number
+    local id = pspawned:pop_back()
+    tfm.exec.removeObject(id)
+end
+
 --- Removes all objects spawned
 --- @param playerName? string # The player to target. If this is `nil`, will target all players.
 BtRound.clearAllObjects = function(self, playerName)
     if not playerName then
         -- Target all
-        for name, pspawned in pairs(self.spawnedObjects) do
+        for _, pspawned in pairs(self.spawnedObjects) do
             for _, obj_id in pspawned:ipairs() do
                 tfm.exec.removeObject(obj_id)
             end

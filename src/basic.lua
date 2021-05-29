@@ -33,12 +33,21 @@ local KEY_EVENTS = {
         end,
         trigger = DOWN_ONLY
     },
+    -- Opens help menu
     [Keys.H] = {
         cb = function(btp, k, down, x, y)
             WindowManager.toggle(WindowEnums.HELP, btp.name)
         end,
         trigger = DOWN_ONLY
     },
+    -- Undo spawn
+    [Keys.U] = {
+        cb = function(btp, k, down, x, y)
+            btp:undoObject()
+        end,
+        trigger = DOWN_ONLY
+    },
+    -- Opens room settings
     [Keys.O] = {
         cb = function(btp, k, down, x, y)
             WindowManager.toggle(WindowEnums.HELP, btp.name)
