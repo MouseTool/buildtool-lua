@@ -75,3 +75,10 @@ tfmEvent:on('PlayerDied', function(pn)
 
     btp:normalRespawn()
 end)
+
+tfmEvent:on('PlayerWon', function(pn)
+    local btp = btRoom.players[pn]
+    if not btp then return end
+
+    btp:normalRespawn()
+end)
