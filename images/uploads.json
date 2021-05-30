@@ -3,6 +3,8 @@
         "interface/help_menu/bg.png": "1786a49a66a.png",
         "interface/help_menu/tab.png": "177dd78b1e8.png",
         "interface/help_menu/tab_active.png": "177dd78e605.png",
-        "interface/settings/bg.png": "1786a49d034.png"
+        "interface/settings/bg.png": "1786a49d034.png",
+        "mouse_spawn/mousespawn_DC_2x_scale.png": "179bcb95025.png",
+        "mouse_spawn/mousespawn_DS_2x_scale.png": "179bc76e7eb.png"
     }
 }

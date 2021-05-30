@@ -1,12 +1,27 @@
-
 local mousexml = require("@mousetool/mousexml")
 local linkedlist = require("@mousetool/linkedlist")
+local btRoom = require("entities.bt_room")
+local string_split = require("util.stringlib").split
+
 local roomGet = tfm.get.room
+
+--- Represents an X-Y coordinate
+--- @class BtXmlMapProp.XY
+--- @field x number # X coordinate
+--- @field y number # Y coordinate
+
+--- Represents an optional X-Y coordinate
+--- @class BtXmlMapProp.XYOptional
+--- @field x number|nil # X coordinate
+--- @field y number|nil # Y coordinate
 
 --- @class BtXmlMapProp
 --- @field wind number
 --- @field gravity number
 --- @field mgoc number
+--- @field mouseSpawns BtXmlMapProp.XY[]
+--- @field shamanSpawns BtXmlMapProp.XY[]
+--- @field mouseSpawnAxis BtXmlMapProp.XYOptional # Mice are spawned randomly across the given axis. Valid when `x` and `y` are mutually exclusive.
 
 --- Represents a BuildTool round
 --- @class BtRound:CommonRound
@@ -39,29 +54,113 @@ end
 --- @param self BtRound
 --- @param xml string
 _parseXml = function(self, xml)
-    if not xml then
-        return
-    end
-
+    if not xml then return end
     local xmlDoc = mousexml.parse(xml)
-    local mapProp = {}
+
+    local mapProp = {
+        mouseSpawns = {},
+        shamanSpawns = {}
+    }
     self.xmlDoc = xmlDoc
     self.mapProp = mapProp
 
-    --- @type XmlNode
-    local prop_node = xmlDoc('C')('P')
-    local prop_attr = prop_node.attributes
-
-    local wind, grav = 0, 10
-    if prop_attr['G'] then
-        wind, grav = prop_attr['G']:match("(%-?%S+),(%-?%S+)")
-        wind = tonumber(wind) or wind
-        grav = tonumber(grav) or grav
+    -- Capture any error while parsing XML fragments
+    local ON_PCALL_ERR = function(err)
+        print("Runtime Error : parseXml : " .. tostring(err) .. "\n" .. debug.traceback(nil, 2))
+        btRoom.moduleMsgDirect(("<R>An error occurred while parsing. Please report the error with this map (@%s)"):format(self.mapCode))
     end
-    mapProp.wind = wind
-    mapProp.gravity = grav
 
-    mapProp.mgoc = tonumber(prop_attr['mgoc']) or 0
+    -- Parse properties
+    xpcall(function()
+        --- @type XmlNode
+        local prop_node = xmlDoc('C')('P')
+        local prop_attr = prop_node.attributes
+
+        local wind, grav = 0, 10
+        if prop_attr['G'] then
+            wind, grav = prop_attr['G']:match("(%-?%S+),(%-?%S+)")
+            wind = tonumber(wind) or wind
+            grav = tonumber(grav) or grav
+        end
+        mapProp.wind = wind
+        mapProp.gravity = grav
+
+        mapProp.mgoc = tonumber(prop_attr['mgoc']) or 0
+    end, ON_PCALL_ERR)
+
+    -- Parse mouse spawns
+    xpcall(function()
+        -- Using ObjetSouris defs
+        --- @type XmlNode
+        local d_node = xmlDoc('C')('Z')('D')
+        local ds_nodes = d_node:findChildren('DS')
+        for i = 1, #ds_nodes do
+            local ds = ds_nodes[i].attributes
+            mapProp.mouseSpawns[i] = { x = ds['X'], y = ds['Y'] }
+        end
+
+        if #mapProp.mouseSpawns == 0 then
+            -- Check using DS param property
+            --- @type XmlNode
+            local prop_node = xmlDoc('C')('P')
+            local prop_attr = prop_node.attributes
+            if prop_attr['DS'] then
+                local spawns = prop_attr['DS']:match("^m;([,%d]*)$") or ""
+                local spl = string_split(spawns, ',')
+                for i = 1, #spl, 2 do
+                    local x, y = spl[i], spl[i + 1]
+                    if x and y then
+                        mapProp.mouseSpawns[#mapProp.mouseSpawns + 1] = { x = x, y = y }
+                    end
+                end
+
+                local axis, val = prop_attr['DS']:match("^([xy]);(%d*)$")
+                if axis and val then
+                    mapProp.mouseSpawnAxis[axis] = val
+                end
+            end
+        end
+
+        if #mapProp.mouseSpawns == 0 then
+            -- Check using mouse hole
+            local t_nodes = d_node:findChildren('T')
+            for i = 1, #t_nodes do
+                local t = t_nodes[i].attributes
+                mapProp.mouseSpawns[i] = { x = t['X'], y = t['Y'] - 15 }
+                if not self:isDualShaman() then
+                    break
+                end
+            end
+        end
+
+        -- TODO: We could perhaps specifically separate DC and DC2 properties, since
+        -- the array size is always expected to be 0 <= x <= 2
+
+        local dc_nodes = d_node:findChildren('DC')
+        for i = 1, #dc_nodes do
+            local dc = dc_nodes[i].attributes
+            mapProp.shamanSpawns[i] = { x = dc['X'], y = dc['Y'] }
+        end
+
+        if #dc_nodes > 0 then
+            local dc2_nodes = d_node:findChildren('DC2')
+            for i = 1, #dc2_nodes do
+                local dc = dc2_nodes[i].attributes
+                mapProp.shamanSpawns[#mapProp.shamanSpawns + 1] = { x = dc['X'], y = dc['Y'] }
+            end
+        end
+
+        if #mapProp.shamanSpawns == 0 and self:isDualShaman() then
+            -- Check using mouse hole
+            local t_nodes = d_node:findChildren('T')
+            for i = 1, #t_nodes do
+                local t = t_nodes[i].attributes
+
+                mapProp.shamanSpawns[#mapProp.shamanSpawns + 1] = { x = t['X'], y = t['Y'] - 15 }
+                if #mapProp.shamanSpawns == 2 then break end
+            end
+        end
+    end, ON_PCALL_ERR)
 end
 
 --- Undo the player's last spawned object in the round
@@ -95,6 +194,17 @@ BtRound.clearAllObjects = function(self, playerName)
         end
         self.spawnedObjects[playerName] = linkedlist:new()
     end
+end
+
+--- Checks if the map is of dual shaman perm
+--- @return boolean
+BtRound.isDualShaman = function(self)
+    local perm_code = self.permCode
+    if not perm_code then return false end
+
+    return perm_code == 8
+        or perm_code == 24
+        or perm_code == 32
 end
 
 --- Instantiate a BT round from the current `TfmRoom`

@@ -5,6 +5,7 @@ local enums = {}
 enums.Window = {
     HELP = 1,
     SETTINGS = 2,
+    MOUSE_SPAWN = 3,
 }
 
 --- Window overlay behavior - describes what the window should do when a
@@ -21,6 +22,7 @@ enums.WindowOverlay = {
 enums.Keys = {
     SPACE = 32,
     H = 72,
+    M = 77,
     O = 79,
     U = 85,
 }
