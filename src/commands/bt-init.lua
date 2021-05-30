@@ -14,6 +14,7 @@ require("commands.cmd_respawn_mort")
 require("commands.cmd_sham")
 require("commands.cmd_score")
 require("commands.cmd_clear")
+require("commands.cmd_room")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
     local btp = btRoom.players[pn]
