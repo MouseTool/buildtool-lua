@@ -291,7 +291,7 @@ end
 
 -- TODO: REEEEEE this is ugly, we'll definitely need to abstract this away
 tfmcmd.getVisible = function(msg)
-    local cmd = msg:match("[^ ]+")
+    local cmd = msg:match("[^ ]+"):lower()
     if commands[cmd] == nil then
         return false
     end
