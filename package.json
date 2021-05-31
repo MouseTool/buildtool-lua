@@ -16,12 +16,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mousetool/mousebase": "1.0.4",
-    "@mousetool/mousexml": "^1.0.1",
+    "@mousetool/mousebase": "1.0.5",
+    "@mousetool/mousexml": "^1.0.2",
     "@mousetool/ordered-table": "^1.0.1"
   },
   "devDependencies": {
-    "@mousetool/onelua": "^1.1.0",
+    "@mousetool/onelua": "^1.1.1",
     "@mousetool/tfm-vscode": "^1.0.1"
   }
 }

@@ -76,6 +76,15 @@ BtPlayer.setLanguage = function(self, language)
     self:emit('languageChanged')
 end
 
+--- Triggers a room `keyboard` event for the player
+--- @param keycode number
+--- @param down boolean
+--- @param x? number
+--- @param y? number
+BtPlayer.triggerKey = function(self, keycode, down, x, y)
+    btRoom.events:emit('keyboard', self, keycode, down, x, y)
+end
+
 --- Respawns the player with the standard conditions:
 ---  - Not banned
 ---  - Dead

@@ -2,25 +2,25 @@
 # yarn lockfile v1
 
 
-"@mousetool/class@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@mousetool/class/1.0.0/33d0651cf6073d899c45e134820fe55944a4cc550e8a8502ceed5d456e0e1434#edab7d0bcb8eccb76e955474bea4d99a5f5a61b2"
-  integrity sha512-m22QXgyNOWcBreEejr9P9Us+BQ7DCtbwtoI3ls72w00zjg4I11r9yQ024MI0zz7yNlQXdhqO1GztG3BYd4thSg==
+"@mousetool/class@^1.0.0", "@mousetool/class@^1.0.1":
+  version "1.0.1"
+  resolved "https://npm.pkg.github.com/download/@mousetool/class/1.0.1/6c327ef42b10d4d3ae5d4dbfa781926d165ca664154c2c7a231cee3e88631559#36f49d85ce4e0488affb446ded683f670a97901a"
+  integrity sha512-xySgNeqefYryp3EPmnQXOCpaY1ptomGWzYJjcAV0ztYZNlV2ry8XRyeZ5fU0LvGy0dnoZs3awzwnOApO1PgQ9A==
 
 "@mousetool/linkedlist@^1.0.1":
   version "1.0.1"
   resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.1/b495c3730f969a93b190c8a3c05745e8ab1de5785dcf795081018941a20cdae4#daa5dabaa4a11694aad95bfd2df565891a8afdbb"
   integrity sha512-F5+GHSvnsLgxQykBbXiiHJVyA0PmSZMuEUuiK8rE6iYf1bBiwcwgLDTYhv+xOWodEuL5F5pjP90K8WSUfzdK0g==
 
-"@mousetool/mousebase@1.0.4", "@mousetool/mousebase@^1.0.2":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@mousetool/mousebase/1.0.4/a6b870e22e6440e9b5ed3dbc0f00cb352498f50fce1085ae069a1ccb7487802f#b50a0943fd0699c46e67c8e9bdf60ac79ae4fa34"
-  integrity sha512-pvxZrahp1ud6iOAKu4jfd2IdWboVijR1l2B6uvymMFeIsVm+5PuSbNNpFA8LJQMkRHWMkakoEM6BCmmLp0rFrA==
+"@mousetool/mousebase@1.0.5", "@mousetool/mousebase@^1.0.2":
+  version "1.0.5"
+  resolved "https://npm.pkg.github.com/download/@mousetool/mousebase/1.0.5/877a59ae0627aa73d58a6c9b6dd76a79c59a03e3a5d58e4d8d31f1423ab037c5#0cfb1d9c99a4bf6859fe44b886f2ff37710b9f97"
+  integrity sha512-nbIcTUZ3oqhzBy97/B94FP60MIIuwvqBvZ5z3U5nkFVgiZszBN684/1tHZ2b15sZvODPUCGvb1hUwXny2VHALw==
   dependencies:
-    "@mousetool/class" "^1.0.0"
+    "@mousetool/class" "^1.0.1"
     "@mousetool/nickname801" "^1.0.0"
 
-"@mousetool/mousexml@^1.0.1":
+"@mousetool/mousexml@^1.0.2":
   version "1.0.2"
   resolved "https://npm.pkg.github.com/download/@mousetool/mousexml/1.0.2/0f8b92a856b9af41bfc5eaa498ab8d0c836a78edfd6f64cfd7a082fc88c66c17#fa7b1bdbc44c9c430fe1baeba56866549b895fd8"
   integrity sha512-M7wBlIlmQaG2Q3IVtqbRGDobZI3w+pry9bdaqjykXwLAh2/br0PFKfvrPafkeBIsXgjw/BxTNCqDxyMWH7YmMA==
@@ -35,10 +35,10 @@
   resolved "https://npm.pkg.github.com/download/@mousetool/nickname801/1.0.0/a06105faaee6534248bfd796ad06c22e16429c6a5d71467438ecebc202664520#c3f3d4dd6e0ad464cd80e58d5679d0246c7894cc"
   integrity sha512-wwdXGm7s0SwR+vq3OHLaWtAIXJasJfFImlqQTpNYW7ZJTjWNN8ePCqIEEqYDzIJX2v41EdLyWOtkefSs57/FTw==
 
-"@mousetool/onelua@^1.1.0":
-  version "1.1.0"
-  resolved "https://npm.pkg.github.com/download/@mousetool/onelua/1.1.0/66669145f2ac91ab1a282c214db514f1807d198b2b7c322209834534bb2d8341#ee3c54a635dd40f15d87c6552cfbc4402bd83382"
-  integrity sha512-Xz7nwcGaRWcGQidpuVKmlc5FdBxl5omYwRpQTFeQWQMLG01T2urD7ll590bnl7v5ZKudJQrnXDGXOjf6GrF4BQ==
+"@mousetool/onelua@^1.1.1":
+  version "1.1.1"
+  resolved "https://npm.pkg.github.com/download/@mousetool/onelua/1.1.1/652dee726888ffb0f5fbffe9c85a991c9bfd25df554954a3b20ceb964694729c#1bfadf97b440acdd4ab7036a1e0b5eb0f3847d24"
+  integrity sha512-QwHCPXHMAO1IB5YcFGMfDfzxVPG4s7Dcjo7/dygVD0PEr58FjyAqbpW7UG4uiXg2fVXYPF45FYdOBd6ilJR5UQ==
   dependencies:
     argparse "^2.0.1"
     decache "^4.6.0"

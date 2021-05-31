@@ -3,6 +3,7 @@
 --- @field currentRound BtRound|nil
 local bt_room = {}
 
+local BtRoomEvents = require("BtRoomEvents")
 local localis = require("localisation.localis_manager")
 
 --- Chat prefix
@@ -63,5 +64,7 @@ bt_room.api = require("@mousetool/mousebase").MbApi()
 
 --- @type table<string, BtPlayer>
 bt_room.players = {}
+
+bt_room.events = BtRoomEvents:new()
 
 return bt_room
