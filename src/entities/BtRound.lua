@@ -2,6 +2,7 @@ local mousexml = require("@mousetool/mousexml")
 local linkedlist = require("@mousetool/linkedlist")
 local btRoom = require("entities.bt_room")
 local string_split = require("util.stringlib").split
+local TfmGround = require("entities.TfmGround")
 
 local roomGet = tfm.get.room
 
@@ -29,6 +30,7 @@ local roomGet = tfm.get.room
 --- @field author string # The map's author
 --- @field xmlDoc XmlDoc|nil # The map's XML document object
 --- @field mapProp BtXmlMapProp|nil # Map properties from the XML
+--- @field grounds TfmGround[]|nil # The map's XML grounds
 --- @field spawnedObjects table<string, LinkedList<number, number>> # Keeps track of all objects IDs spawned in the round per player
 local BtRound = require("entities.CommonRound"):extend("BtRound")
 
@@ -43,7 +45,7 @@ BtRound._init = function(self, mapCode, isMirrored, author, permCode, xml)
     BtRound._parent._init(self, mapCode, isMirrored, author, permCode, xml)
     self.author = author or "Tigrounette#0001"
 
-    -- Parse XML
+    -- Parse XML and grounds
     xpcall(_parseXml, function(err)
         print(("Failed to parse XML on map @%s:\n%s"):format(mapCode, debug.traceback(nil, 2)))
     end, self, xml)
@@ -160,6 +162,11 @@ _parseXml = function(self, xml)
                 if #mapProp.shamanSpawns == 2 then break end
             end
         end
+    end, ON_PCALL_ERR)
+
+    -- Parse all grounds
+    xpcall(function()
+        self.grounds = TfmGround.fromXmlDoc(xmlDoc)
     end, ON_PCALL_ERR)
 end
 

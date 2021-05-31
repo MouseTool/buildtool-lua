@@ -4,7 +4,7 @@ local btRoom = require("entities.bt_room")
 local WindowManager = require("window.window_manager")
 local BtEnums = require("bt-enums")
 local btPerms = require("permissions.bt_perms")
-local groundMath = require("util.ground_math")
+local mathGeometry = require("util.math_geometry")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
@@ -71,6 +71,9 @@ local KEY_EVENTS = {
                 WindowManager.close(WindowEnums.MOUSE_SPAWN, btp.name)
             end
         end,
+        trigger = DOWN_UP
+    },
+    [Keys.G] = {
         trigger = DOWN_UP
     },
     [Keys.CTRL] = {
@@ -147,7 +150,7 @@ tfmEvent:on('Mouse', function(pn, x, y)
         and player_locked[Keys.SHIFT] then
             if is_shaman and is_admin then
                 for id, object in pairs(tfm.get.room.objectList) do
-                    if groundMath.isPointInCircle(object.x, object.y, 16, x, y) then
+                    if mathGeometry.isPointInCircle(object.x, object.y, 16, x, y) then
                         tfm.exec.removeObject(id)
                         break
                     end
@@ -162,6 +165,29 @@ tfmEvent:on('Mouse', function(pn, x, y)
             end
             -- Extend the timeout for shift
             player_locked[Keys.SHIFT] = os_time() + LOCK_TIMEOUT_MS
+        elseif player_locked[Keys.G] then
+            local round = btRoom.currentRound
+            if not round then
+                btp:tlChatMsg("err_round_not_loaded")
+                return
+            end
+            if not round.grounds then return end
+            local found_g = nil
+            for i = 1, #round.grounds do
+                local ground = round.grounds[i]
+                if ground:isPointInside(x, y) then
+                    found_g = ground
+                    break
+                end
+            end
+            if found_g then
+                WindowManager.open(WindowEnums.GROUND_INFO, btp.name)
+                --- @type GroundInfoWindow
+                local w_ginfo = WindowManager.getWindow(WindowEnums.GROUND_INFO, btp.name)
+                if w_ginfo then
+                    w_ginfo:displayGInfo(found_g)
+                end
+            end
         end
     end
 end)

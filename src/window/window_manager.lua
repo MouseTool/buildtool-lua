@@ -13,6 +13,7 @@ local WindowOverlayEnums = require("bt-enums").WindowOverlay
 local HelpWindow = require("HelpWindow")
 local SettingsWindow = require("SettingsWindow")
 local MouseSpawnWindow = require("MouseSpawnWindow")
+local GroundInfoWindow = require("GroundInfoWindow")
 
 --- @class WindowData
 --- @field window Window
@@ -31,6 +32,7 @@ local CLASS_MAP = {
     [WindowEnums.HELP] = HelpWindow,
     [WindowEnums.SETTINGS] = SettingsWindow,
     [WindowEnums.MOUSE_SPAWN] = MouseSpawnWindow,
+    [WindowEnums.GROUND_INFO] = GroundInfoWindow,
 }
 
 --- Called when a new window is going to be in ultimate focus, and the old top window (if any) has to be unfocused.

@@ -24,7 +24,10 @@ translations.en = {
     mapinfo_tag_no_b = "No-B",
     mapinfo_tag_no_motor = "No Motor",
     err_score_not_ranged = "<R>Error: score not within range (%s-%s)",
-    err_round_not_loaded = "<R>Error: round is not loaded"
+    err_round_not_loaded = "<R>Error: round is not loaded",
+    ui_ginfo_true = "<VP>True",
+    ui_ginfo_false = "<N2>False",
+    ui_ginfo_properties = "<N>Z-Index: \t%s\t <N>Type: \t%s\n<N>X: \t%s\t <N>Y: \t%s\n<N>Length: \t%s\t <N>Height: \t%s\n<N>Friction: \t%s\t <N>Restitution: \t%s\n<N>Angle: \t%s\t <N>Disappear: \t%s\n<N>Color: \t%s\t <N>Dynamic: \t%s\n<N>Mass: \t%s\t <N>Fixed Rotation: \t%s"
 }
 
 return translations

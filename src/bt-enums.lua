@@ -6,6 +6,7 @@ enums.Window = {
     HELP = 1,
     SETTINGS = 2,
     MOUSE_SPAWN = 3,
+    GROUND_INFO = 4,
 }
 
 --- Window overlay behavior - describes what the window should do when a
@@ -23,6 +24,7 @@ enums.Keys = {
     SHIFT = 16,
     CTRL = 17,
     SPACE = 32,
+    G = 71,
     H = 72,
     M = 77,
     O = 79,
