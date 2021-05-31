@@ -21,6 +21,7 @@ enums.WindowOverlay = {
 --- AS3 key codes
 enums.Keys = {
     SHIFT = 16,
+    CTRL = 17,
     SPACE = 32,
     H = 72,
     M = 77,

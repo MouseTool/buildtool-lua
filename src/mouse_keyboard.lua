@@ -4,6 +4,7 @@ local btRoom = require("entities.bt_room")
 local WindowManager = require("window.window_manager")
 local BtEnums = require("bt-enums")
 local btPerms = require("permissions.bt_perms")
+local groundMath = require("util.ground_math")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
@@ -72,6 +73,9 @@ local KEY_EVENTS = {
         end,
         trigger = DOWN_UP
     },
+    [Keys.CTRL] = {
+        trigger = DOWN_UP
+    },
     [Keys.SHIFT] = {
         trigger = DOWN_UP
     },
@@ -136,9 +140,26 @@ tfmEvent:on('Mouse', function(pn, x, y)
     if not btp then return end
 
     local player_locked = locked_keys[pn]
-    if btp.capabilities:hasFlag(CAPFLAG.ADMIN) and player_locked then
-        if player_locked[Keys.SHIFT] then
-            tfm.exec.movePlayer(pn, x, y)
+    local is_admin = btp.capabilities:hasFlag(CAPFLAG.ADMIN)
+    local is_shaman = btp.mbp:getTfmPlayer().isShaman
+    if player_locked then
+        if player_locked[Keys.CTRL]
+        and player_locked[Keys.SHIFT] then
+            if is_shaman and is_admin then
+                for id, object in pairs(tfm.get.room.objectList) do
+                    if groundMath.isPointInCircle(object.x, object.y, 16, x, y) then
+                        tfm.exec.removeObject(id)
+                        break
+                    end
+                end
+            end
+            -- Extend the timeout for ctrl and shift
+            player_locked[Keys.CTRL] = os_time() + LOCK_TIMEOUT_MS
+            player_locked[Keys.SHIFT] = os_time() + LOCK_TIMEOUT_MS
+        elseif player_locked[Keys.SHIFT] then
+            if is_admin then
+                tfm.exec.movePlayer(pn, x, y)
+            end
             -- Extend the timeout for shift
             player_locked[Keys.SHIFT] = os_time() + LOCK_TIMEOUT_MS
         end
