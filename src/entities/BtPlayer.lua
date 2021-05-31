@@ -49,7 +49,7 @@ end
 
 --- Sends a translated module message to the player. If the `keyName` supplied is not found in the translations, the `keyName` will be displayed instead.
 --- @param keyName string # The key name of the translation string
---- @vararg string[]|LocalisBuilder[] # Translation string parameters
+--- @vararg string|LocalisBuilder # Translation string parameters
 BtPlayer.tlChatMsg = function(self, keyName, ...)
     moduleMsgDirect(self:tlGet(keyName, ...), self.name)
 end
@@ -63,7 +63,7 @@ end
 
 --- Retrives a translated module string for the player. If the `keyName` supplied is not found in the translations, the `keyName` will be displayed instead.
 --- @param keyName string # The key name of the translation string
---- @vararg string[]|LocalisBuilder[] # Translation string parameters
+--- @vararg string|LocalisBuilder # Translation string parameters
 --- @return string
 BtPlayer.tlGet = function(self, keyName, ...)
     return localis.evaluator:new(keyName, ...):exec(self.language, false)
