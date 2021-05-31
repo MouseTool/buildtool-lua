@@ -56,12 +56,14 @@ tfmEvent:onCrucial('NewGame', function()
         end
 
         local _props = round.mapProp
-        mapinfo_joins[#mapinfo_joins + 1] = "\n"
-        mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_summary_properties",
-            -- wind, gravity
-            _props.wind, _props.gravity,
-            -- mgoc
-            _props.mgoc)
+        if _props then
+            mapinfo_joins[#mapinfo_joins + 1] = "\n"
+            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_summary_properties",
+                -- wind, gravity
+                _props.wind, _props.gravity,
+                -- mgoc
+                _props.mgoc)
+        end
 
         btRoom.tlbChatMsg(localis.joiner:new(mapinfo_joins))
     end)

@@ -134,7 +134,7 @@ tfmEvent:on('Mouse', function(pn, x, y)
     if not btp then return end
 
     local player_locked = locked_keys[pn]
-    if btp.capabilities:hasFlag(CAPFLAG.ADMIN) and locked_keys then
+    if btp.capabilities:hasFlag(CAPFLAG.ADMIN) and player_locked then
         if player_locked[Keys.SHIFT] then
             tfm.exec.movePlayer(pn, x, y)
             -- Extend the timeout for shift
