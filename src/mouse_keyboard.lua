@@ -105,13 +105,15 @@ end)
 
 -- Release locked keys after LOCK_TIMEOUT_MS
 tfmEvent:on('Loop', function()
-    if next_lock_check and os_time() <= next_lock_check then
+    local ostime = os_time()
+    if next_lock_check and ostime <= next_lock_check then
         return
     end
+    next_lock_check = ostime + CHECK_LOCK_INTERVAL_MS
     for name, keys in pairs(locked_keys) do
         local release, sz = {}, 0
         for k, expire_ms in pairs(keys) do
-            if os_time() > expire_ms then
+            if ostime > expire_ms then
                 sz = sz + 1
                 release[sz] = k
             end
