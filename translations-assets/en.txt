@@ -27,11 +27,16 @@ err_round_not_loaded = [[<R>Error: round is not loaded]]
 ui_ginfo_true = [[<VP>True]]
 ui_ginfo_false = [[<N2>False]]
 ui_ginfo_properties = [[
-<N>Z-Index: \t%s\t <N>Type: \t%s
-<N>X: \t%s\t <N>Y: \t%s
-<N>Length: \t%s\t <N>Height: \t%s
-<N>Friction: \t%s\t <N>Restitution: \t%s
-<N>Angle: \t%s\t <N>Disappear: \t%s
-<N>Color: \t%s\t <N>Dynamic: \t%s
-<N>Mass: \t%s\t <N>Fixed Rotation: \t%s
+<N>Z-Index: \t%s
+<N>Type: \t%s
+<N>X, Y: \t%s, %s
+<N>Length: \t%s
+<N>Height: \t%s
+<N>Friction: \t%s
+<N>Restitution: \t%s
+<N>Angle: \t%s
+<N>Disappear: \t%s
+<N>Color: \t#%x
+<N>Dynamic: \t%s
+<N>Mass: \t%s
 ]]

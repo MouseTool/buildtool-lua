@@ -34,13 +34,6 @@ local next_lock_check
 
 --- @type table<number, mousekey.KeyDesc>
 local KEY_EVENTS = {
-    -- TODO: Testing only, to remove
-    [Keys.SPACE] = {
-        cb = function(btp, k)
-            WindowManager.refocus(WindowEnums.SETTINGS, btp.name)
-        end,
-        trigger = DOWN_ONLY
-    },
     -- Opens help menu
     [Keys.H] = {
         cb = function(btp, k)
@@ -58,7 +51,7 @@ local KEY_EVENTS = {
     -- Opens room settings
     [Keys.O] = {
         cb = function(btp, k)
-            WindowManager.toggle(WindowEnums.HELP, btp.name)
+            WindowManager.toggle(WindowEnums.SETTINGS, btp.name)
         end,
         trigger = DOWN_ONLY
     },

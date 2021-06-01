@@ -8,12 +8,17 @@ local localis = require("localisation.localis_manager")
 
 local COLOR_BG = 0x402A1D
 
+GroundInfoWindow.UNFOCUS_BEHAVIOR = require("bt-enums").WindowUnfocus.NONE
+GroundInfoWindow.ON_FOCUS_BEHAVIOR = require("bt-enums").WindowOnFocus.NONE
+
 GroundInfoWindow.doRender = function(self)
 end
 
 --- Displays a ground info.
 --- @param ground TfmGround
-GroundInfoWindow.displayGInfo = function(self, ground)
+--- @param x integer
+--- @param y integer
+GroundInfoWindow.displayGInfo = function(self, ground, x, y)
     if self.gInfoId then
         self:removeTextArea(self.gInfoId)
         self.gInfoId = nil
@@ -25,14 +30,19 @@ GroundInfoWindow.displayGInfo = function(self, ground)
     local T_TRUE = btp:tlGet("ui_ginfo_true")
     local T_FALSE = btp:tlGet("ui_ginfo_true")
 
-    -- <N>Z-Index: \t%s\t <N>Type: \t%s
-    -- <N>X: \t%s\t <N>Y: \t%s
-    -- <N>Length: \t%s\t <N>Height: \t%s
-    -- <N>Friction: \t%s\t <N>Restitution: \t%s
-    -- <N>Angle: \t%s\t <N>Disappear: \t%s
-    -- <N>Color: \t%s\t <N>Dynamic: \t%s
-    -- <N>Mass: \t%s\t <N>Fixed Rotation: \t%s
-    local text = "<textformat tabstops='[90,150,240]'>" ..
+    -- <N>Z-Index: \t%s
+    -- <N>Type: \t%s
+    -- <N>X, Y: \t%s, %s
+    -- <N>Length: \t%s
+    -- <N>Height: \t%s
+    -- <N>Friction: \t%s
+    -- <N>Restitution: \t%s
+    -- <N>Angle: \t%s
+    -- <N>Disappear: \t%s
+    -- <N>Color: \t#%x
+    -- <N>Dynamic: \t%s
+    -- <N>Mass: \t%s
+    local text = "<textformat tabstops='[80,150]'>" ..
         btp:tlGet("ui_ginfo_properties",
             ground.zIndex, ground.type,
             ground.x, ground.y,
@@ -40,10 +50,10 @@ GroundInfoWindow.displayGInfo = function(self, ground)
             ground.friction, ground.restitution,
             ground.angle, ground.vanish or T_FALSE,
             ground.color, ground.dynamic and T_TRUE or T_FALSE,
-            ground.mass, ground.fixedRotation and T_TRUE or T_FALSE)
+            ground.mass)
 
     self.gInfoId = self:addTextArea(nil, text, 200, 200, nil, nil, COLOR_BG,
-        nil, 0.95, false)
+        nil, 0.9, false)
 end
 
 return GroundInfoWindow

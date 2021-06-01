@@ -1,6 +1,14 @@
 local idGen = require("bt-ids")
 local OrderedTable = require("@mousetool/ordered-table")
-local WindowOverlayEnums = require("bt-enums").WindowOverlay
+local WindowUnfocus = require("bt-enums").WindowUnfocus
+local WindowOnFocus = require("bt-enums").WindowOnFocus
+
+--- @class Window.LenTable : table
+--- @field length integer
+
+--- @class Window.CachedImgs : table
+--- @field args any[]
+--- @field fakeId integer
 
 --- A basic window.
 --- @class Window:EventEmitter
@@ -12,10 +20,18 @@ local WindowOverlayEnums = require("bt-enums").WindowOverlay
 --- @field protected textAreas OrderedTable
 --- @field protected pn string @The player whom the window belongs to
 --- @field private _should_refocus_next boolean
---- @field private _cached_textAreas table
+--- @field private _cached_textAreas Window.LenTable<integer, any[]>
+--- @field private _cached_images Window.LenTable<integer, Window.CachedImgs>
 local Window = require("@mousetool/mousebase").EventEmitter:extend("Window")
 
-Window.OVERLAY = WindowOverlayEnums.UNFOCUS
+--- Specifies the behavior of the window when a new window is layered over it.
+Window.UNFOCUS_BEHAVIOR = WindowUnfocus.UNFOCUS
+
+--- Defines the behavior of other windows when the window is going to be in ultimate focus.
+Window.ON_FOCUS_BEHAVIOR = WindowOnFocus.UNFOCUS_TOP
+
+--- Whether the window should be closed when the Esc key is pressed, when it is the top window.
+Window.DESTROY_ON_ESC = true
 
 Window._init = function(self, pn, state)
     Window._parent._init(self)
@@ -40,6 +56,16 @@ Window._init = function(self, pn, state)
 
 end
 
+--- Same as `Window.addImage` but accepts a `fakeId` used as a constant image identifier.
+--- @see Window.addImage
+--- @param self Window
+--- @param fakeId integer
+local function _addImageFakeId(self, fakeId, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor)
+    tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha, xAnchor, yAnchor)
+    self.images[fakeId] = {imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor}
+    return fakeId
+end
+
 --- Adds an image bound to the window.
 --- @param imageUid string # the image identifier
 --- @param target string # the game element to attach the image to
@@ -59,7 +85,7 @@ end
 --- @param alpha float # the opacity of the image, from 0 (transparent) to 1 (opaque) (default 1)
 --- @param xAnchor float # the horizontal offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the left of the image) (default 0)
 --- @param yAnchor float # the vertical offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the top of the image) (default 0)
---- @return integer # The image ID created from tfm.exec.addImage
+--- @return integer # The image ID created. This is different from the ID used by `tfm.exec.addImage` and will persist through refocusings.
 Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor)
     local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha, xAnchor, yAnchor)
     self.images[imageId] = {imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor}
@@ -67,7 +93,7 @@ Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale,
 end
 
 --- Removes an image bound to the window.
---- @param imageId integer the image identifier
+--- @param imageId integer # the image identifier from `Window.addImage`
 Window.removeImage = function(self, imageId)
     tfm.exec.removeImage(imageId)
     self.images[imageId] = nil
@@ -177,6 +203,26 @@ Window.doUnfocus = function(self)
     self.textAreas = OrderedTable:new()
 end
 
+--- Called on unfocus before `unfocused` event is emitted. Default behavior is to remove all textareas AND images, and stage them for readdition for the next focus() call.
+--- @virtual
+Window.doFullUnfocus = function(self)
+    self:doUnfocus()
+
+    local cached_images, len = {}, 0
+
+    -- Cache and remove all images
+    for img_id, args in OrderedTable.pairs(self.images) do
+        len = len + 1
+        cached_images[len] = { fakeId = img_id, args = args }
+        ui.removeTextArea(img_id, self.pn)
+    end
+
+    self._should_refocus_next = true
+    cached_images.length = len
+    self._cached_images = cached_images
+    self.images = OrderedTable:new()
+end
+
 --- Partially focus on the window. Restores all text areas if doUnfocus was not overloaded (default behavior). Subsequently calls doFocus.
 --- Will emit the `focused` event when successfully transitioned from unfocused --> focused.
 Window.focus = function(self)
@@ -185,22 +231,38 @@ Window.focus = function(self)
 
     -- Text area elements staged for readdition by doUnfocus()
     if self._should_refocus_next then
-        for i = 1, self._cached_textAreas.length do
-            self:addTextArea(table.unpack(self._cached_textAreas[i], 1, 10))
+        if self._cached_textAreas then
+            for i = 1, self._cached_textAreas.length do
+                self:addTextArea(table.unpack(self._cached_textAreas[i], 1, 10))
+            end
+        end
+        if self._cached_images then
+            for i = 1, self._cached_images.length do
+                local cached_images = self._cached_images
+                _addImageFakeId(self, cached_images[i].fakeId, table.unpack(cached_images[i].args, 1, 10))
+            end
         end
         self._should_refocus_next = nil
         self._cached_textAreas = nil
+        self._cached_images = nil
     end
 
     self.focused = true
     self:emit("focused")
 end
 
---- Unfocus the window. Calls doUnfocus().
+--- Unfocus the window. Calls doUnfocus(). Usually this means that the window will still be in view, but partially.
 --- Will emit the `unfocused` event when successfully transitioned from focused --> unfocused.
 Window.unfocus = function(self)
-    if not self.focused then return end  -- already unfocused
     self:doUnfocus()
+    self.focused = false
+    self:emit("unfocused")
+end
+
+--- Fully unfocus the window. Calls doFullUnfocus(). Usually this means that the window will be hidden from view (aka minimized).
+--- Will emit the `unfocused` event when successfully transitioned from focused --> unfocused.
+Window.fullUnfocus = function(self)
+    self:doFullUnfocus()
     self.focused = false
     self:emit("unfocused")
 end
@@ -212,26 +274,37 @@ Window.refocus = function(self)
     if self.focused then return end  -- already focused
     self:doFocus()
 
-    -- Readd all existing images.
-    local cached_images, ci_len = {}, 0
-    for img_id, args in OrderedTable.pairs(self.images) do
-        ci_len = ci_len + 1
-        cached_images[ci_len] = args
-        tfm.exec.removeImage(img_id)
-    end
-    self.images = OrderedTable:new()
-
-    for i = 1, ci_len do
-        self:addImage(table.unpack(cached_images[i], 1, 10))
-    end
-
     -- Text area elements staged for readdition by doUnfocus()
     if self._should_refocus_next then
-        for i = 1, self._cached_textAreas.length do
-            self:addTextArea(table.unpack(self._cached_textAreas[i], 1, 10))
+        if self._cached_textAreas then
+            for i = 1, self._cached_textAreas.length do
+                self:addTextArea(table.unpack(self._cached_textAreas[i], 1, 10))
+            end
+        end
+        if self._cached_images then
+            for i = 1, self._cached_images.length do
+                local cached_images = self._cached_images
+                _addImageFakeId(self, cached_images[i].fakeId, table.unpack(cached_images[i].args, 1, 10))
+            end
         end
         self._should_refocus_next = nil
         self._cached_textAreas = nil
+        self._cached_images = nil
+    else
+        -- Readd all existing images.
+        local cached_images, ci_len = {}, 0
+        for img_id, args in OrderedTable.pairs(self.images) do
+            ci_len = ci_len + 1
+            cached_images[ci_len] = { fakeId = img_id, args = args }
+            tfm.exec.removeImage(img_id)
+        end
+        self.images = OrderedTable:new()
+
+        for i = 1, ci_len do
+            _addImageFakeId(self, cached_images[i].fakeId, table.unpack(cached_images[i].args, 1, 10))
+        end
+
+        -- No action needed for text area.
     end
 
     self.focused = true

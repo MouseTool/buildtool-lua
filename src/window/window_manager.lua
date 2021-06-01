@@ -8,7 +8,8 @@ local btRoom = require("entities.bt_room")
 local api = btRoom.api
 local OrderedTable = require("@mousetool/ordered-table")
 local WindowEnums = require("bt-enums").Window
-local WindowOverlayEnums = require("bt-enums").WindowOverlay
+local WindowUnfocus = require("bt-enums").WindowUnfocus
+local WindowOnFocus = require("bt-enums").WindowOnFocus
 
 local HelpWindow = require("HelpWindow")
 local SettingsWindow = require("SettingsWindow")
@@ -35,10 +36,12 @@ local CLASS_MAP = {
     [WindowEnums.GROUND_INFO] = GroundInfoWindow,
 }
 
+-- TODO: Support a boolean isMutualExclusive to allow a new window to specify whether old windows should
+-- go into full unfocus when it is going to be in focus.
+
 --- Called when a new window is going to be in ultimate focus, and the old top window (if any) has to be unfocused.
 --- @param pn string
 local function unfocusTop(pn)
-    -- TODO: change to getTopWIndow
     if not windows[pn] or not windows[pn].opened then
         return
     end
@@ -49,7 +52,12 @@ local function unfocusTop(pn)
     end
 
     if top_window then
-        top_window:unfocus()
+        local unfoc_behavior = top_window.UNFOCUS_BEHAVIOR
+        if unfoc_behavior == WindowUnfocus.UNFOCUS then
+            top_window:unfocus()
+        elseif unfoc_behavior == WindowUnfocus.MINIMIZE then
+            top_window:fullUnfocus()
+        end
     end
 end
 
@@ -86,20 +94,22 @@ window_manager.open = function(window_id, pn)
         windows[pn].opened[window_id] = window_data
     end)
     window:once("destroyed", function(state)
-        -- If this window is currently the top one, focus the next top if any
-        do
-            local top_window, new_top_window
-            for _, wd in OrderedTable.revpairs(windows[pn].opened) do
-                if not top_window then
-                    top_window = wd.window
-                else
-                    new_top_window = wd.window
-                    break
+        if window.ON_FOCUS_BEHAVIOR == WindowOnFocus.UNFOCUS_TOP then
+            -- If this window is currently the top one, focus the next top if any
+            do
+                local top_window, new_top_window
+                for _, wd in OrderedTable.revpairs(windows[pn].opened) do
+                    if not top_window then
+                        top_window = wd.window
+                    else
+                        new_top_window = wd.window
+                        break
+                    end
                 end
-            end
 
-            if top_window == window and new_top_window then
-                new_top_window:focus()
+                if top_window == window and new_top_window then
+                    new_top_window:focus()
+                end
             end
         end
 
@@ -108,7 +118,9 @@ window_manager.open = function(window_id, pn)
         window_data.isOpen = nil
         windows[pn].opened[window_id] = nil
     end)
-    unfocusTop(pn)
+    if window.ON_FOCUS_BEHAVIOR == WindowOnFocus.UNFOCUS_TOP then
+        unfocusTop(pn)
+    end
     window:render()
     return window
 end
@@ -171,7 +183,9 @@ window_manager.refocus = function(window_id, pn)
     local window = window_data.window
     if window.focused then return end  -- already focused
 
-    unfocusTop(pn)
+    if window.ON_FOCUS_BEHAVIOR == WindowOnFocus.UNFOCUS_TOP then
+        unfocusTop(pn)
+    end
     window:refocus()
 end
 
