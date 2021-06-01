@@ -132,6 +132,26 @@ tfmEvent:on('Loop', function()
     end
 end)
 
+--- Searches all spawns and finds the matching object near `x, y` to delete
+--- @param x integer
+--- @param y integer
+local function deleteObject(x, y)
+    local round = btRoom.currentRound
+    if round then
+        local obj_list = tfm.get.room.objectList
+        for _, pspawned in pairs(round.spawnedObjects) do
+            for i, obj_id in pspawned:revipairs() do
+                local object = obj_list[obj_id]
+                if mathGeometry.isPointInCircle(object.x, object.y, 16, x, y) then
+                    pspawned:remove(i)
+                    tfm.exec.removeObject(obj_id)
+                    return
+                end
+            end
+        end
+    end
+end
+
 --- @param pn string # Player name
 --- @param x number # Mouse click X
 --- @param y number # Mouse click Y
@@ -145,13 +165,8 @@ tfmEvent:on('Mouse', function(pn, x, y)
     if player_locked then
         if player_locked[Keys.CTRL]
         and player_locked[Keys.SHIFT] then
-            if is_shaman and is_admin then
-                for id, object in pairs(tfm.get.room.objectList) do
-                    if mathGeometry.isPointInCircle(object.x, object.y, 16, x, y) then
-                        tfm.exec.removeObject(id)
-                        break
-                    end
-                end
+            if is_shaman or is_admin then
+                deleteObject(x, y)
             end
             -- Extend the timeout for ctrl and shift
             player_locked[Keys.CTRL] = os_time() + LOCK_TIMEOUT_MS
@@ -173,7 +188,7 @@ tfmEvent:on('Mouse', function(pn, x, y)
             end
             if not round.grounds then return end
             local found_g = nil
-            for i = 1, #round.grounds do
+            for i = #round.grounds, 1, -1 do
                 local ground = round.grounds[i]
                 if ground:isPointInside(x, y) then
                     found_g = ground

@@ -7,10 +7,10 @@
   resolved "https://npm.pkg.github.com/download/@mousetool/class/1.0.1/6c327ef42b10d4d3ae5d4dbfa781926d165ca664154c2c7a231cee3e88631559#36f49d85ce4e0488affb446ded683f670a97901a"
   integrity sha512-xySgNeqefYryp3EPmnQXOCpaY1ptomGWzYJjcAV0ztYZNlV2ry8XRyeZ5fU0LvGy0dnoZs3awzwnOApO1PgQ9A==
 
-"@mousetool/linkedlist@^1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.1/b495c3730f969a93b190c8a3c05745e8ab1de5785dcf795081018941a20cdae4#daa5dabaa4a11694aad95bfd2df565891a8afdbb"
-  integrity sha512-F5+GHSvnsLgxQykBbXiiHJVyA0PmSZMuEUuiK8rE6iYf1bBiwcwgLDTYhv+xOWodEuL5F5pjP90K8WSUfzdK0g==
+"@mousetool/linkedlist@^1.0.1", "@mousetool/linkedlist@^1.0.4":
+  version "1.0.4"
+  resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.4/78dd32fb47546de942568dabb55bb39734f572fcf55b8c4bbd8e0e6d0a65c7b2#2720fd783ff8dd3545af1a817c93e4124f01fa65"
+  integrity sha512-IoKRINk8PaJIBHftJMPMVGwtKXbXDtt2negnTUjjvGtytmg9n3CcCvVMmfSXTQTk42LQWFXu2loSN2XpVUs3ig==
 
 "@mousetool/mousebase@1.0.5", "@mousetool/mousebase@^1.0.2":
   version "1.0.5"
