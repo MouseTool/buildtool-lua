@@ -37,6 +37,7 @@ enums.WindowOnFocus = {
 enums.Keys = {
     SHIFT = 16,
     CTRL = 17,
+    ESC = 27,
     SPACE = 32,
     G = 71,
     H = 72,

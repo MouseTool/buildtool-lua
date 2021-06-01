@@ -92,9 +92,9 @@ TfmGround.fromXmlDoc = function(xmlDoc)
 
         -- Empty string means invisible color
         if attr['o'] and attr['o'] == "" then
-            ground.color = 0x000000
+            ground.color = 0xffffffff
         else
-            ground.color = attr['o']
+            ground.color = tonumber(attr['o'])
         end
 
         -- Read P attribute

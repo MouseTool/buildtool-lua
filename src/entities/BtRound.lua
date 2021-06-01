@@ -17,6 +17,8 @@ local roomGet = tfm.get.room
 --- @field y number|nil # Y coordinate
 
 --- @class BtXmlMapProp
+--- @field length integer
+--- @field height integer
 --- @field wind number
 --- @field gravity number
 --- @field mgoc number
@@ -87,6 +89,8 @@ _parseXml = function(self, xml)
         mapProp.wind = wind
         mapProp.gravity = grav
 
+        mapProp.length = tonumber(prop_attr['L']) or 800
+        mapProp.height = tonumber(prop_attr['H']) or 400
         mapProp.mgoc = tonumber(prop_attr['mgoc']) or 0
     end, ON_PCALL_ERR)
 

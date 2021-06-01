@@ -7,6 +7,9 @@ local btRoom = require("entities.bt_room")
 local IMG_MOUSE = "179bc76e7eb.png"
 local IMG_SHAMAN = "179bcd80032.png"
 
+local WindowEnum = require("bt-enums").Window
+MouseSpawnWindow.TYPE_ID = WindowEnum.MOUSE_SPAWN
+
 MouseSpawnWindow.doRender = function(self)
     local round = btRoom.currentRound
     if not (round and round.mapProp) then return end

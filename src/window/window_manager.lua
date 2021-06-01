@@ -7,9 +7,11 @@ local window_manager = {}
 local btRoom = require("entities.bt_room")
 local api = btRoom.api
 local OrderedTable = require("@mousetool/ordered-table")
-local WindowEnums = require("bt-enums").Window
-local WindowUnfocus = require("bt-enums").WindowUnfocus
-local WindowOnFocus = require("bt-enums").WindowOnFocus
+local btEnums = require("bt-enums")
+local WindowEnums = btEnums.Window
+local WindowUnfocus = btEnums.WindowUnfocus
+local WindowOnFocus = btEnums.WindowOnFocus
+local Keys = btEnums.Keys
 
 local HelpWindow = require("HelpWindow")
 local SettingsWindow = require("SettingsWindow")
@@ -58,6 +60,23 @@ local function unfocusTop(pn)
         elseif unfoc_behavior == WindowUnfocus.MINIMIZE then
             top_window:fullUnfocus()
         end
+    end
+end
+
+--- Closes the top most window if it has `DESTROY_ON_ESC` set.
+--- @param pn string
+local function closeTopOnEsc(pn)
+    if not windows[pn] or not windows[pn].opened then
+        return
+    end
+    local top_window
+    for _, wd in OrderedTable.revpairs(windows[pn].opened) do
+        top_window = wd.window
+        break
+    end
+
+    if top_window and top_window.DESTROY_ON_ESC == true then
+        top_window:destroy()
     end
 end
 
@@ -222,6 +241,18 @@ end
 
 api.tfmEvent:on("PlayerLeft", function(pn)
     windows[pn] = nil
+end)
+
+btRoom.events:on('keyboard', function(btp, k, down, x, y)
+    if k == Keys.ESC and down then
+        closeTopOnEsc(btp.name)
+    end
+end)
+
+btRoom.textAreaEvents:on('closeWin', function(btp, paramStr)
+    local win_id = tonumber(paramStr)
+    if not win_id then return end
+    window_manager.close(win_id, btp.name)
 end)
 
 return window_manager

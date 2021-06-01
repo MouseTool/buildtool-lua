@@ -32,7 +32,7 @@ end
 --[[ External Init ]]
 require("basic")
 require("shaman")
-require("mouse_keyboard")
+require("input")
 require("commands.bt-init")
 require("translations.bt-init")
 

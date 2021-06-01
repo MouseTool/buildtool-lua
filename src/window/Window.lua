@@ -1,7 +1,8 @@
 local idGen = require("bt-ids")
 local OrderedTable = require("@mousetool/ordered-table")
-local WindowUnfocus = require("bt-enums").WindowUnfocus
-local WindowOnFocus = require("bt-enums").WindowOnFocus
+local btEnums = require("bt-enums")
+local WindowUnfocus = btEnums.WindowUnfocus
+local WindowOnFocus = btEnums.WindowOnFocus
 
 --- @class Window.LenTable : table
 --- @field length integer
@@ -32,6 +33,9 @@ Window.ON_FOCUS_BEHAVIOR = WindowOnFocus.UNFOCUS_TOP
 
 --- Whether the window should be closed when the Esc key is pressed, when it is the top window.
 Window.DESTROY_ON_ESC = true
+
+--- The window's type ID
+Window.TYPE_ID = -99
 
 Window._init = function(self, pn, state)
     Window._parent._init(self)
@@ -134,6 +138,13 @@ end
 Window.removeTextArea = function(self, textAreaId)
     ui.removeTextArea(textAreaId, self.pn)
     self.textAreas[textAreaId] = nil
+end
+
+--- Returns a hyperlinked string that triggers a closing event for the window.
+--- @param content string # the content of the link
+--- @return string
+Window.closifyContent = function(self, content)
+    return ("<a href='event:closeWin!%s'>%s</a>"):format(self.TYPE_ID, content)
 end
 
 --- Removes all text areas and images bound to the window.

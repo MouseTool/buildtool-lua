@@ -1,4 +1,3 @@
-------- Images enum --------
 -- interface/help_menu/bg.png 615x316
 local IMG_BG = "1786a49a66a.png"
 -- interface/help_menu/tab.png 100x36
@@ -6,14 +5,15 @@ local IMG_TAB_NORMAL = "177dd78b1e8.png"
 -- interface/help_menu/tab_active.png 100x36
 local IMG_TAB_ACTIVE = "177dd78e605.png"
 
-------- Tabs enum --------
+--- Tabs enum
 local TAB_ID = {
-    
 }
 
-------- Class defs --------
 --- @class HelpWindow:Window
 local HelpWindow = require("Window"):extend("HelpWindow")
+
+local WindowEnum = require("bt-enums").Window
+HelpWindow.TYPE_ID = WindowEnum.HELP
 
 HelpWindow.doRender = function(self)
     self:addImage(IMG_BG, ":1", 90, 49)

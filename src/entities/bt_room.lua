@@ -4,6 +4,7 @@
 local bt_room = {}
 
 local BtRoomEvents = require("BtRoomEvents")
+local BtTaEvents = require("BtTaEvents")
 local localis = require("localisation.localis_manager")
 
 --- Chat prefix
@@ -66,5 +67,7 @@ bt_room.api = require("@mousetool/mousebase").MbApi()
 bt_room.players = {}
 
 bt_room.events = BtRoomEvents:new()
+
+bt_room.textAreaEvents = BtTaEvents:new()
 
 return bt_room

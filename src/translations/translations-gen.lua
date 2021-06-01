@@ -27,7 +27,7 @@ translations.en = {
     err_round_not_loaded = "<R>Error: round is not loaded",
     ui_ginfo_true = "<VP>True",
     ui_ginfo_false = "<N2>False",
-    ui_ginfo_properties = "<N>Z-Index: \t%s\n<N>Type: \t%s\n<N>X, Y: \t%s, %s\n<N>Length: \t%s\n<N>Height: \t%s\n<N>Friction: \t%s\n<N>Restitution: \t%s\n<N>Angle: \t%s\n<N>Disappear: \t%s\n<N>Color: \t#%x\n<N>Dynamic: \t%s\n<N>Mass: \t%s"
+    ui_ginfo_properties = "<N>Z-Index: \t%s\n<N>Type: \t%s\n<N>X, Y: \t%s, %s\n<N>Length: \t%s\n<N>Height: \t%s\n<N>Friction: \t%s\n<N>Restitution: \t%s\n<N>Angle: \t%s\n<N>Disappear: \t%s\n<N>Color: \t%s\n<N>Dynamic: \t%s\n<N>Mass: \t%s"
 }
 
 return translations

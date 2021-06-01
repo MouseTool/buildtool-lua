@@ -1,4 +1,4 @@
--- Controls mouse or keyboard-related events
+-- Controls user input events (mouse, keyboard, textarea, etc.)
 
 local btRoom = require("entities.bt_room")
 local WindowManager = require("window.window_manager")
@@ -75,8 +75,12 @@ local KEY_EVENTS = {
     [Keys.SHIFT] = {
         trigger = DOWN_UP
     },
+    [Keys.ESC] = {
+        trigger = DOWN_ONLY
+    }
 }
 
+-- Trigger module keyboard event
 tfmEvent:on('Keyboard', function(pn, k, down, x, y)
     local btp = btRoom.players[pn]
     if not btp then return end
@@ -159,6 +163,9 @@ tfmEvent:on('Mouse', function(pn, x, y)
             -- Extend the timeout for shift
             player_locked[Keys.SHIFT] = os_time() + LOCK_TIMEOUT_MS
         elseif player_locked[Keys.G] then
+            -- Extend the timeout for G
+            player_locked[Keys.G] = os_time() + LOCK_TIMEOUT_MS
+
             local round = btRoom.currentRound
             if not round then
                 btp:tlChatMsg("err_round_not_loaded")
@@ -178,11 +185,23 @@ tfmEvent:on('Mouse', function(pn, x, y)
                 --- @type GroundInfoWindow
                 local w_ginfo = WindowManager.getWindow(WindowEnums.GROUND_INFO, btp.name)
                 if w_ginfo then
-                    w_ginfo:displayGInfo(found_g)
+                    w_ginfo:displayGInfo(found_g, x, y)
                 end
             end
         end
     end
+end)
+
+--- Trigger module player callback event
+--- @param textAreaId integer
+--- @param playerName string
+--- @param eventString string
+tfmEvent:onCrucial('TextAreaCallback', function(textAreaId, playerName, eventString)
+    local eventName, param_str = eventString:match('(%w+)!?(.*)')
+    local btp = btRoom.players[playerName]
+    if not (eventName and btp) then return end
+
+    btRoom.textAreaEvents:emit(eventName, btp, param_str, textAreaId)
 end)
 
 tfmEvent:on('PlayerLeft', function(pn)

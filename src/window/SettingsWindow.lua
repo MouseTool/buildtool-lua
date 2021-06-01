@@ -1,15 +1,15 @@
-------- Images enum --------
 -- interface/settings/settings_bg.png 280x316
 local IMG_BG = "1786a49d034.png"
 
-------- Tabs enum --------
+--- Tabs enum
 local TAB_ID = {
-    
 }
 
-------- Class defs --------
 --- @class SettingsWindow:Window
 local SettingsWindow = require("Window"):extend("SettingsWindow")
+
+local WindowEnum = require("bt-enums").Window
+SettingsWindow.TYPE_ID = WindowEnum.SETTINGS
 
 SettingsWindow.doRender = function(self)
     self:addImage(IMG_BG, ":1", 233, 45)
