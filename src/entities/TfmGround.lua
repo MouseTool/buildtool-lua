@@ -9,31 +9,34 @@
 --- @field friction float
 --- @field restitution float
 --- @field angle integer
---- @field color integer
 --- @field miceCollision boolean
---- @field groundCollision boolean
+--- @field objectCollision boolean
 --- @field dynamic boolean
 --- @field fixedRotation boolean
 --- @field mass integer
 --- @field linearDamping float
 --- @field angularDamping float
+--- @field color integer|nil # The color of the ground. When `nil` and a colored ground, it by convention means invisible.
 --- @field vanish integer|nil # The time in milliseconds after which the ground will disappear
 --- @field zIndex integer|nil # The Z-Index of the ground in the map
 --- @field luaId integer|nil # The Lua ID of the ground.
 local TfmGround = require("@mousetool/mousebase").Class:extend("TfmGround")
 
+local TfmGroundEnum = require("TfmGroundEnum")
 local mathGeometry = require("util.math_geometry")
 local string_split = require("util.stringlib").split
+local GroundType = TfmGroundEnum.GroundType
 
+-- todo types enum
 -- Set default properties
 do
     local _DEFAULT_PROPS = {
         { "type", 0 }, { "x", 0 }, { "y", 0 },
         { "width", 10 }, { "height", 10 }, { "foreground", false },
         { "friction", 0.3 }, { "restitution", 0.2 }, { "angle", 0 },
-        { "color", 0x324560 }, { "miceCollision", true }, { "groundCollision", true },
-        { "dynamic", false }, { "fixedRotation", 0 }, { "mass", 0 },
-        { "linearDamping", 0 }, { "angularDamping", 0 }
+        { "miceCollision", true }, { "objectCollision", true }, { "dynamic", false },
+        { "fixedRotation", 0 }, { "mass", 0 }, { "linearDamping", 0 },
+        { "angularDamping", 0 }
     }
     for i = 1, #_DEFAULT_PROPS do
         local def = _DEFAULT_PROPS[i]
@@ -54,6 +57,21 @@ TfmGround.isPointInside = function(self, pointX, pointY)
     return mathGeometry.isPointInRect(self.x, self.y, self.width, self.height, self.angle, pointX, pointY)
 end
 
+--- Checks if the ground is a rectangle or circle.
+--- @return boolean
+TfmGround.isColoredGround = function(self)
+    return self.type == GroundType.Rectangle
+        or self.type == GroundType.Circle
+end
+
+--- Checks if the ground's color is invisible.
+--- Note that this refers to the color property, and is different from the generic invisible property.
+--- @return boolean
+TfmGround.isColorInvisible = function(self)
+    return self.color == nil
+        or self.color == 0xffffffff
+end
+
 --- Instantiate an array of grounds from the map XML document.
 --- @param xmlDoc XmlDoc
 --- @return TfmGround[]
@@ -65,7 +83,7 @@ TfmGround.fromXmlDoc = function(xmlDoc)
     for i = 1, #s_nodes do
         local attr = s_nodes[i].attributes
         local ground = TfmGround:new()
-        ground.type = attr['T']
+        ground.type = tonumber(attr['T'])
         ground.x = tonumber(attr['X'])
         ground.y = tonumber(attr['Y'])
         ground.width = tonumber(attr['L'])
@@ -78,23 +96,22 @@ TfmGround.fromXmlDoc = function(xmlDoc)
             local c = tonumber(attr['c'])
             if c == 0 or c == 1 then
                 ground.miceCollision = true
-                ground.groundCollision = true
+                ground.objectCollision = true
             elseif c == 2 then
                 ground.miceCollision = false
-                ground.groundCollision = true
+                ground.objectCollision = true
             elseif c == 3 then
                 ground.miceCollision = true
-                ground.groundCollision = false
+                ground.objectCollision = false
             end
             ground.miceCollision = false
-            ground.groundCollision = false
+            ground.objectCollision = false
         end
 
-        -- Empty string means invisible color
-        if attr['o'] and attr['o'] == "" then
-            ground.color = 0xffffffff
-        else
-            ground.color = tonumber(attr['o'])
+        -- Set color for colored grounds
+        if ground.type == GroundType.Rectangle
+        or ground.type == GroundType.Circle then
+            ground.color = attr['o'] and (tonumber(attr['o'], 16) or true)
         end
 
         -- Read P attribute
@@ -115,5 +132,8 @@ TfmGround.fromXmlDoc = function(xmlDoc)
 
     return result
 end
+
+TfmGround.GroundType = GroundType
+TfmGround.typeNames = TfmGroundEnum.typeNames
 
 return TfmGround

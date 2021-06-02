@@ -2,6 +2,8 @@
 
 local btRoom = require("entities.bt_room")
 local localis = require("localisation.localis_manager")
+local WindowManager = require("window.window_manager")
+local WindowEnums = require("bt-enums").Window
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
 
@@ -69,6 +71,10 @@ tfmEvent:onCrucial('NewGame', function()
     end)
 
     round:activate()
+
+    for name, _ in pairs(btRoom.players) do
+        WindowManager.close(WindowEnums.GROUND_INFO, name)
+    end
 end)
 
 tfmEvent:on('PlayerDied', function(pn)

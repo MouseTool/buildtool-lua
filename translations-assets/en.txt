@@ -22,21 +22,45 @@ mapinfo_tag_no_motor = [[No Motor]]
 err_score_not_ranged = [[<R>Error: score not within range (%s-%s)]]
 err_round_not_loaded = [[<R>Error: round is not loaded]]
 
+# Grounds (Map Editor)
+ground_wood = [[Wood]]
+ground_ice = [[Ice]]
+ground_trampoline = [[trampoline]]
+ground_lava = [[Lava]]
+ground_chocolate = [[Chocolate]]
+ground_earth = [[Earth]]
+ground_grass = [[Grass]]
+ground_sand = [[Sand]]
+ground_cloud = [[Cloud]]
+ground_water = [[Water]]
+ground_stone = [[Stone]]
+ground_snow = [[Snow]]
+ground_rectangle = [[Rectangle]]
+ground_circle = [[Circle]]
+ground_invisible = [[Invisible]]
+ground_cobweb = [[Cobweb]]
+ground_grass2 = [[Yellow grass]]
+ground_grass3 = [[Pink grass]]
+ground_acid = [[Acid]]
+
 # User Interface
 ## Ground Info
 ui_ginfo_true = [[<VP>True]]
 ui_ginfo_false = [[<N2>False]]
+ui_ginfo_invisible = [[<N2>Invisible]]
+ui_ginfo_mouse = [[<CH>Mouse]]
+ui_ginfo_object = [[<CH2>Object]]
 ui_ginfo_properties = [[
-<N>Z-Index: \t%s
-<N>Type: \t%s
-<N>X, Y: \t%s, %s
-<N>Length: \t%s
-<N>Height: \t%s
-<N>Friction: \t%s
-<N>Restitution: \t%s
-<N>Angle: \t%s
-<N>Disappear: \t%s
-<N>Color: \t%s
-<N>Dynamic: \t%s
-<N>Mass: \t%s
+<N>Z-Index: \t %s
+<N>Position (X,Y): \t %s,%s
+<N>Length: \t %s
+<N>Height: \t %s
+<N>Friction: \t %s
+<N>Restitution: \t %s
+<N>Angle: \t %s
+<N>Disappear: \t %s
+<N>Collision: \t %s
+<N>Color: \t %s
+<N>Dynamic: \t %s
+<N>Mass: \t %s
 ]]

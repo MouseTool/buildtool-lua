@@ -202,6 +202,8 @@ tfmEvent:on('Mouse', function(pn, x, y)
                 if w_ginfo then
                     w_ginfo:displayGInfo(found_g, x, y)
                 end
+            else
+                WindowManager.close(WindowEnums.GROUND_INFO, btp.name)
             end
         end
     end
