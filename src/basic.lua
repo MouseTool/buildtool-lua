@@ -1,7 +1,6 @@
 -- Controls the room's basic lifecycle
 
 local btRoom = require("entities.bt_room")
-local localis = require("localisation.localis_manager")
 local WindowManager = require("window.window_manager")
 local WindowEnums = require("bt-enums").Window
 local BtPlayer = require("entities.BtPlayer")
@@ -45,29 +44,7 @@ tfmEvent:onCrucial('NewGame', function()
     round:once('ready', function()
         btRoom.currentRound = round
 
-        --- @type table<number, string|LocalisBuilder>
-        local mapinfo_joins = {
-            localis.evaluator:new("mapinfo_summary",
-                -- @map, author
-                "@" .. round.mapCode, round.author)
-        }
-
-        if round.isMirrored then
-            mapinfo_joins[#mapinfo_joins + 1] = " "
-            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_mirrored")
-        end
-
-        local _props = round.mapProp
-        if _props then
-            mapinfo_joins[#mapinfo_joins + 1] = "\n"
-            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_summary_properties",
-                -- wind, gravity
-                _props.wind, _props.gravity,
-                -- mgoc
-                _props.mgoc)
-        end
-
-        btRoom.tlbChatMsg(localis.joiner:new(mapinfo_joins))
+        round:sendMapInfo()
     end)
 
     round:activate()

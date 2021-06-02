@@ -95,3 +95,15 @@ tfmcmd.registerCommand(tfmcmd.Main {
         end
     end
 })
+
+tfmcmd.registerCommand(tfmcmd.Main {
+    name = "time",
+    args = {
+        tfmcmd.ArgNumber { },
+    },
+    --- @param ctx tfmcmd.CmdContext
+    --- @param time number # time in seconds
+    func = function(ctx, time)
+        tfm.exec.setGameTime(time)
+    end
+})

@@ -1,5 +1,5 @@
-local tfmcmd = require("commands.tfmcmd")
-local cmdPerms = require("commands.perms")
+local tfmcmd = require("tfmcmd")
+local cmdPerms = require("perms")
 
 local btRoom = require("entities.bt_room")
 local api = btRoom.api
@@ -8,10 +8,11 @@ local tfmEvent = api.tfmEvent
 tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
 
 -- Init commands
-require("commands.cmd_debug")
-require("commands.cmd_room")
-require("commands.cmd_rotation")
-require("commands.cmd_round")
+require("cmd_debug")
+require("cmd_interface")
+require("cmd_room")
+require("cmd_rotation")
+require("cmd_round")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
     local btp = btRoom.players[pn]

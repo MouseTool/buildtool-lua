@@ -1,6 +1,7 @@
 local mousexml = require("@mousetool/mousexml")
 local linkedlist = require("@mousetool/linkedlist")
 local btRoom = require("entities.bt_room")
+local localis = require("localisation.localis_manager")
 local string_split = require("util.stringlib").split
 local TfmGround = require("entities.TfmGround")
 
@@ -34,6 +35,7 @@ local roomGet = tfm.get.room
 --- @field mapProp BtXmlMapProp|nil # Map properties from the XML
 --- @field grounds TfmGround[]|nil # The map's XML grounds
 --- @field spawnedObjects table<string, LinkedList<number, number>> # Keeps track of all objects IDs spawned in the round per player
+--- @field _cacheMapInfoBuilder LocalisBuilder|nil # Caches the mapinfo localization builder
 local BtRound = require("entities.CommonRound"):extend("BtRound")
 
 local _parseXml
@@ -172,6 +174,45 @@ _parseXml = function(self, xml)
     xpcall(function()
         self.grounds = TfmGround.fromXmlDoc(xmlDoc)
     end, ON_PCALL_ERR)
+end
+
+--- Sends the map info to everyone, or a specific player.
+--- @param playerName? string
+BtRound.sendMapInfo = function(self, playerName)
+    local builder = self._cacheMapInfoBuilder
+    if not builder then
+        --- @type table<number, string|LocalisBuilder>
+        local mapinfo_joins = {
+            localis.evaluator:new("mapinfo_summary",
+                -- @map, author
+                "@" .. self.mapCode, self.author)
+        }
+
+        if self.isMirrored then
+            mapinfo_joins[#mapinfo_joins + 1] = " "
+            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_mirrored")
+        end
+
+        local _props = self.mapProp
+        if _props then
+            mapinfo_joins[#mapinfo_joins + 1] = "\n"
+            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_summary_properties",
+                -- wind, gravity
+                _props.wind, _props.gravity,
+                -- mgoc
+                _props.mgoc)
+        end
+
+        builder = localis.joiner:new(mapinfo_joins)
+        self._cacheMapInfoBuilder = builder
+    end
+
+    if playerName then
+        local btp = btRoom.players[playerName]
+        if btp then btp:tlbChatMsg(builder) end
+    else
+        btRoom.tlbChatMsg(builder)
+    end
 end
 
 --- Undo the player's last spawned object in the round
