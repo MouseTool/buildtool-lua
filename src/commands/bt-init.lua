@@ -8,13 +8,10 @@ local tfmEvent = api.tfmEvent
 tfmcmd.setDefaultAllow(cmdPerms.IS_ADMIN)
 
 -- Init commands
-require("commands.cmd_map")
 require("commands.cmd_debug")
-require("commands.cmd_respawn_mort")
-require("commands.cmd_sham")
-require("commands.cmd_score")
-require("commands.cmd_clear")
 require("commands.cmd_room")
+require("commands.cmd_rotation")
+require("commands.cmd_round")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
     local btp = btRoom.players[pn]
