@@ -113,7 +113,7 @@ timed_task.overrideUseLoop = function(id, time_ms, cb, a1, a2, a3, a4)
     return add_task(false, id, time_ms, cb, a1, a2, a3, a4)
 end
 
-tfmEvent.on('Loop', function()
+tfmEvent:on('Loop', function()
     local done, sz = {}, 0
     for id, task in pairs(tasks) do
         if os.time() >= task[2] then
