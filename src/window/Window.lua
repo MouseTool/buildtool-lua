@@ -249,8 +249,8 @@ Window.focus = function(self)
         end
         if self._cached_images then
             for i = 1, self._cached_images.length do
-                local cached_images = self._cached_images
-                _addImageFakeId(self, cached_images[i].fakeId, table.unpack(cached_images[i].args, 1, 10))
+                local cached_image = self._cached_images[i]
+                _addImageFakeId(self, cached_image.fakeId, table.unpack(cached_image.args, 1, 10))
             end
         end
         self._should_refocus_next = nil
@@ -294,8 +294,8 @@ Window.refocus = function(self)
         end
         if self._cached_images then
             for i = 1, self._cached_images.length do
-                local cached_images = self._cached_images
-                _addImageFakeId(self, cached_images[i].fakeId, table.unpack(cached_images[i].args, 1, 10))
+                local cached_image = self._cached_images[i]
+                _addImageFakeId(self, cached_image.fakeId, table.unpack(cached_image.args, 1, 10))
             end
         end
         self._should_refocus_next = nil
