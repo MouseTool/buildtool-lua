@@ -51,9 +51,9 @@
   integrity sha512-BzLon8OMx2Q30OGeEBF0Mo114cAFLwd6sZ1bZUU+U8WXKF993T/dNsvy3xFL0UUKWl+myR0gFbmTiUoLVYQ1FA==
 
 "@mousetool/tfm-vscode@^1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@mousetool/tfm-vscode/1.0.1/56cae670a0515ce52eb49d3a2b88734a94e41efcc40f361da96f230eb3eddbae#5dc4f87a23ddb1b4525e2ccf482182d2d65e2331"
-  integrity sha512-gUydKCaQ+Vs8vSMVsVkg1/aSBN2UC5ZB95I9CSO4EC6QL0g/TXlUDLfUBuc1EV/H2BYa9PyutTMlowofykastg==
+  version "1.0.4"
+  resolved "https://npm.pkg.github.com/download/@mousetool/tfm-vscode/1.0.4/23f419b3004ec84df8fe41396eaeb16853dbdc5a4a42675468e6b216b9d021a3#ccabf67284db3cf2b69c7f12468ebd4098062771"
+  integrity sha512-TwVYTDcIU8BhrATRAGH6fYBH9V7jqAs8gXg4UEtv6hQeTRFfoMl7B1D8I2zO3qZEOB8jYL0HjbCX+7PPglVp/A==
 
 argparse@^2.0.1:
   version "2.0.1"
