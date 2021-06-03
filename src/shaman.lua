@@ -2,8 +2,8 @@
 
 local linkedlist = require("@mousetool/linkedlist")
 local btRoom = require("entities.bt_room")
-local api = btRoom.api
-local tfmEvent = api.tfmEvent
+local ShamObj = require("bt-enums").ShamObj
+local tfmEvent = btRoom.api.tfmEvent
 
 --- @param pn string
 --- @param objType integer
@@ -14,7 +14,10 @@ local tfmEvent = api.tfmEvent
 tfmEvent:onCrucial('SummoningEnd', function(pn, objType, xPos, yPos, angle, objDesc)
     -- Add on to the list of spawns
     local round = btRoom.currentRound
-    if round then
+    local baseType = objDesc.baseType
+    if round and baseType ~= ShamObj.Arrow
+    and baseType ~= ShamObj.Spirit
+    and baseType ~= ShamObj.Portal then
         local pspawn = round.spawnedObjects[pn]
         if not pspawn then
             pspawn = linkedlist:new()

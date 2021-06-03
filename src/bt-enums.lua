@@ -46,4 +46,21 @@ enums.Keys = {
     U = 85,
 }
 
+--- Shaman object types
+--- @class ShamObjEnum
+enums.ShamObj = {
+    Arrow      = 0,
+    SmallBox   = 1,
+    LargeBox   = 2,
+    SmallPlank = 3,
+    LargePlank = 4,
+    Ball = 6,
+    Anvil = 10,
+    Cannon = 17,
+    Spirit = 24,
+    Portal = 26,
+    Balloon = 28,
+    Rune = 32,
+}
+
 return enums
