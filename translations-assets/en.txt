@@ -25,7 +25,7 @@ err_round_not_loaded = [[<R>Error: round is not loaded]]
 # Grounds (Map Editor)
 ground_wood = [[Wood]]
 ground_ice = [[Ice]]
-ground_trampoline = [[trampoline]]
+ground_trampoline = [[Trampoline]]
 ground_lava = [[Lava]]
 ground_chocolate = [[Chocolate]]
 ground_earth = [[Earth]]
