@@ -50,6 +50,7 @@ ui_ginfo_false = [[<N2>False]]
 ui_ginfo_invisible = [[<N2>Invisible]]
 ui_ginfo_mouse = [[<CH>Mouse]]
 ui_ginfo_object = [[<CH2>Object]]
+ui_ginfo_all = [[<VP>All]]
 ui_ginfo_properties = [[
 <N>Z-Index: \t %s
 <N>Position (X,Y): \t %s,%s

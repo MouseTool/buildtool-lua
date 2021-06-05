@@ -40,6 +40,7 @@ GroundInfoWindow.displayGInfo = function(self, ground, x, y)
     local T_INVISIBLE = btp:tlGet("ui_ginfo_invisible")
     local T_MOUSE = btp:tlGet("ui_ginfo_mouse")
     local T_OBJECT = btp:tlGet("ui_ginfo_object")
+    local T_ALL = btp:tlGet("ui_ginfo_all")
 
     local color = "-"
     if ground:isColoredGround() then
@@ -50,9 +51,12 @@ GroundInfoWindow.displayGInfo = function(self, ground, x, y)
         end
     end
 
-    local collision = (ground.miceCollision and T_MOUSE)
-            or (ground.objectCollision and T_OBJECT)
-            or T_FALSE
+    local collision = T_FALSE
+    if ground.miceCollision then
+        collision = ground.objectCollision and T_ALL or T_MOUSE
+    elseif ground.objectCollision then
+        collision = ground.miceCollision and T_ALL or T_OBJECT
+    end
 
     local text = "<p><textformat tabstops='[4,145]'>" .. self:closifyContent(
         ("\t<b>%s (ID: %s)</b> \t %s"):format(
