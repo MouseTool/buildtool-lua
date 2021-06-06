@@ -46,7 +46,7 @@ translations.en = {
     err_round_not_loaded = "<R>Error: round is not loaded",
     ground_wood = "Wood",
     ground_ice = "Ice",
-    ground_trampoline = "trampoline",
+    ground_trampoline = "Trampoline",
     ground_lava = "Lava",
     ground_chocolate = "Chocolate",
     ground_earth = "Earth",
@@ -68,6 +68,7 @@ translations.en = {
     ui_ginfo_invisible = "<N2>Invisible",
     ui_ginfo_mouse = "<CH>Mouse",
     ui_ginfo_object = "<CH2>Object",
+    ui_ginfo_all = "<VP>All",
     ui_ginfo_properties = "<N>Z-Index: \t %s\n<N>Position (X,Y): \t %s,%s\n<N>Length: \t %s\n<N>Height: \t %s\n<N>Friction: \t %s\n<N>Restitution: \t %s\n<N>Angle: \t %s\n<N>Disappear: \t %s\n<N>Collision: \t %s\n<N>Color: \t %s\n<N>Dynamic: \t %s\n<N>Mass: \t %s"
 }
 
