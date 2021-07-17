@@ -12,7 +12,7 @@ require("cmd_debug")
 require("cmd_interface")
 require("cmd_room")
 require("cmd_rotation")
-require("cmd_round")
+require("cmd_utility")
 
 tfmEvent:on("ChatCommand", function(pn, msg)
     local btp = btRoom.players[pn]

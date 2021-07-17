@@ -107,3 +107,41 @@ tfmcmd.registerCommand(tfmcmd.Main {
         tfm.exec.setGameTime(time)
     end
 })
+
+tfmcmd.registerCommand(tfmcmd.Main {
+    name = "tp",
+    args = {
+        tfmcmd.ArgString { optional = true },
+    },
+    --- @param ctx tfmcmd.CmdContext
+    --- @param target? string
+    func = function(ctx, target)
+        local btp = btRoom.players[ctx.playerName]
+        if not btp then return end
+        -- TODO: support multiple targets
+        btp.tpTarget = target and { target } or true
+    end
+})
+
+tfmcmd.registerCommand(tfmcmd.Main {
+    name = "arrow",
+    allowed = perms.IS_SHAM_OR_ADMIN,
+    args = {
+        tfmcmd.ArgString { optional = true, lower = true },
+    },
+    --- @param ctx tfmcmd.CmdContext
+    --- @param mode? string
+    func = function(ctx, mode)
+        local btp = btRoom.players[ctx.playerName]
+        if not btp then return end
+        if mode == "on" then
+            btp.arrowMode = "on"
+            btp:tlChatMsg("enabled_arrow_mode")
+        elseif mode == "off" then
+            btp.arrowMode = nil
+            btp:tlChatMsg("disabled_arrow_mode")
+        else
+            btp.arrowMode = "single"
+        end
+    end
+})

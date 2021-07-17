@@ -207,6 +207,27 @@ tfmEvent:on('Mouse', function(pn, x, y)
             end
         end
     end
+
+    if btp.tpTarget and is_admin then
+        local tp_target = btp.tpTarget
+        if tp_target == true then
+            for name in pairs(btRoom.players) do
+                tfm.exec.movePlayer(name, x, y, false)
+            end
+        else -- type(tp_target) == "table"
+            for i = 1, #tp_target do
+                tfm.exec.movePlayer(tp_target[i], x, y, false)
+            end
+        end
+        btp.tpTarget = nil
+    end
+
+    if btp.arrowMode and (is_admin or is_shaman) then
+        tfm.exec.addShamanObject(0, x, y - 15)
+        if btp.arrowMode == "single" then
+            btp.arrowMode = nil
+        end
+    end
 end)
 
 --- Trigger module player callback event

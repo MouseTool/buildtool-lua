@@ -33,6 +33,8 @@ translations.en = {
     player_welcome = "<J>Welcome to BuildTool Beta Testing! Type !help or press H to see the help window.",
     set_room_password = "<J>%s set a password.",
     unset_room_password = "<J>%s disabled the password.",
+    enabled_arrow_mode = "<J>Enabled arrow mode.",
+    disabled_arrow_mode = "<J>Disabled arrow mode.",
     mapinfo_summary = "<ROSE>[Map Info] <J>%s <N>by %s",
     mapinfo_summary_properties = "Wind: %s | Gravity: %s | MGOC: %s",
     mapinfo_mirrored = "(mirrored)",
@@ -46,7 +48,7 @@ translations.en = {
     err_round_not_loaded = "<R>Error: round is not loaded",
     ground_wood = "Wood",
     ground_ice = "Ice",
-    ground_trampoline = "trampoline",
+    ground_trampoline = "Trampoline",
     ground_lava = "Lava",
     ground_chocolate = "Chocolate",
     ground_earth = "Earth",
@@ -68,6 +70,7 @@ translations.en = {
     ui_ginfo_invisible = "<N2>Invisible",
     ui_ginfo_mouse = "<CH>Mouse",
     ui_ginfo_object = "<CH2>Object",
+    ui_ginfo_all = "<VP>All",
     ui_ginfo_properties = "<N>Z-Index: \t %s\n<N>Position (X,Y): \t %s,%s\n<N>Length: \t %s\n<N>Height: \t %s\n<N>Friction: \t %s\n<N>Restitution: \t %s\n<N>Angle: \t %s\n<N>Disappear: \t %s\n<N>Collision: \t %s\n<N>Color: \t %s\n<N>Dynamic: \t %s\n<N>Mass: \t %s"
 }
 

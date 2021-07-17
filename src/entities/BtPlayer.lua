@@ -8,6 +8,9 @@
 --- @field inRoom boolean # Whether the player is currently in the room
 --- @field capabilities Capabilities # The player's capabiltiies
 --- @field language string # The player's language
+---
+--- @field tpTarget? string[]|boolean # Used to denote which player(s) are to be tp'd in the next click
+--- @field arrowMode? '"on"'|'"single"' # The behavior of arrow spawning in the next click
 local BtPlayer = require("@mousetool/mousebase").EventEmitter:extend("BtPlayer")
 
 local btRoom = require("entities.bt_room")
