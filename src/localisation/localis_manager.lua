@@ -41,8 +41,8 @@ LocalisManager.overrideLanguageString = function(language, locKey, locString)
 end
 
 --- @class LocalisManager.LangMap
---- @field 1 string # The target language to map from
---- @field 2 string|nil # The base language to map to
+--- @field [1] string # The target language to map from
+--- @field [2] string|nil # The base language to map to
 
 --- Maps languages to another.
 --- Example to map `zh` and `tw` to `cn`:
