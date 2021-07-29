@@ -4,6 +4,7 @@ local btRoom = require("entities.bt_room")
 local localis = require("localisation.localis_manager")
 local string_split = require("util.stringlib").split
 local TfmGround = require("entities.TfmGround")
+local mapSched = require("util.mapSched")
 
 local roomGet = tfm.get.room
 
@@ -36,6 +37,7 @@ local roomGet = tfm.get.room
 --- @field grounds TfmGround[]|nil # The map's XML grounds
 --- @field spawnedObjects table<string, LinkedList<number, number>> # Keeps track of all objects IDs spawned in the round per player
 --- @field _cacheMapInfoBuilder LocalisBuilder|nil # Caches the mapinfo localization builder
+--- @field mode MapModeEnum # The mode of the map
 local BtRound = require("entities.CommonRound"):extend("BtRound")
 
 local _parseXml
@@ -174,6 +176,12 @@ _parseXml = function(self, xml)
     xpcall(function()
         self.grounds = TfmGround.fromXmlDoc(xmlDoc)
     end, ON_PCALL_ERR)
+
+    -- Load vars
+    xpcall(function()
+        local sched_info = mapSched.onNewGameCheck()
+        self.mode = sched_info.mode
+    end)
 end
 
 --- Sends the map info to everyone, or a specific player.

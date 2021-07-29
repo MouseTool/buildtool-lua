@@ -1,6 +1,7 @@
 local tfmcmd = require("commands.tfmcmd")
-
 local btRoom = require("entities.bt_room")
+
+local leisure = {'1564662', '1655932', '2845278', '2852771', '3078425', '3173473', '3178265', '3257261', '3361756', '3412288', '3601296', '4000002', '4942685', '4983947', '4994050', '5008162', '5025621', '5070570', '7427860', '5139956', '5165396', '5316685', '5365803', '5523036', '5820213', '5841255', '5859725', '5912389', '5917728', '5917786', '5918763','5927750', '5982865', '6009181', '6023878', '6026172', '6030416', '6157962','6168087', '6168097','6179809', '6672295', '6712216', '7029015', '7131514', '7426069', '7491094', '7492815', '988050'}
 
 tfmcmd.registerCommand(
     tfmcmd.Main {
@@ -19,9 +20,9 @@ tfmcmd.registerCommand(
             else
                 local T = {p4='#4',p8='#8'}
                 if w2 then
-                    tfm.exec.newGame(T[w2] or w2, w3=='mirror' and true or false)
+                    btRoom.loadMap(T[w2] or w2, w3=='mirror' and true or false)
                 else
-                    --mapsched.load(settings.maps.leisure[math.random(1,#settings.maps.leisure)]) roundvars.maptype = 'leisure'
+                    btRoom.loadMap(leisure[math.random(1, #leisure)])
                 end
             end
         end

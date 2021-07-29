@@ -63,4 +63,14 @@ enums.ShamObj = {
     Rune       = 32,
 }
 
+--- BT Map modes
+--- @class MapModeEnum
+enums.MapModeEnum = {
+    UNKNOWN = 0,
+    NORMAL = 1,
+    LEISURE = 2,
+    DIVINITY = 3,
+    SPIRITUAL = 4
+}
+
 return enums

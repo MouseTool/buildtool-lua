@@ -1,10 +1,11 @@
 -- Controls the room's basic lifecycle
 
-local btRoom = require("entities.bt_room")
 local WindowManager = require("window.window_manager")
 local WindowEnums = require("bt-enums").Window
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
+local btRoom = require("entities.bt_room")
+local timedTask = require("util.timed_task")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
@@ -67,3 +68,5 @@ tfmEvent:on('PlayerWon', function(pn)
 
     btp:normalRespawn()
 end)
+
+tfmEvent:on('Loop', timedTask.onEventLoop)

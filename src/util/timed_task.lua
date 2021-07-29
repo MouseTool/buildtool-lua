@@ -3,8 +3,6 @@
 --- tasks via eventLoop if system.newTimer does not work
 local timed_task = {}
 
-local tfmEvent = require("entities.bt_room").api.tfmEvent
-
 local TIMER_OFFSET_MS = 400
 local tasks = {}
 local last_id = 0
@@ -113,7 +111,8 @@ timed_task.overrideUseLoop = function(id, time_ms, cb, a1, a2, a3, a4)
     return add_task(false, id, time_ms, cb, a1, a2, a3, a4)
 end
 
-tfmEvent:on('Loop', function()
+--- Called on each event loop tick.
+timed_task.onEventLoop = function()
     local done, sz = {}, 0
     for id, task in pairs(tasks) do
         if os.time() >= task[2] then
@@ -129,6 +128,6 @@ tfmEvent:on('Loop', function()
     for i = 1, sz do
         tasks[done[i]] = nil
     end
-end)
+end
 
 return timed_task
