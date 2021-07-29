@@ -1,5 +1,5 @@
 local tfmcmd = require("commands.tfmcmd")
-local btRoom = require("entities.bt_room")
+local btRoom = require("entities.btRoom")
 local mapSched = require("util.mapSched")
 
 tfmcmd.registerCommand(

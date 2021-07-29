@@ -1,8 +1,8 @@
 local tfmcmd = require("commands.tfmcmd")
 local perms = require("commands.perms")
-local ROLE = require("permissions.bt_perms").ROLE
+local ROLE = require("permissions.btPerms").ROLE
 
-local btRoom = require("entities.bt_room")
+local btRoom = require("entities.btRoom")
 
 tfmcmd.registerCommand(tfmcmd.Main {
     name = "pw",

@@ -2,13 +2,11 @@
 --- @class BtRoom
 --- @field currentRound BtRound|nil
 --- @field queuedMode MapModeEnum|nil
-local bt_room = {}
+local btRoom = {}
 
 local BtRoomEvents = require("BtRoomEvents")
 local BtTaEvents = require("BtTaEvents")
-local localis = require("localisation.localis_manager")
-local mapSched = require("util.mapSched")
-local btEnums = require("bt-enums")
+local localis = require("localisation.localis")
 
 --- Chat prefix
 local C_PRE = "<V>[&#926;] <N>"
@@ -16,21 +14,21 @@ local C_PRE = "<V>[&#926;] <N>"
 --- Sends a global chat message in the module context.
 --- @param message string # The module message to display
 --- @param playerName? string # The player who will get the message (if nil, applies to all players)
-bt_room.moduleMsgDirect = function(message, playerName)
+btRoom.moduleMsgDirect = function(message, playerName)
     tfm.exec.chatMessage(C_PRE .. message, playerName)
 end
 
-local directMsg = bt_room.moduleMsgDirect
+local directMsg = btRoom.moduleMsgDirect
 
 --- Sends a module message to a capabilities group.
 --- @param message string # The module message to display
 --- @param group? Capabilities # The players whom have the set group will get the message (if nil applies to all players)
-bt_room.chatMsg = function(message, group)
+btRoom.chatMsg = function(message, group)
     if group == nil then
         directMsg(message)
         return
     end
-    for name, btp in pairs(bt_room.players) do
+    for name, btp in pairs(btRoom.players) do
         if btp.capabilities:hasCaps(group) then
             directMsg(message, name)
         end
@@ -41,9 +39,9 @@ end
 --- @param group? Capabilities # The players whom have the set group will get the message (if nil applies to all players)
 --- @param keyName string # The key name of the translation string
 --- @vararg string # Translation string parameters
-bt_room.tlChatMsg = function(group, keyName, ...)
+btRoom.tlChatMsg = function(group, keyName, ...)
     local evaluator = localis.evaluator:new(keyName, ...)
-    for _, btp in pairs(bt_room.players) do
+    for _, btp in pairs(btRoom.players) do
         if not group or btp.capabilities:hasCaps(group) then
             btp:tlbChatMsg(evaluator)
         end
@@ -51,11 +49,11 @@ bt_room.tlChatMsg = function(group, keyName, ...)
 end
 
 --- Sends a translated module message to a capabilities group. Similar to `tlChatMsg`, but accepts a localisation builder and caches the language string.
---- @see bt_room.tlChatMsg
+--- @see btRoom.tlChatMsg
 --- @param builder LocalisBuilder
 --- @param group? Capabilities # The players whom have the set group will get the message (if nil applies to all players)
-bt_room.tlbChatMsg = function(builder, group)
-    for _, btp in pairs(bt_room.players) do
+btRoom.tlbChatMsg = function(builder, group)
+    for _, btp in pairs(btRoom.players) do
         if not group or btp.capabilities:hasCaps(group) then
             btp:tlbChatMsg(builder)
         end
@@ -64,13 +62,13 @@ end
 
 --- [[Module vars]]
 
-bt_room.api = require("@mousetool/mousebase").MbApi()
+btRoom.api = require("@mousetool/mousebase").MbApi()
 
 --- @type table<string, BtPlayer>
-bt_room.players = {}
+btRoom.players = {}
 
-bt_room.events = BtRoomEvents:new()
+btRoom.events = BtRoomEvents:new()
 
-bt_room.textAreaEvents = BtTaEvents:new()
+btRoom.textAreaEvents = BtTaEvents:new()
 
-return bt_room
+return btRoom

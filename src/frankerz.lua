@@ -1,8 +1,8 @@
 -- 100% accurate emotional display in tfm
 
-local btRoom = require("entities.bt_room")
-local btPerms = require("permissions.bt_perms")
-local TimedTask = require("util.timed_task")
+local btRoom = require("entities.btRoom")
+local btPerms = require("permissions.btPerms")
+local timedTask = require("util.timedTask")
 
 local emotes = {
     {"172c223b05c.png", -16, -60},        -- kekW
@@ -26,7 +26,7 @@ end)
 
 btRoom.api.tfmEvent:on('PlayerLeft', function(pn)
     if curr_emote[pn] then tfm.exec.removeImage(curr_emote[pn]) end
-    if curr_task[pn] then TimedTask.remove(curr_task[pn]) end
+    if curr_task[pn] then timedTask.remove(curr_task[pn]) end
     curr_emote[pn] = nil
     curr_task[pn] = nil
 end)
@@ -40,9 +40,9 @@ btRoom.events:on('keyboard', function(btp, k, d)
     if img and btp.capabilities:hasFlag(btPerms.CAPFLAG.ADMIN) then
         local id = tfm.exec.addImage(img[1], "$"..pn, img[2], img[3])
         if curr_emote[pn] then tfm.exec.removeImage(curr_emote[pn]) end
-        if curr_task[pn] then TimedTask.remove(curr_task[pn]) end
+        if curr_task[pn] then timedTask.remove(curr_task[pn]) end
         curr_emote[pn] = id
-        curr_task[pn] = TimedTask.addUseLoop(4000, function(i_id)
+        curr_task[pn] = timedTask.addUseLoop(4000, function(i_id)
             tfm.exec.removeImage(i_id)
             curr_emote[pn] = nil
             curr_task[pn] = nil

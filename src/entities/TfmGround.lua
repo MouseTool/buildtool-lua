@@ -23,7 +23,7 @@
 local TfmGround = require("@mousetool/mousebase").Class:extend("TfmGround")
 
 local TfmGroundEnum = require("TfmGroundEnum")
-local mathGeometry = require("util.math_geometry")
+local mathGeometry = require("util.mathGeometry")
 local string_split = require("util.stringlib").split
 local GroundType = TfmGroundEnum.GroundType
 

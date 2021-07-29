@@ -8,7 +8,7 @@ local TAB_ID = {
 --- @class SettingsWindow:Window
 local SettingsWindow = require("Window"):extend("SettingsWindow")
 
-local WindowEnum = require("bt-enums").Window
+local WindowEnum = require("btEnums").Window
 SettingsWindow.TYPE_ID = WindowEnum.SETTINGS
 
 SettingsWindow.doRender = function(self)

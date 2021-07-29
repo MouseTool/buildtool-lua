@@ -13,15 +13,15 @@
 --- @field arrowMode? '"on"'|'"single"' # The behavior of arrow spawning in the next click
 local BtPlayer = require("@mousetool/mousebase").EventEmitter:extend("BtPlayer")
 
-local btRoom = require("entities.bt_room")
+local btRoom = require("entities.btRoom")
 local Capabilities = require("permissions.Capabilities")
-local btPerms = require("permissions.bt_perms")
+local btPerms = require("permissions.btPerms")
 local BT_ROLE = btPerms.ROLE
 local BT_CAP = btPerms.CAPFLAG
 local roomSets = require("settings.RoomSettings")
-local localis = require("localisation.localis_manager")
+local localis = require("localisation.localis")
 
-local moduleMsgDirect = require("entities.bt_room").moduleMsgDirect
+local moduleMsgDirect = require("entities.btRoom").moduleMsgDirect
 
 local DEFAULT_LANGUAGE = "en"
 

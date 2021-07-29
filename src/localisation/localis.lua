@@ -1,20 +1,20 @@
 --- A simple localisations string manager
---- @class LocalisManager
-local LocalisManager = {}
+--- @class Localis
+local localis = {}
 
 local translations = {}
 local fallback_lang = "en"
 
 --- Sets the fallback language, "en" by default
 --- @param language string|nil
-LocalisManager.setFallbackLang = function(language)
+localis.setFallbackLang = function(language)
     fallback_lang = language
 end
 
 --- Add language data
 --- @param language string
 --- @param langData table<string, string> # Table <LocKey , LocString>
-LocalisManager.addLanguageData = function(language, langData)
+localis.addLanguageData = function(language, langData)
     translations[language] = langData
 end
 
@@ -22,7 +22,7 @@ end
 --- Retrieves the language data
 --- @param language string
 --- @return table<string, string> langData
-LocalisManager.getLanguageData = function(language)
+localis.getLanguageData = function(language)
     return translations[language]
 end
 
@@ -30,7 +30,7 @@ end
 --- @param language string # The language
 --- @param locKey string # Localisation key
 --- @param locString string|nil # Localisation string, `nil` to unset
-LocalisManager.overrideLanguageString = function(language, locKey, locString)
+localis.overrideLanguageString = function(language, locKey, locString)
     local t = translations[language]
     if not t then
         t = {}
@@ -40,7 +40,7 @@ LocalisManager.overrideLanguageString = function(language, locKey, locString)
     t[locKey] = locString
 end
 
---- @class LocalisManager.LangMap
+--- @class Localis.LangMap
 --- @field [1] string # The target language to map from
 --- @field [2] string|nil # The base language to map to
 
@@ -48,13 +48,13 @@ end
 --- Example to map `zh` and `tw` to `cn`:
 --- ```lua
 --- -- {target : string, base : string?}
---- LocalisManager.mapLangs({
+--- Localis.mapLangs({
 ---     {"zh", "cn"},
 ---     {"tw", "cn"}
 --- })
 --- ```
----@param langMap LocalisManager.LangMap[]
-LocalisManager.mapLangs = function(langMap)
+---@param langMap Localis.LangMap[]
+localis.mapLangs = function(langMap)
     for i = 1, #langMap do
         local map = langMap[i]
         translations[map[1]] = translations[map[2]]
@@ -65,7 +65,7 @@ end
 --- language -> fallback_lang -> locKey
 --- @param language string|nil # The language. If `nil` will use the fallback language.
 --- @return string # The translated string
-LocalisManager.get = function(language, locKey)
+localis.get = function(language, locKey)
     local langData = translations[language]
 
     if not (langData and langData[locKey]) then
@@ -140,7 +140,7 @@ LocalisEvaluator.exec = function(self, language, shouldCache)
 
     local args = _processArgs(self.localisArgs, self.localisArgsCount, language)
 
-    cache = LocalisManager.get(language, self.keyName):format(table.unpack(args, 1, self.localisArgsCount))
+    cache = localis.get(language, self.keyName):format(table.unpack(args, 1, self.localisArgsCount))
     if shouldCache ~= false then
         self.cache[language] = cache
     end
@@ -184,7 +184,7 @@ LocalisJoiner.exec = function(self, language, shouldCache)
     return cache
 end
 
-LocalisManager.evaluator = LocalisEvaluator
-LocalisManager.joiner = LocalisJoiner
+localis.evaluator = LocalisEvaluator
+localis.joiner = LocalisJoiner
 
-return LocalisManager
+return localis

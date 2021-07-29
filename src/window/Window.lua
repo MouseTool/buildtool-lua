@@ -1,6 +1,6 @@
-local idGen = require("bt-ids")
+local btIds = require("util.btIds")
+local btEnums = require("btEnums")
 local OrderedTable = require("@mousetool/ordered-table")
-local btEnums = require("bt-enums")
 local WindowUnfocus = btEnums.WindowUnfocus
 local WindowOnFocus = btEnums.WindowOnFocus
 
@@ -116,7 +116,7 @@ end
 --- @param fixedPos boolean # whether the position is fixed or if it should follow the player's camera on long maps (default false)
 --- @return integer # The ID of the text area created
 Window.addTextArea = function(self, textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
-    textAreaId = textAreaId or idGen.getNewTextAreaId()
+    textAreaId = textAreaId or btIds.getNewTextAreaId()
     ui.addTextArea(textAreaId, text, self.pn, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
     self.textAreas[textAreaId] = {textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos}
     return textAreaId
@@ -162,7 +162,7 @@ Window.removeAllElements = function(self)
     self.textAreas = OrderedTable:new()
 end
 
---- Called on render before `rendered` event is emitted. 
+--- Called on render before `rendered` event is emitted.
 --- @virtual
 --- @protected
 Window.doRender = function(self) end
@@ -279,7 +279,7 @@ Window.fullUnfocus = function(self)
 end
 
 --- Re-focus the window. Similar to focus(), except that it also readds all images.
---- The difference with focus() is that this is mostly used when the unfocused window needs to be re-rendered over other windows. 
+--- The difference with focus() is that this is mostly used when the unfocused window needs to be re-rendered over other windows.
 --- Will emit both `focused` and `refocused` events when successfully transitioned from unfocused --> focused.
 Window.refocus = function(self)
     if self.focused then return end  -- already focused

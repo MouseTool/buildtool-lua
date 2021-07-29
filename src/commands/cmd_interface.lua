@@ -1,8 +1,8 @@
 local tfmcmd = require("commands.tfmcmd")
 
 local WindowManager = require("window.window_manager")
-local WindowEnum = require("bt-enums").Window
-local btRoom = require("entities.bt_room")
+local WindowEnum = require("btEnums").Window
+local btRoom = require("entities.btRoom")
 
 tfmcmd.registerCommand(tfmcmd.Main {
     name = "help",

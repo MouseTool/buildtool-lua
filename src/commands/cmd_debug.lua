@@ -1,9 +1,9 @@
 local tfmcmd = require("commands.tfmcmd")
 local perms = require("commands.perms")
-local ROLE = require("permissions.bt_perms").ROLE
+local ROLE = require("permissions.btPerms").ROLE
 
-local btRoom = require("entities.bt_room")
-local localis = require("localisation.localis_manager")
+local btRoom = require("entities.btRoom")
+local localis = require("localisation.localis")
 local string_split = require("util.stringlib").split
 
 -- Silly micro optimization experiment (TODO)

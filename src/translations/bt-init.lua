@@ -1,4 +1,4 @@
-local localis = require("localisation.localis_manager")
+local localis = require("localisation.localis")
 
 localis.setFallbackLang("en")
 

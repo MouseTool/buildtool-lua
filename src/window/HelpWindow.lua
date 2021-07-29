@@ -12,7 +12,7 @@ local TAB_ID = {
 --- @class HelpWindow:Window
 local HelpWindow = require("Window"):extend("HelpWindow")
 
-local WindowEnum = require("bt-enums").Window
+local WindowEnum = require("btEnums").Window
 HelpWindow.TYPE_ID = WindowEnum.HELP
 
 HelpWindow.doRender = function(self)

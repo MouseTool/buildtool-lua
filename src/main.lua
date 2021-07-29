@@ -1,4 +1,4 @@
-local btRoom = require("entities.bt_room")
+local btRoom = require("entities.btRoom")
 local api = btRoom.api
 
 -- Patch globals with custom vars

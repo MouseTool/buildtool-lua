@@ -4,10 +4,10 @@
 --- of elements coexist. This window manager serves to handle them.
 local window_manager = {}
 
-local btRoom = require("entities.bt_room")
+local btRoom = require("entities.btRoom")
 local api = btRoom.api
 local OrderedTable = require("@mousetool/ordered-table")
-local btEnums = require("bt-enums")
+local btEnums = require("btEnums")
 local WindowEnums = btEnums.Window
 local WindowUnfocus = btEnums.WindowUnfocus
 local WindowOnFocus = btEnums.WindowOnFocus
@@ -100,7 +100,7 @@ window_manager.open = function(window_id, pn)
 
     local window_data = player_windows[window_id]
     if window_data.isOpen then return end
-    
+
     local window = CLASS_MAP[window_id]:new(pn, window_data.state)
     window:once("rendered", function()
         window_data.window = window

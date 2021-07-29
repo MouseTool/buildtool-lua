@@ -1,17 +1,17 @@
 -- Controls the room's basic lifecycle
 
 local WindowManager = require("window.window_manager")
-local WindowEnums = require("bt-enums").Window
+local WindowEnums = require("btEnums").Window
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
-local btRoom = require("entities.bt_room")
-local timedTask = require("util.timed_task")
+local btRoom = require("entities.btRoom")
+local timedTask = require("util.timedTask")
 local mapSched = require("util.mapSched")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
 
-local btPerms = require("permissions.bt_perms")
+local btPerms = require("permissions.btPerms")
 local BT_CAP = btPerms.CAPFLAG
 
 api:onCrucial('ready', function()

@@ -1,15 +1,15 @@
 -- Controls user input events (mouse, keyboard, textarea, etc.)
 
-local btRoom = require("entities.bt_room")
+local btRoom = require("entities.btRoom")
 local WindowManager = require("window.window_manager")
-local BtEnums = require("bt-enums")
-local btPerms = require("permissions.bt_perms")
-local mathGeometry = require("util.math_geometry")
+local btEnums = require("btEnums")
+local btPerms = require("permissions.btPerms")
+local mathGeometry = require("util.mathGeometry")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
-local WindowEnums = BtEnums.Window
-local Keys = BtEnums.Keys
+local WindowEnums = btEnums.Window
+local Keys = btEnums.Keys
 local CAPFLAG = btPerms.CAPFLAG
 
 local os_time = os.time
