@@ -6,12 +6,17 @@ local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
 local btRoom = require("entities.bt_room")
 local timedTask = require("util.timed_task")
+local mapSched = require("util.mapSched")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
 
 local btPerms = require("permissions.bt_perms")
 local BT_CAP = btPerms.CAPFLAG
+
+api:onCrucial('ready', function()
+    mapSched.loadLeisure()
+end)
 
 tfmEvent:onCrucial('PlayerLeft', function(pn)
     local btp = btRoom.players[pn]

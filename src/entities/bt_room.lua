@@ -62,15 +62,6 @@ bt_room.tlbChatMsg = function(builder, group)
     end
 end
 
---- Loads a new map or queues to load it after the cooldown. This will override any existing map being queued.
---- @param mapCode? string The map code or data.
---- @param flipped? boolean Whether the map should be flipped.
---- @param mode? MapModeEnum (default MapModeEnum.NORMAL)
---- @see tfm.exec.newGame
-bt_room.loadMap = function(mapCode, flipped, mode)
-    mapSched.load(mapCode, flipped, mode or btEnums.MapModeEnum.NORMAL)
-end
-
 --- [[Module vars]]
 
 bt_room.api = require("@mousetool/mousebase").MbApi()
