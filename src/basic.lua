@@ -14,7 +14,7 @@ local tfmEvent = api.tfmEvent
 local btPerms = require("permissions.btPerms")
 local BT_CAP = btPerms.CAPFLAG
 
-api:onCrucial('ready', function()
+api:on('ready', function()
     mapSched.loadLeisure()
 end)
 
