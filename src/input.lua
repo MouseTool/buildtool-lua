@@ -24,6 +24,9 @@ local CHECK_LOCK_INTERVAL_MS = 1000
 --- { [playerName] = { [keyId] = expireAfterMs } }
 --- @type table<string, table<number, number>>
 local locked_keys = {}
+--- { [playerName] = { [keyId] = expireAfterMs } }
+--- @type table<string, table<number, number>>
+local keys_next_activate = {}
 --- After when the next loop can run to release keys
 --- @type number|nil
 local next_lock_check
@@ -31,6 +34,7 @@ local next_lock_check
 --- @class mousekey.KeyDesc
 --- @field cb fun(btp: BtPlayer, k: integer, down: boolean, x?: integer, y?: integer)|nil # The callback function triggered when the key is triggered
 --- @field trigger "DOWN_ONLY" | "UP_ONLY" | "DOWN_UP"
+--- @field activateCooldown? integer # The cooldown in milliseconds for activating the key per player (default 200)
 
 --- @type table<number, mousekey.KeyDesc>
 local KEY_EVENTS = {
@@ -90,14 +94,28 @@ end)
 btRoom.events:on('keyboard', function(btp, k, down, x, y)
     local key_ev = KEY_EVENTS[k]
     if not key_ev then return end
+    local pn = btp.name
 
     if key_ev.trigger == DOWN_UP then
-        local pn = btp.name
         if down then
             locked_keys[pn] = locked_keys[pn] or {}
             locked_keys[pn][k] = os_time() + LOCK_TIMEOUT_MS
         elseif locked_keys[pn] then
             locked_keys[pn][k] = nil
+        end
+    end
+
+    if down then
+        if not (keys_next_activate[pn] and keys_next_activate[pn][k])
+        or os_time() > keys_next_activate[pn][k] then
+            -- Timeout for the next allowed activation
+            local timeout_activate = key_ev.activateCooldown or 200
+            keys_next_activate[pn] = keys_next_activate[pn] or {}
+            keys_next_activate[pn][k] = os_time() + timeout_activate
+        else
+            -- Ignore this activation
+            -- print("[DBG] key ignore " .. os_time() - keys_next_activate[pn][k])
+            return
         end
     end
 
@@ -244,6 +262,7 @@ end)
 
 tfmEvent:on('PlayerLeft', function(pn)
     locked_keys[pn] = nil
+    keys_next_activate[pn] = nil
 end)
 
 --- @param mbp MbPlayer
