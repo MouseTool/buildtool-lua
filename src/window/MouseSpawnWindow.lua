@@ -17,13 +17,13 @@ MouseSpawnWindow.doRender = function(self)
     local mouse_spawns = round.mapProp.mouseSpawns
     local shaman_spawns = round.mapProp.shamanSpawns
 
-    for i = 1, #shaman_spawns do
+    for i = 1, math.min(#shaman_spawns, 10) do
         local s = shaman_spawns[i]
         self:addImage(IMG_SHAMAN, "!1", s.x, s.y,
                 .5, .5, 0, 1, 0.62631578947, 0.73461538461)
     end
 
-    for i = 1, #mouse_spawns do
+    for i = 1, math.min(#mouse_spawns, 10) do
         local s = mouse_spawns[i]
         self:addImage(IMG_MOUSE, "!1", s.x, s.y,
                 .5, .5, 0, 1, 0.58641975308, 0.63131313131)
