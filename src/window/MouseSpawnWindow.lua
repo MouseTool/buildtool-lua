@@ -1,7 +1,7 @@
 --- @class MouseSpawnWindow : Window
 local MouseSpawnWindow = require("Window"):extend("MouseSpawnWindow")
 
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 
 -- Sprites are scaled at 2x their actual size
 local IMG_MOUSE = "179bc76e7eb.png"

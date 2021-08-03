@@ -1,7 +1,7 @@
 -- Controls shaman-related gameplay
 
 local linkedlist = require("@mousetool/linkedlist")
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 local ShamObj = require("btEnums").ShamObj
 local tfmEvent = btRoom.api.tfmEvent
 

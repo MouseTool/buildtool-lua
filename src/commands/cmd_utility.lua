@@ -1,7 +1,7 @@
 local tfmcmd = require("commands.tfmcmd")
 local perms = require("commands.perms")
 
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 
 tfmcmd.registerCommand(tfmcmd.Main {
     name = "respawn",

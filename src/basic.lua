@@ -4,9 +4,9 @@ local WindowManager = require("window.window_manager")
 local WindowEnums = require("btEnums").Window
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
-local btRoom = require("entities.btRoom")
-local timedTask = require("util.timedTask")
-local mapSched = require("util.mapSched")
+local btRoom = require("modules.btRoom")
+local timedTask = require("modules.timedTask")
+local mapSched = require("modules.mapSched")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent

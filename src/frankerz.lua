@@ -1,8 +1,8 @@
 -- 100% accurate emotional display in tfm
 
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 local btPerms = require("permissions.btPerms")
-local timedTask = require("util.timedTask")
+local timedTask = require("modules.timedTask")
 
 local emotes = {
     {"172c223b05c.png", -16, -60},        -- kekW

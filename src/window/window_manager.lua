@@ -4,7 +4,7 @@
 --- of elements coexist. This window manager serves to handle them.
 local window_manager = {}
 
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 local api = btRoom.api
 local OrderedTable = require("@mousetool/ordered-table")
 local btEnums = require("btEnums")

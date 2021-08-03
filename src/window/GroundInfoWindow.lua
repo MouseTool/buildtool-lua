@@ -4,7 +4,7 @@
 local GroundInfoWindow = require("Window"):extend("MouseSpawnWindow")
 
 local TfmGround = require("entities.TfmGround")
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 local btEnums = require("btEnums")
 local WindowEnum = btEnums.Window
 local GroundType = TfmGround.GroundType

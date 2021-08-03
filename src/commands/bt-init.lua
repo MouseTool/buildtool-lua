@@ -1,7 +1,7 @@
 local tfmcmd = require("tfmcmd")
 local cmdPerms = require("perms")
 
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
 

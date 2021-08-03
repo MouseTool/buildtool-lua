@@ -1,10 +1,10 @@
 local mousexml = require("@mousetool/mousexml")
 local linkedlist = require("@mousetool/linkedlist")
-local btRoom = require("entities.btRoom")
+local btRoom = require("modules.btRoom")
 local localis = require("localisation.localis")
 local string_split = require("util.stringlib").split
 local TfmGround = require("entities.TfmGround")
-local mapSched = require("util.mapSched")
+local mapSched = require("modules.mapSched")
 
 local roomGet = tfm.get.room
 

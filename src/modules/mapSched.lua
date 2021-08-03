@@ -1,6 +1,6 @@
-local timedTask = require("timedTask")
+local timedTask = require("modules.timedTask")
 local btEnums = require("btEnums")
-local btUtil = require("util.btUtil")
+local btUtil = require("modules.btUtil")
 
 --- This module controls the rotation of BT.
 local mapSched = {}

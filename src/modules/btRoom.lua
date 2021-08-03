@@ -3,8 +3,8 @@
 --- @field currentRound BtRound|nil
 local btRoom = {}
 
-local BtRoomEvents = require("BtRoomEvents")
-local BtTaEvents = require("BtTaEvents")
+local BtRoomEvents = require("entities.BtRoomEvents")
+local BtTaEvents = require("entities.BtTaEvents")
 local localis = require("localisation.localis")
 
 --- Chat prefix
