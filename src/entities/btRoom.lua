@@ -1,7 +1,6 @@
 --- BuildTool Room single instance module
 --- @class BtRoom
 --- @field currentRound BtRound|nil
---- @field queuedMode MapModeEnum|nil
 local btRoom = {}
 
 local BtRoomEvents = require("BtRoomEvents")
