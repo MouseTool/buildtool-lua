@@ -96,15 +96,6 @@ btRoom.events:on('keyboard', function(btp, k, down, x, y)
     if not key_ev then return end
     local pn = btp.name
 
-    if key_ev.trigger == DOWN_UP then
-        if down then
-            locked_keys[pn] = locked_keys[pn] or {}
-            locked_keys[pn][k] = os_time() + LOCK_TIMEOUT_MS
-        elseif locked_keys[pn] then
-            locked_keys[pn][k] = nil
-        end
-    end
-
     if down then
         if not (keys_next_activate[pn] and keys_next_activate[pn][k])
         or os_time() > keys_next_activate[pn][k] then
@@ -116,6 +107,15 @@ btRoom.events:on('keyboard', function(btp, k, down, x, y)
             -- Ignore this activation
             -- print("[DBG] key ignore " .. os_time() - keys_next_activate[pn][k])
             return
+        end
+    end
+
+    if key_ev.trigger == DOWN_UP then
+        if down then
+            locked_keys[pn] = locked_keys[pn] or {}
+            locked_keys[pn][k] = os_time() + LOCK_TIMEOUT_MS
+        elseif locked_keys[pn] then
+            locked_keys[pn][k] = nil
         end
     end
 
