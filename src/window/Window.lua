@@ -140,13 +140,6 @@ Window.removeTextArea = function(self, textAreaId)
     self.textAreas[textAreaId] = nil
 end
 
---- Returns a hyperlinked string that triggers a closing event for the window.
---- @param content string # the content of the link
---- @return string
-Window.closifyContent = function(self, content)
-    return ("<a href='event:closeWin!%s'>%s</a>"):format(self.TYPE_ID, content)
-end
-
 --- Removes all text areas and images bound to the window.
 Window.removeAllElements = function(self)
     -- Remove all images
@@ -322,4 +315,16 @@ Window.refocus = function(self)
     self:emit("focused")
     self:emit("refocused")
 end
+
+--- Returns a hyperlinked string that triggers a closing event for the window.
+--- @param content string # the content of the link
+--- @return string
+Window.closifyContent = function(self, content)
+    return ("<a href='event:closeWin!%s'>%s</a>"):format(self.TYPE_ID, content)
+end
+
+Window.linkifyContent = function(self, content)
+
+end
+
 return Window
