@@ -1,5 +1,5 @@
 --- Component for managing clickables with self-managed events.
---- @class Linkify : EventEmitter
+--- @class Linkify : mousebase.EventEmitter
 --- @field id integer
 --- @field callbackLink string
 --- @field cachedApiCb function[]

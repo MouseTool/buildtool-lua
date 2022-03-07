@@ -1,10 +1,10 @@
 --- BuildTool specific player
---- @class BtPlayer:EventEmitter
---- @field new fun(mbPlayer:MbPlayer, inRoom:boolean|nil):BtPlayer
+--- @class BtPlayer:mousebase.EventEmitter
+--- @field new fun(mbPlayer:mousebase.MbPlayer, inRoom:boolean|nil):BtPlayer
 --- @field on fun(eventName:'"languageChanged"', listener:fun()) # Fired when the player's language changes
 ---
 --- @field name string # The player's A801 name
---- @field mbp MbPlayer # The MouseBase player object tied to the player
+--- @field mbp mousebase.MbPlayer # The MouseBase player object tied to the player
 --- @field inRoom boolean # Whether the player is currently in the room
 --- @field capabilities Capabilities # The player's capabiltiies
 --- @field language string # The player's language
@@ -27,7 +27,7 @@ local DEFAULT_LANGUAGE = "en"
 
 local DEV = {["Cass11337#8417"] = true, ["Casserole#1798"] = true, ["Emeryaurora#0000"] = true}  -- TODO: tmp
 
---- @param mbPlayer MbPlayer # The MouseBase player object tied to the player
+--- @param mbPlayer mousebase.MbPlayer # The MouseBase player object tied to the player
 --- @param inRoom boolean|nil # Whether the player is in the room (default true)
 BtPlayer._init = function(self, mbPlayer, inRoom)
     BtPlayer._parent._init(self)

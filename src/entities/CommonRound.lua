@@ -1,5 +1,5 @@
 --- Represents a generic game round
---- @class CommonRound:EventEmitter
+--- @class CommonRound:mousebase.EventEmitter
 --- @field new fun(mapCode:number, isMirrored?:boolean, author?:string, permCode?:string, xml?:string):CommonRound
 --- @field mapCode number Map
 --- @field isMirrored boolean

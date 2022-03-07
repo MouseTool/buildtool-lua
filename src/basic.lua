@@ -27,7 +27,7 @@ tfmEvent:onCrucial('PlayerLeft', function(pn)
     btRoom.players[pn] = nil
 end)
 
---- @param mbp MbPlayer
+--- @param mbp mousebase.MbPlayer
 api:onCrucial('newPlayer', function(mbp)
     local btp = BtPlayer:new(mbp)
     btRoom.players[mbp.name] = btp

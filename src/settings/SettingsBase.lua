@@ -1,5 +1,5 @@
 --- Securely store settings fields, and emits events when a field gets changed.
---- @class SettingsBase:EventEmitter
+--- @class SettingsBase:mousebase.EventEmitter
 --- @field private currentFieldValues table<string, any> @Field name, Field value
 --- @field private fieldOpts table<string, SettingsBase.FieldOpts>
 local SettingsBase = require("@mousetool/mousebase").EventEmitter:extend("SettingsBase")

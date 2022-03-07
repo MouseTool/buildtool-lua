@@ -12,7 +12,7 @@ local WindowOnFocus = btEnums.WindowOnFocus
 --- @field fakeId integer
 
 --- A basic window.
---- @class Window:EventEmitter
+--- @class Window:mousebase.EventEmitter
 --- @field new fun(self:Window, pn:string, state:table):Window
 --- @field public running boolean @Whether or not the window is running (false if not yet rendered/destroyed)
 --- @field public focused boolean @Whether or not the window is focused

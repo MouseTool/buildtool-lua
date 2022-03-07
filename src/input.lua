@@ -265,7 +265,7 @@ tfmEvent:on('PlayerLeft', function(pn)
     keys_next_activate[pn] = nil
 end)
 
---- @param mbp MbPlayer
+--- @param mbp mousebase.MbPlayer
 api:onCrucial('newPlayer', function(mbp)
     -- Bind keys
     for id, key in pairs(KEY_EVENTS) do

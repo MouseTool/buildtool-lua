@@ -3,83 +3,82 @@
 
 
 "@mousetool/class@^1.0.0", "@mousetool/class@^1.0.1":
-  "integrity" "sha512-xySgNeqefYryp3EPmnQXOCpaY1ptomGWzYJjcAV0ztYZNlV2ry8XRyeZ5fU0LvGy0dnoZs3awzwnOApO1PgQ9A=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/class/1.0.1/6c327ef42b10d4d3ae5d4dbfa781926d165ca664154c2c7a231cee3e88631559"
-  "version" "1.0.1"
+  version "1.0.1"
+  resolved "https://npm.pkg.github.com/download/@mousetool/class/1.0.1/6c327ef42b10d4d3ae5d4dbfa781926d165ca664154c2c7a231cee3e88631559"
+  integrity sha512-xySgNeqefYryp3EPmnQXOCpaY1ptomGWzYJjcAV0ztYZNlV2ry8XRyeZ5fU0LvGy0dnoZs3awzwnOApO1PgQ9A==
 
 "@mousetool/linkedlist@^1.0.1", "@mousetool/linkedlist@^1.0.5":
-  "integrity" "sha512-vkU9SUupGrvZ8Kek5+HpdMN8KWdlXw8BA09p9f1Tn7ZdHjrArFKqjye5GOc5KvmOa76Wt8gEQBhr7HrH99yevw=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.5/f1d66e7d69ff233fc1ff4b7c20c82268445d5f29bc1aeaa8af25002b89cc6d85"
-  "version" "1.0.5"
+  version "1.0.5"
+  resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.5/f1d66e7d69ff233fc1ff4b7c20c82268445d5f29bc1aeaa8af25002b89cc6d85"
+  integrity sha512-vkU9SUupGrvZ8Kek5+HpdMN8KWdlXw8BA09p9f1Tn7ZdHjrArFKqjye5GOc5KvmOa76Wt8gEQBhr7HrH99yevw==
 
-"@mousetool/mousebase@^1.0.2", "@mousetool/mousebase@1.0.5":
-  "integrity" "sha512-nbIcTUZ3oqhzBy97/B94FP60MIIuwvqBvZ5z3U5nkFVgiZszBN684/1tHZ2b15sZvODPUCGvb1hUwXny2VHALw=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/mousebase/1.0.5/877a59ae0627aa73d58a6c9b6dd76a79c59a03e3a5d58e4d8d31f1423ab037c5"
-  "version" "1.0.5"
+"@mousetool/mousebase@1.1.0":
+  version "1.1.0"
+  resolved "https://npm.pkg.github.com/download/@mousetool/mousebase/1.1.0/f4c676fbd5d900541c3ee68fe9123464f847fd49e2e21f26648057d7ae3651d7#0d36399367fdb3ddf3a167f780a965ab8bb2a973"
+  integrity sha512-6WpQs02PxUDGkoqxmdmsAX9BmKoXXYG5+AL41BRg3eZGjBUxdf2K3WjgimYc9s0i8YGiSA3RM4hfBMT/P01bEw==
   dependencies:
     "@mousetool/class" "^1.0.1"
     "@mousetool/nickname801" "^1.0.0"
 
-"@mousetool/mousexml@^1.0.2":
-  "integrity" "sha512-M7wBlIlmQaG2Q3IVtqbRGDobZI3w+pry9bdaqjykXwLAh2/br0PFKfvrPafkeBIsXgjw/BxTNCqDxyMWH7YmMA=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/mousexml/1.0.2/0f8b92a856b9af41bfc5eaa498ab8d0c836a78edfd6f64cfd7a082fc88c66c17"
-  "version" "1.0.2"
+"@mousetool/mousexml@^1.0.3":
+  version "1.0.3"
+  resolved "https://npm.pkg.github.com/download/@mousetool/mousexml/1.0.3/fcb9b673ef7e5a345da5163ccd8fdc87b6c0a4ccf9bd7e6959341f086c5fdeb2#207df7d97913725ae6791daaa48f117756be2089"
+  integrity sha512-HM9zh4G1aFPx4Vb+dxYJTM1fw3plE9GFD99L4PolXRvgQxrutHpIWsEihFNRLOfAxPugGgbyy1deUCN9sVyQnw==
   dependencies:
     "@mousetool/class" "^1.0.0"
     "@mousetool/linkedlist" "^1.0.1"
-    "@mousetool/mousebase" "^1.0.2"
     "@mousetool/ordered-table" "^1.0.1"
 
 "@mousetool/nickname801@^1.0.0":
-  "integrity" "sha512-wwdXGm7s0SwR+vq3OHLaWtAIXJasJfFImlqQTpNYW7ZJTjWNN8ePCqIEEqYDzIJX2v41EdLyWOtkefSs57/FTw=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/nickname801/1.0.0/a06105faaee6534248bfd796ad06c22e16429c6a5d71467438ecebc202664520"
-  "version" "1.0.0"
+  version "1.0.0"
+  resolved "https://npm.pkg.github.com/download/@mousetool/nickname801/1.0.0/a06105faaee6534248bfd796ad06c22e16429c6a5d71467438ecebc202664520"
+  integrity sha512-wwdXGm7s0SwR+vq3OHLaWtAIXJasJfFImlqQTpNYW7ZJTjWNN8ePCqIEEqYDzIJX2v41EdLyWOtkefSs57/FTw==
 
 "@mousetool/onelua@^1.1.1":
-  "integrity" "sha512-QwHCPXHMAO1IB5YcFGMfDfzxVPG4s7Dcjo7/dygVD0PEr58FjyAqbpW7UG4uiXg2fVXYPF45FYdOBd6ilJR5UQ=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/onelua/1.1.1/652dee726888ffb0f5fbffe9c85a991c9bfd25df554954a3b20ceb964694729c"
-  "version" "1.1.1"
+  version "1.1.1"
+  resolved "https://npm.pkg.github.com/download/@mousetool/onelua/1.1.1/652dee726888ffb0f5fbffe9c85a991c9bfd25df554954a3b20ceb964694729c"
+  integrity sha512-QwHCPXHMAO1IB5YcFGMfDfzxVPG4s7Dcjo7/dygVD0PEr58FjyAqbpW7UG4uiXg2fVXYPF45FYdOBd6ilJR5UQ==
   dependencies:
-    "argparse" "^2.0.1"
-    "decache" "^4.6.0"
-    "luamin" "^1.0.4"
-    "luaparse" "^0.2.1"
+    argparse "^2.0.1"
+    decache "^4.6.0"
+    luamin "^1.0.4"
+    luaparse "^0.2.1"
 
 "@mousetool/ordered-table@^1.0.1":
-  "integrity" "sha512-BzLon8OMx2Q30OGeEBF0Mo114cAFLwd6sZ1bZUU+U8WXKF993T/dNsvy3xFL0UUKWl+myR0gFbmTiUoLVYQ1FA=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/ordered-table/1.0.1/873196ef5b31d53bfb4b9f8d3f30ad7b85f0784852e12ac25cb052d6782e385c"
-  "version" "1.0.1"
+  version "1.0.1"
+  resolved "https://npm.pkg.github.com/download/@mousetool/ordered-table/1.0.1/873196ef5b31d53bfb4b9f8d3f30ad7b85f0784852e12ac25cb052d6782e385c"
+  integrity sha512-BzLon8OMx2Q30OGeEBF0Mo114cAFLwd6sZ1bZUU+U8WXKF993T/dNsvy3xFL0UUKWl+myR0gFbmTiUoLVYQ1FA==
 
 "@mousetool/tfm-vscode@^2.0.0":
-  "integrity" "sha512-O+cgsBPqbaDhwlY3pWkiIdT6MJBVwjkCKqfc/Lu25habxGlDVHXEH8vH3pAXK7bhjdl0jsbnS81ohjg+7Q8OSw=="
-  "resolved" "https://npm.pkg.github.com/download/@mousetool/tfm-vscode/2.0.0/25a9c9bf8f57ac950bc236fe5b4c9054630e41a84900057c4f3893e3627225d5"
-  "version" "2.0.0"
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@mousetool/tfm-vscode/2.0.0/25a9c9bf8f57ac950bc236fe5b4c9054630e41a84900057c4f3893e3627225d5"
+  integrity sha512-O+cgsBPqbaDhwlY3pWkiIdT6MJBVwjkCKqfc/Lu25habxGlDVHXEH8vH3pAXK7bhjdl0jsbnS81ohjg+7Q8OSw==
 
-"argparse@^2.0.1":
-  "integrity" "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
-  "resolved" "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz"
-  "version" "2.0.1"
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
-"callsite@^1.0.0":
-  "integrity" "sha1-KAOY5dZkvXQDi28JBRU+borxvCA="
-  "resolved" "https://registry.npmjs.org/callsite/-/callsite-1.0.0.tgz"
-  "version" "1.0.0"
+callsite@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/callsite/-/callsite-1.0.0.tgz"
+  integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
 
-"decache@^4.6.0":
-  "integrity" "sha512-PppOuLiz+DFeaUvFXEYZjLxAkKiMYH/do/b/MxpDe/8AgKBi5GhZxridoVIbBq72GDbL36e4p0Ce2jTGUwwU+w=="
-  "resolved" "https://registry.npmjs.org/decache/-/decache-4.6.0.tgz"
-  "version" "4.6.0"
+decache@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/decache/-/decache-4.6.0.tgz"
+  integrity sha512-PppOuLiz+DFeaUvFXEYZjLxAkKiMYH/do/b/MxpDe/8AgKBi5GhZxridoVIbBq72GDbL36e4p0Ce2jTGUwwU+w==
   dependencies:
-    "callsite" "^1.0.0"
+    callsite "^1.0.0"
 
-"luamin@^1.0.4":
-  "integrity" "sha1-lEUptY/G+k0x6s4uA1PUEhDw49M="
-  "resolved" "https://registry.npmjs.org/luamin/-/luamin-1.0.4.tgz"
-  "version" "1.0.4"
+luamin@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/luamin/-/luamin-1.0.4.tgz"
+  integrity sha1-lEUptY/G+k0x6s4uA1PUEhDw49M=
   dependencies:
-    "luaparse" "^0.2.1"
+    luaparse "^0.2.1"
 
-"luaparse@^0.2.1":
-  "integrity" "sha1-qo9WEysN6X0388mRqd9C4OF/ZWw="
-  "resolved" "https://registry.npmjs.org/luaparse/-/luaparse-0.2.1.tgz"
-  "version" "0.2.1"
+luaparse@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npmjs.org/luaparse/-/luaparse-0.2.1.tgz"
+  integrity sha1-qo9WEysN6X0388mRqd9C4OF/ZWw=
