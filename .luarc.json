@@ -1,0 +1,7 @@
+{
+    "workspace": {
+        "userThirdParty": [
+            "./node_modules/@mousetool/tfm-vscode"
+        ]
+    }
+}

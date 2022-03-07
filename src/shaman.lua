@@ -10,7 +10,7 @@ local tfmEvent = btRoom.api.tfmEvent
 --- @param xPos integer
 --- @param yPos integer
 --- @param angle integer
---- @param objDesc TfmShamanObject
+--- @param objDesc tfm.ShamanObject
 tfmEvent:onCrucial('SummoningEnd', function(pn, objType, xPos, yPos, angle, objDesc)
     -- Add on to the list of spawns
     local round = btRoom.currentRound

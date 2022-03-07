@@ -83,12 +83,12 @@ end
 ---     - :fixedLayerDepthBehindLuaInterfaces
 --- @param xPosition integer # the horizontal offset of the anchor of the image, relative to the game element (0 being the middle of the game element) (default 0)
 --- @param yPosition integer # the vertical offset of the anchor of the image, relative to the game element (0 being the middle of the game element) (default 0)
---- @param xScale float # the horizontal (width) scale of the image (default 1)
---- @param yScale float # the vertical (height) scale of the image (default 1)
---- @param angle float # the rotation angle about anchor of the image, in radians (default 0)
---- @param alpha float # the opacity of the image, from 0 (transparent) to 1 (opaque) (default 1)
---- @param xAnchor float # the horizontal offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the left of the image) (default 0)
---- @param yAnchor float # the vertical offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the top of the image) (default 0)
+--- @param xScale number # the horizontal (width) scale of the image (default 1)
+--- @param yScale number # the vertical (height) scale of the image (default 1)
+--- @param angle number # the rotation angle about anchor of the image, in radians (default 0)
+--- @param alpha number # the opacity of the image, from 0 (transparent) to 1 (opaque) (default 1)
+--- @param xAnchor number # the horizontal offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the left of the image) (default 0)
+--- @param yAnchor number # the vertical offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the top of the image) (default 0)
 --- @return integer # The image ID created. This is different from the ID used by `tfm.exec.addImage` and will persist through refocusings.
 Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor)
     local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha, xAnchor, yAnchor)
@@ -112,7 +112,7 @@ end
 --- @param height integer # the height in pixels of the text area (if 0, it will be ajusted to the text height) (default 0)
 --- @param backgroundColor integer # the background color of the text area (default 0x324650)
 --- @param borderColor integer # the border color of the text area (default 0)
---- @param backgroundAlpha float # the background's opacity, from 0 (transparent) to 1 (opaque) (default 1)
+--- @param backgroundAlpha number # the background's opacity, from 0 (transparent) to 1 (opaque) (default 1)
 --- @param fixedPos boolean # whether the position is fixed or if it should follow the player's camera on long maps (default false)
 --- @return integer # The ID of the text area created
 Window.addTextArea = function(self, textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)

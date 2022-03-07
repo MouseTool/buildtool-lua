@@ -6,16 +6,16 @@
 --- @field width integer # Ground width. When a circle, this refers to the radius.
 --- @field height integer # Ground height.
 --- @field foreground boolean
---- @field friction float
---- @field restitution float
+--- @field friction number
+--- @field restitution number
 --- @field angle integer
 --- @field miceCollision boolean
 --- @field objectCollision boolean
 --- @field dynamic boolean
 --- @field fixedRotation boolean
 --- @field mass integer
---- @field linearDamping float
---- @field angularDamping float
+--- @field linearDamping number
+--- @field angularDamping number
 --- @field color integer|nil # The color of the ground. When `nil` and a colored ground, it by convention means invisible.
 --- @field vanish integer|nil # The time in milliseconds after which the ground will disappear
 --- @field zIndex integer|nil # The Z-Index of the ground in the map

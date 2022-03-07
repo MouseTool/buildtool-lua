@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "@mousetool/onelua": "^1.1.1",
-    "@mousetool/tfm-vscode": "^1.0.5"
+    "@mousetool/tfm-vscode": "^2.0.0"
   }
 }
