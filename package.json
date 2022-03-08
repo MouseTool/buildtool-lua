@@ -5,6 +5,7 @@
   "main": "dummy.js",
   "scripts": {
     "build": "node build-translations.js && onelua . --no-minify --prepend-meta",
+    "build:watch": "onchange \"src/**/*.lua\" -i -- onelua . --no-minify --prepend-meta",
     "minify": "node build-translations.js && onelua . -o buildtool-minified.lua",
     "regentl": "py regen-translations.py",
     "buildtl": "node build-translations.js"
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@mousetool/onelua": "^1.1.1",
-    "@mousetool/tfm-vscode": "^2.0.0"
+    "@mousetool/tfm-vscode": "^2.0.0",
+    "onchange": "^7.1.0"
   }
 }

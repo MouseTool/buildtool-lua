@@ -19,8 +19,6 @@ local NORMAL_OFFSET = 8  -- left, right, bottom
 local TOP_OFFSET = 28    -- accounts for map title bar interface
 
 GroundInfoWindow.TYPE_ID = WindowEnum.GROUND_INFO
-GroundInfoWindow.UNFOCUS_BEHAVIOR = btEnums.WindowUnfocus.NONE
-GroundInfoWindow.ON_FOCUS_BEHAVIOR = btEnums.WindowOnFocus.NONE
 
 --- Displays a ground info.
 --- @param ground TfmGround

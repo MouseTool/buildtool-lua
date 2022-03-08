@@ -16,8 +16,8 @@ local WindowEnum = require("btEnums").Window
 HelpWindow.TYPE_ID = WindowEnum.HELP
 
 HelpWindow.doRender = function(self)
-    self:addImage(IMG_BG, ":1", 90, 49)
-    self:addImage(IMG_TAB_NORMAL, ":1", 120, 78)
+    self:addImage(IMG_BG, nil, 90, 49)
+    self:addImage(IMG_TAB_NORMAL, nil, 120, 78)
     self:addTextArea(nil, "<font size='2'><a href='event:'>\n<font size='12'><p align='center'>Welcome\n</a>", 120, 84, 100, 24, 0x222222, 0x000000, .1, true)
 end
 

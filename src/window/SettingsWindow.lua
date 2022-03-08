@@ -12,7 +12,7 @@ local WindowEnum = require("btEnums").Window
 SettingsWindow.TYPE_ID = WindowEnum.SETTINGS
 
 SettingsWindow.doRender = function(self)
-    self:addImage(IMG_BG, ":1", 233, 45)
+    self:addImage(IMG_BG, nil, 233, 45)
     self:addTextArea(nil, "<font size='2'><a href='event:'>\n<font size='12'><p align='center'>eee\n</a>", 300, 84, 100, 24, 0x222222, 0x000000, .1, true)
 end
 

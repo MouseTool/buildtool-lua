@@ -25,11 +25,11 @@ local WindowOnFocus = btEnums.WindowOnFocus
 --- @field private _cached_images Window.LenTable<integer, Window.CachedImgs>
 local Window = require("@mousetool/mousebase").EventEmitter:extend("Window")
 
---- Specifies the behavior of the window when a new window is layered over it.
+--- Specifies the behavior of the window when a new `UNFOCUS_TOP` window is layered over it.
 Window.UNFOCUS_BEHAVIOR = WindowUnfocus.UNFOCUS
 
 --- Defines the behavior of other windows when the window is going to be in ultimate focus.
-Window.ON_FOCUS_BEHAVIOR = WindowOnFocus.UNFOCUS_TOP
+Window.ON_FOCUS_BEHAVIOR = WindowOnFocus.NONE
 
 --- Whether the window should be closed when the Esc key is pressed, when it is the top window.
 Window.DESTROY_ON_ESC = true
@@ -71,9 +71,10 @@ local function _addImageFakeId(self, fakeId, imageUid, target, xPosition, yPosit
 end
 
 --- Adds an image bound to the window.
---- @param imageUid string # the image identifier
---- @param target string # the game element to attach the image to
+--- @param imageUid string the image identifier
+--- @param target? string the game element to attach the image to (default `~0`)
 ---     - #mobileId
+---     - =mobileId (keep current sprite)
 ---     - $playerName (on the mouse sprite)
 ---     - %playerName (with the mouse sprite removed)
 ---     - ?backgroundLayerDepth
@@ -81,6 +82,8 @@ end
 ---     - !foregroundLayerDepth
 ---     - &fixedLayerDepthBeforeLuaInterfaces
 ---     - :fixedLayerDepthBehindLuaInterfaces
+---     - ~fixedLayerDepthWithLuaInterfaces
+---     - +physicObjectId
 --- @param xPosition integer # the horizontal offset of the anchor of the image, relative to the game element (0 being the middle of the game element) (default 0)
 --- @param yPosition integer # the vertical offset of the anchor of the image, relative to the game element (0 being the middle of the game element) (default 0)
 --- @param xScale number # the horizontal (width) scale of the image (default 1)
@@ -91,6 +94,7 @@ end
 --- @param yAnchor number # the vertical offset (in 0 to 1 scale) of the image's anchor, relative to the image (0 being the top of the image) (default 0)
 --- @return integer # The image ID created. This is different from the ID used by `tfm.exec.addImage` and will persist through refocusings.
 Window.addImage = function(self, imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor)
+    target = target or "~0"
     local imageId = tfm.exec.addImage(imageUid, target, xPosition, yPosition, self.pn, xScale, yScale, angle, alpha, xAnchor, yAnchor)
     self.images[imageId] = {imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor}
     return imageId
