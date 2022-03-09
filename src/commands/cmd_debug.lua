@@ -11,7 +11,7 @@ local LOCBUILDER_CHANGED_LANG
 do
     local _joins = {
         "<BL>Language set:",
-        localis.evaluator:new("language_native")
+        localis.evaluator:new("general.language_native")
     }
     LOCBUILDER_CHANGED_LANG = localis.joiner:new(_joins, " ")
 end

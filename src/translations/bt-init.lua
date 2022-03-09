@@ -8,5 +8,6 @@ for lang, data in next, translations_tbl do
 end
 
 localis.mapLangs({
-    {"zh", "cn"},
+    {"cn", "zh-Hant"},
+    {"zh", "zh-Hant"}
 })

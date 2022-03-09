@@ -191,20 +191,20 @@ BtRound.sendMapInfo = function(self, playerName)
     if not builder then
         --- @type table<number, string|LocalisBuilder>
         local mapinfo_joins = {
-            localis.evaluator:new("mapinfo_summary",
+            localis.evaluator:new("chat.mapinfo_summary",
                 -- @map, author
                 "@" .. self.mapCode, self.author)
         }
 
         if self.isMirrored then
             mapinfo_joins[#mapinfo_joins + 1] = " "
-            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_mirrored")
+            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("chat.mapinfo_mirrored")
         end
 
         local _props = self.mapProp
         if _props then
             mapinfo_joins[#mapinfo_joins + 1] = "\n"
-            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("mapinfo_summary_properties",
+            mapinfo_joins[#mapinfo_joins + 1] = localis.evaluator:new("chat.mapinfo_summary_properties",
                 -- wind, gravity
                 _props.wind, _props.gravity,
                 -- mgoc

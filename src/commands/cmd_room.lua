@@ -15,6 +15,6 @@ tfmcmd.registerCommand(tfmcmd.Main {
     --- @param password? string
     func = function(ctx, password)
         tfm.exec.setRoomPassword(password or "")
-        btRoom.tlChatMsg(nil, password and "set_room_password" or "unset_room_password", ctx.playerName)
+        btRoom.tlChatMsg(nil, password and "chat.set_room_password" or "chat.unset_room_password", ctx.playerName)
     end
 })

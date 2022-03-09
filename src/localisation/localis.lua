@@ -62,9 +62,9 @@ localis.mapLangs = function(langMap)
 end
 
 --- Gets the translated string from the key. The fallback condition is as follows:
---- language -> fallback_lang -> locKey
+--- language -> fallback_lang -> nil
 --- @param language string|nil # The language. If `nil` will use the fallback language.
---- @return string # The translated string
+--- @return string|nil # The translated string
 localis.get = function(language, locKey)
     local langData = translations[language]
 
@@ -76,7 +76,7 @@ localis.get = function(language, locKey)
         end
     end
 
-    return langData[locKey] or locKey
+    return langData[locKey] or nil
 end
 
 -- [[Localis Builder]]
@@ -112,7 +112,7 @@ end
 
 --- A localisations string evaluator
 --- @class LocalisEvaluator:LocalisBuilder
---- @field new fun(keyName:string, ...):LocalisBuilder
+--- @field new fun(self:LocalisEvaluator, keyName:BtTranslationKeys, ...):LocalisBuilder
 --- @field keyName string
 --- @field localisArgs table<number, string|LocalisBuilder>
 --- @field localisArgsCount number
@@ -122,7 +122,7 @@ local LocalisEvaluator = LocalisBuilder:extend("LocalisEvaluator")
 --- @param keyName string
 LocalisEvaluator._init = function(self, keyName, ...)
     self.keyName = keyName
-    self.localisArgs = {...}
+    self.localisArgs = { ... }
     self.localisArgsCount = select('#', ...)
     self.cache = {}
 end
@@ -139,17 +139,31 @@ LocalisEvaluator.exec = function(self, language, shouldCache)
     end
 
     local args = _processArgs(self.localisArgs, self.localisArgsCount, language)
+    local tlTemplate = localis.get(language, self.keyName)
 
-    cache = localis.get(language, self.keyName):format(table.unpack(args, 1, self.localisArgsCount))
-    if shouldCache ~= false then
-        self.cache[language] = cache
+    if not tlTemplate then
+        -- Malformed args and formatters, fallback without actual cache
+        return self.keyName .. " " .. table.concat(args, " ", 1, self.localisArgsCount)
     end
+
+    local status = pcall(function()
+        cache = tlTemplate:format(table.unpack(args, 1, self.localisArgsCount))
+        if shouldCache ~= false then
+            self.cache[language] = cache
+        end
+    end)
+
+    if not status then
+        -- Malformed args and formatters, fallback without actual cache
+        return self.keyName .. " " .. table.concat(args, " ", 1, self.localisArgsCount)
+    end
+
     return cache
 end
 
 --- A localisations string joiner
 --- @class LocalisJoiner:LocalisBuilder
---- @field new fun(joins:table<number, string|LocalisBuilder>, delimiter?:string):LocalisJoiner
+--- @field new fun(self:LocalisJoiner, joins:table<number, string|LocalisBuilder>, delimiter?:string):LocalisJoiner
 --- @field localisJoins table<number, string|LocalisBuilder>
 --- @field localisJoinsCount number
 --- @field delimiter string

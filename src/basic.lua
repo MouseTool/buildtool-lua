@@ -22,7 +22,7 @@ tfmEvent:onCrucial('PlayerLeft', function(pn)
     local btp = btRoom.players[pn]
     if not btp then return end
 
-    btRoom.tlChatMsg(nil, "player_left", btp.name)
+    btRoom.tlChatMsg(nil, "chat.player_left", btp.name)
 
     btRoom.players[pn] = nil
 end)
@@ -33,8 +33,8 @@ api:onCrucial('newPlayer', function(mbp)
     btRoom.players[mbp.name] = btp
     print("player ".. btp.name .. ";isAdmin:" .. tostring(btp.capabilities:hasFlag(BT_CAP.ADMIN)) )
 
-    btRoom.tlChatMsg(nil, "player_entered", btp.name)
-    btp:tlChatMsg("player_welcome")
+    btRoom.tlChatMsg(nil, "chat.player_entered", btp.name)
+    btp:tlChatMsg("chat.player_welcome")
 
     btp:normalRespawn()
 end)

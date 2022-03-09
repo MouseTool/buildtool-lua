@@ -33,12 +33,12 @@ GroundInfoWindow.displayGInfo = function(self, ground, x, y)
     local btp = btRoom.players[self.pn]
     if not btp then return end
 
-    local T_TRUE = btp:tlGet("ui_ginfo_true")
-    local T_FALSE = btp:tlGet("ui_ginfo_false")
-    local T_INVISIBLE = btp:tlGet("ui_ginfo_invisible")
-    local T_MOUSE = btp:tlGet("ui_ginfo_mouse")
-    local T_OBJECT = btp:tlGet("ui_ginfo_object")
-    local T_ALL = btp:tlGet("ui_ginfo_all")
+    local T_TRUE = btp:tlGet("groundinfo.true")
+    local T_FALSE = btp:tlGet("groundinfo.false")
+    local T_INVISIBLE = btp:tlGet("groundinfo.invisible")
+    local T_MOUSE = btp:tlGet("groundinfo.mouse")
+    local T_OBJECT = btp:tlGet("groundinfo.object")
+    local T_ALL = btp:tlGet("groundinfo.all")
 
     local color = "-"
     if ground:isColoredGround() then
@@ -58,7 +58,7 @@ GroundInfoWindow.displayGInfo = function(self, ground, x, y)
 
     local text = "<p><textformat tabstops='[4,145]'>" .. self:closifyContent(
         ("\t<b>%s (ID: %s)</b> \t %s"):format(
-            btp:tlGet("ground_" .. groundTypeNames[ground.type] or groundTypeNames[GroundType.Wood]),
+            btp:tlGet("ground." .. groundTypeNames[ground.type] or groundTypeNames[GroundType.Wood]),
             ground.type,
             "×\n"
         )

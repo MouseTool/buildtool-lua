@@ -36,7 +36,7 @@ end
 
 --- Sends a translated module message to a capabilities group. If the `keyName` supplied is not found in the translations, the `keyName` will be displayed instead.
 --- @param group? Capabilities # The players whom have the set group will get the message (if nil applies to all players)
---- @param keyName string # The key name of the translation string
+--- @param keyName BtTranslationKeys # The key name of the translation string
 --- @vararg string # Translation string parameters
 btRoom.tlChatMsg = function(group, keyName, ...)
     local evaluator = localis.evaluator:new(keyName, ...)

@@ -1,0 +1,370 @@
+[
+  {
+    "term": "general.language_english",
+    "definition": "Korean",
+    "context": "The name of the language in English",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "general.language_native",
+    "definition": "hangul",
+    "context": "The name of the language in the language itself",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.player_welcome",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.player_entered",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.player_left",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.set_room_password",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.unset_room_password",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.enabled_arrow_mode",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.disabled_arrow_mode",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_summary",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_summary_properties",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_mirrored",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tags",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_portals",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_opportunist",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_noballoon",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_no_b",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_no_motor",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.err_score_not_ranged",
+    "definition": null,
+    "context": "I may change the error message, no need to translate this yet",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "chat.err_round_not_loaded",
+    "definition": null,
+    "context": "I may change the error message, no need to translate this yet",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.wood",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.ice",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.trampoline",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.lava",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.chocolate",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.earth",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.grass",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.sand",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.cloud",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.water",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.stone",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.snow",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.rectangle",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.circle",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.invisible",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.cobweb",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.grass2",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.grass3",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "ground.acid",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.true",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.false",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.invisible",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.mouse",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.object",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.all",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.properties",
+    "definition": null,
+    "context": "",
+    "term_plural": "",
+    "reference": "",
+    "comment": ""
+  }
+]

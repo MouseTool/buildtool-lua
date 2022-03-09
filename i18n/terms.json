@@ -1,0 +1,562 @@
+[
+  {
+    "term": "general.language_english",
+    "context": "The name of the language in English",
+    "plural": "",
+    "created": "2022-03-09T16:35:00+0000",
+    "updated": "2022-03-09T20:23:08+0000",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "general.language_native",
+    "context": "The name of the language in the language itself",
+    "plural": "",
+    "created": "2022-03-09T16:35:00+0000",
+    "updated": "2022-03-09T20:23:45+0000",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.player_welcome",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:46:43+0000",
+    "updated": "2022-03-09T16:49:04+0000",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.player_entered",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:54:19+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.player_left",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:55:12+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.set_room_password",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:56:41+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.unset_room_password",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:56:53+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.enabled_arrow_mode",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:57:00+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.disabled_arrow_mode",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:57:17+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_summary",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:57:32+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_summary_properties",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:57:45+0000",
+    "updated": "2022-03-09T16:57:54+0000",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_mirrored",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:58:45+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tags",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:59:01+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_portals",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:59:12+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_opportunist",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T16:59:59+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_noballoon",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:00:10+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_no_b",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:00:20+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.mapinfo_tag_no_motor",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:00:50+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "mapinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.err_score_not_ranged",
+    "context": "I may change the error message, no need to translate this yet",
+    "plural": "",
+    "created": "2022-03-09T17:01:41+0000",
+    "updated": "2022-03-10T03:41:42+0000",
+    "reference": "",
+    "tags": [
+      "error"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "chat.err_round_not_loaded",
+    "context": "I may change the error message, no need to translate this yet",
+    "plural": "",
+    "created": "2022-03-09T17:01:50+0000",
+    "updated": "2022-03-10T03:41:44+0000",
+    "reference": "",
+    "tags": [
+      "error"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.wood",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:04:34+0000",
+    "updated": "2022-03-09T17:06:34+0000",
+    "reference": "",
+    "tags": [
+      "mapeditor",
+      "ui"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.ice",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:04:53+0000",
+    "updated": "2022-03-09T17:06:03+0000",
+    "reference": "",
+    "tags": [
+      "mapeditor",
+      "ui"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.trampoline",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:05:08+0000",
+    "updated": "2022-03-09T17:06:10+0000",
+    "reference": "",
+    "tags": [
+      "mapeditor",
+      "ui"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.lava",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:05:19+0000",
+    "updated": "2022-03-09T17:06:15+0000",
+    "reference": "",
+    "tags": [
+      "mapeditor",
+      "ui"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.chocolate",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:05:31+0000",
+    "updated": "2022-03-09T17:06:20+0000",
+    "reference": "",
+    "tags": [
+      "mapeditor",
+      "ui"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.earth",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:05:42+0000",
+    "updated": "2022-03-09T17:06:26+0000",
+    "reference": "",
+    "tags": [
+      "mapeditor",
+      "ui"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.grass",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:07:15+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.sand",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:07:29+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.cloud",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:10:24+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.water",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:10:35+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.stone",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:10:59+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.snow",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:11:20+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.rectangle",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:14:52+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.circle",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:15:15+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.invisible",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:15:27+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.cobweb",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:15:35+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.grass2",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:15:46+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.grass3",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:15:56+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "ground.acid",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:16:02+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "mapeditor"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.true",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:18:21+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.false",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:19:00+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.invisible",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:19:16+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.mouse",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:19:39+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.object",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:19:53+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.all",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:20:07+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  },
+  {
+    "term": "groundinfo.properties",
+    "context": "",
+    "plural": "",
+    "created": "2022-03-09T17:20:17+0000",
+    "updated": "",
+    "reference": "",
+    "tags": [
+      "ui",
+      "groundinfo"
+    ],
+    "comment": ""
+  }
+]

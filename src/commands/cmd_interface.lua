@@ -26,7 +26,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
         if not currentRound then
             local btp = btRoom.players[ctx.playerName]
             if btp then
-                btp:tlChatMsg("err_round_not_loaded")
+                btp:tlChatMsg("chat.err_round_not_loaded")
             end
             return
         end

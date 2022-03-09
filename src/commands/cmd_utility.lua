@@ -136,10 +136,10 @@ tfmcmd.registerCommand(tfmcmd.Main {
         if not btp then return end
         if mode == "on" then
             btp.arrowMode = "on"
-            btp:tlChatMsg("enabled_arrow_mode")
+            btp:tlChatMsg("chat.enabled_arrow_mode")
         elseif mode == "off" then
             btp.arrowMode = nil
-            btp:tlChatMsg("disabled_arrow_mode")
+            btp:tlChatMsg("chat.disabled_arrow_mode")
         else
             btp.arrowMode = "single"
         end

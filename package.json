@@ -4,11 +4,11 @@
   "description": "Buildtowol",
   "main": "dummy.js",
   "scripts": {
-    "build": "node build-translations.js && onelua . --no-minify --prepend-meta",
+    "build": "onelua . --no-minify --prepend-meta",
     "build:watch": "onchange \"src/**/*.lua\" -i -- onelua . --no-minify --prepend-meta",
-    "minify": "node build-translations.js && onelua . -o buildtool-minified.lua",
-    "regentl": "py regen-translations.py",
-    "buildtl": "node build-translations.js"
+    "minify": "onelua . -o buildtool-minified.lua",
+    "poeditor:build": "ts-node tools/build-translations.ts",
+    "poeditor:fetch": "ts-node -r dotenv/config tools/poeditor-fetch.ts"
   },
   "onelua": {
     "main": "src/main.lua",
@@ -25,6 +25,11 @@
   "devDependencies": {
     "@mousetool/onelua": "^1.1.1",
     "@mousetool/tfm-vscode": "^2.0.0",
-    "onchange": "^7.1.0"
+    "@types/node": "^17.0.21",
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
+    "onchange": "^7.1.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
   }
 }

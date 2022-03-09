@@ -25,6 +25,11 @@ Thumbs.db
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Secrets
+.env
+!.env.sample
+!.env.example
+
 # Buildtool build output
 buildtool.lua
 buildtool-minified.lua

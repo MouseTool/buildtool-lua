@@ -37,7 +37,7 @@ tfmcmd.registerCommand(
             if not currentRound then
                 local btp = btRoom.players[ctx.playerName]
                 if btp then
-                    btp:tlChatMsg("err_round_not_loaded")
+                    btp:tlChatMsg("chat.err_round_not_loaded")
                 end
                 return
             end
@@ -62,7 +62,7 @@ tfmcmd.registerCommand(tfmcmd.Main {
         local score = tonumber(w2) or tonumber(w3) or 0
         local target = not tonumber(w2) and w2 or ctx.playerName
         if score < 0 or score > 999 then
-            invoker:tlChatMsg("err_score_not_ranged", 0, 999)
+            invoker:tlChatMsg("chat.err_score_not_ranged", 0, 999)
         elseif w2 == "all" or w3 == "all" then
             for name, btp in pairs(btRoom.players) do
                 tfm.exec.setPlayerScore(name, score)
