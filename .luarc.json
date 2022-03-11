@@ -3,5 +3,5 @@
         "userThirdParty": [
             "./node_modules/@mousetool/tfm-vscode"
         ]
-    },"hint.enable": true
+    }
 }
