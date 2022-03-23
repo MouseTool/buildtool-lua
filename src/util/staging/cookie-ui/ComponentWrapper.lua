@@ -33,16 +33,18 @@ function ComponentWrapper:addComponent(component)
 
     if component.prerender then
         component:prerender()
-        component.state = "prerendered"
-        component:emit("prerendered")
     end
+    component.state = "prerendered"
+    component:emit("prerendered")
 end
 
 --- Renders the component group.
 ComponentWrapper.render = function(self)
     for i = 1, #self.components do
         local c = self.components[i]
-        c:render()
+        if c.render then
+            c:render()
+        end
         c.state = "rendered"
         c:emit("rendered")
     end
@@ -54,7 +56,9 @@ end
 ComponentWrapper.destroy = function(self)
     for i = 1, #self.components do
         local c = self.components[i]
-        c:destroy()
+        if c.destroy then
+            c:destroy()
+        end
         c.state = "destroyed"
         c:emit("destroyed")
     end
@@ -66,7 +70,9 @@ end
 ComponentWrapper.unfocus = function(self)
     for i = 1, #self.components do
         local c = self.components[i]
-        c:unfocus()
+        if c.unfocus then
+            c:unfocus()
+        end
         c.state = "unfocused"
         c:emit("unfocused")
     end
@@ -79,7 +85,9 @@ ComponentWrapper.restore = function(self)
     if self.state == "rendered" then return end -- already focused
     for i = 1, #self.components do
         local c = self.components[i]
-        c:restore()
+        if c.restore then
+            c:restore()
+        end
         c.state = "rendered"
         c:emit("restored")
     end

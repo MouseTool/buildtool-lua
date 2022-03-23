@@ -95,7 +95,7 @@ local _reverseNextKey = function(tbl, index)
     return prev_key
 end
 
-function Map:__init()
+function Map:_init()
     self._items = {}
     self._keys = { _front = nil, _back = nil, length = 0 }
     self._keyNodes = {}

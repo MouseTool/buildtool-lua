@@ -14,6 +14,8 @@ local ImageComponent = DefaultComponent:extend("ImageComponent")
 exports.ImageComponent = ImageComponent
 
 function ImageComponent:_init(imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor)
+    ImageComponent._parent._init(self)
+
     target = target or "~0"
     self.args = { imageUid, target, xPosition, yPosition, xScale, yScale, angle, alpha, xAnchor, yAnchor }
 end
@@ -44,6 +46,8 @@ local TextAreaComponent = DefaultComponent:extend("TextAreaComponent")
 exports.TextAreaComponent = TextAreaComponent
 
 function TextAreaComponent:_init(textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
+    ImageComponent._parent._init(self)
+
     self.args = { textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos }
     self.textAreaId = textAreaId
 end

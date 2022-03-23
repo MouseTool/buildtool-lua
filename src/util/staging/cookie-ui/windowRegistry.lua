@@ -29,7 +29,7 @@ end
 --- @param componentWrapper cookie-ui.ComponentWrapper
 function WindowRegistry:open(windowId, componentWrapper)
     if self.opened:has(windowId) then
-        print(("opening opened %s %s"):format(windowId, componentWrapper)) -- TODO: dbg
+        print(("opening opened %s %s"):format(windowId, componentWrapper.playerName)) -- TODO: dbg
         return
     end
 
@@ -40,7 +40,7 @@ function WindowRegistry:open(windowId, componentWrapper)
 
         -- Restore the top if it isn't already focused.
 
-        --- @type cookie-ui.ComponentWrapper
+        --- @type cookie-ui.ComponentWrapper|nil
         local top
         do
             for _, w in self.opened:reversePairs() do
@@ -49,7 +49,9 @@ function WindowRegistry:open(windowId, componentWrapper)
             end
         end
 
-        top:restore()
+        if top then
+            top:restore()
+        end
     end)
 
     componentWrapper:on("restored", function()
@@ -60,7 +62,7 @@ function WindowRegistry:open(windowId, componentWrapper)
 
     -- Unfocus old top
 
-    --- @type cookie-ui.ComponentWrapper
+    --- @type cookie-ui.ComponentWrapper|nil
     local top
     do
         for _, w in self.opened:reversePairs() do
@@ -69,7 +71,9 @@ function WindowRegistry:open(windowId, componentWrapper)
         end
     end
 
-    top:unfocus()
+    if top then
+        top:unfocus()
+    end
 
     componentWrapper:render()
     self.opened:set(windowId, componentWrapper)

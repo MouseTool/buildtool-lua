@@ -1,6 +1,6 @@
 -- Controls the room's basic lifecycle
 
-local WindowManager = require("window.window_manager")
+--local WindowManager = require("window.window_manager")
 local WindowEnums = require("btEnums").Window
 local BtPlayer = require("entities.BtPlayer")
 local BtRound = require("entities.BtRound")
@@ -56,7 +56,7 @@ tfmEvent:onCrucial('NewGame', function()
     round:activate()
 
     for name, _ in pairs(btRoom.players) do
-        WindowManager.close(WindowEnums.GROUND_INFO, name)
+        --WindowManager.close(WindowEnums.GROUND_INFO, name)
     end
 end)
 

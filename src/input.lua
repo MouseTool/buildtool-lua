@@ -1,7 +1,6 @@
 -- Controls user input events (mouse, keyboard, textarea, etc.)
 
 local btRoom        = require("modules.btRoom")
-local WindowManager = require("window.window_manager")
 local btEnums       = require("btEnums")
 local btPerms       = require("permissions.btPerms")
 local mathGeometry  = require("util.mathGeometry")
