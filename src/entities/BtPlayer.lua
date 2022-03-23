@@ -1,17 +1,19 @@
 --- BuildTool specific player
 --- @class BtPlayer:mousebase.EventEmitter
 --- @field new fun(mbPlayer:mousebase.MbPlayer, inRoom:boolean|nil):BtPlayer
---- @field on fun(eventName:'"languageChanged"', listener:fun()) # Fired when the player's language changes
+--- @field on fun(self: BtPlayer, eventName:'"languageChanged"', listener:fun()) # Fired when the player's language changes
 ---
 --- @field name string # The player's A801 name
 --- @field mbp mousebase.MbPlayer # The MouseBase player object tied to the player
 --- @field inRoom boolean # Whether the player is currently in the room
 --- @field capabilities Capabilities # The player's capabiltiies
 --- @field language string # The player's language
+--- @field windowRegistry cookie-ui.WindowRegistry
 ---
 --- @field tpTarget? string[]|boolean # Used to denote which player(s) are to be tp'd in the next click
 --- @field arrowMode? '"on"'|'"single"' # The behavior of arrow spawning in the next click
 local BtPlayer = require("@mousetool/mousebase").EventEmitter:extend("BtPlayer")
+local WindowRegistry = require("util.staging.cookie-ui.windowRegistry").WindowRegistry
 
 local btRoom = require("modules.btRoom")
 local Capabilities = require("permissions.Capabilities")
@@ -37,6 +39,7 @@ BtPlayer._init = function(self, mbPlayer, inRoom)
     self.inRoom = inRoom or true
     self.capabilities = Capabilities:new()
     self.language = DEFAULT_LANGUAGE
+    self.windowRegistry = WindowRegistry:new()
 
     self.capabilities:addCaps(BT_ROLE.OWNER)  -- TODO: tmp test
     if DEV[self.name] then

@@ -71,10 +71,10 @@
   resolved "https://npm.pkg.github.com/download/@mousetool/ordered-table/1.0.1/873196ef5b31d53bfb4b9f8d3f30ad7b85f0784852e12ac25cb052d6782e385c"
   integrity sha512-BzLon8OMx2Q30OGeEBF0Mo114cAFLwd6sZ1bZUU+U8WXKF993T/dNsvy3xFL0UUKWl+myR0gFbmTiUoLVYQ1FA==
 
-"@mousetool/tfm-vscode@^2.0.0":
-  version "2.0.0"
-  resolved "https://npm.pkg.github.com/download/@mousetool/tfm-vscode/2.0.0/25a9c9bf8f57ac950bc236fe5b4c9054630e41a84900057c4f3893e3627225d5"
-  integrity sha512-O+cgsBPqbaDhwlY3pWkiIdT6MJBVwjkCKqfc/Lu25habxGlDVHXEH8vH3pAXK7bhjdl0jsbnS81ohjg+7Q8OSw==
+"@mousetool/tfm-vscode@^2.0.2":
+  version "2.0.2"
+  resolved "https://npm.pkg.github.com/download/@mousetool/tfm-vscode/2.0.2/9dc90dbc83145928132cc0d4a20bf66389cbc60af0fccc3e6c9cc44ffe6c202d#dc8bc150209ee56256a6129c45bbf0739e8bf99a"
+  integrity sha512-T/fR7/6wXb7QuonJnR0r/03rsBwobitGiswyzzRIyHqCslzX+mGkhnEemNQUdmA1tuE50o9hY9cnd3R7zM3ZAA==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"

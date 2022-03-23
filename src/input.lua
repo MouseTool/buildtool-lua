@@ -1,10 +1,11 @@
 -- Controls user input events (mouse, keyboard, textarea, etc.)
 
-local btRoom = require("modules.btRoom")
+local btRoom        = require("modules.btRoom")
 local WindowManager = require("window.window_manager")
-local btEnums = require("btEnums")
-local btPerms = require("permissions.btPerms")
-local mathGeometry = require("util.mathGeometry")
+local btEnums       = require("btEnums")
+local btPerms       = require("permissions.btPerms")
+local mathGeometry  = require("util.mathGeometry")
+local HelpWindow    = require("window.HelpWindow")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
@@ -40,8 +41,13 @@ local next_lock_check
 local KEY_EVENTS = {
     -- Opens help menu
     [Keys.H] = {
+        -- TODO: Watch LLS [#917](https://github.com/sumneko/lua-language-server/issues/917)
+        ---@param btp BtPlayer
         cb = function(btp, k)
-            WindowManager.toggle(WindowEnums.HELP, btp.name)
+            --WindowManager.toggle(WindowEnums.HELP, btp.name)
+            btp.windowRegistry:open(WindowEnums.HELP,
+                HelpWindow:new():wrapFor(btp.name)
+            )
         end,
         trigger = DOWN_ONLY
     },
@@ -98,7 +104,7 @@ btRoom.events:on('keyboard', function(btp, k, down, x, y)
 
     if down then
         if not (keys_next_activate[pn] and keys_next_activate[pn][k])
-        or os_time() > keys_next_activate[pn][k] then
+            or os_time() > keys_next_activate[pn][k] then
             -- Timeout for the next allowed activation
             local timeout_activate = key_ev.activateCooldown or 200
             keys_next_activate[pn] = keys_next_activate[pn] or {}
@@ -182,7 +188,7 @@ tfmEvent:on('Mouse', function(pn, x, y)
     local is_shaman = btp.mbp:getTfmPlayer().isShaman
     if player_locked then
         if player_locked[Keys.CTRL]
-        and player_locked[Keys.SHIFT] then
+            and player_locked[Keys.SHIFT] then
             if is_shaman or is_admin then
                 deleteObject(x, y)
             end

@@ -9,29 +9,6 @@ enums.Window = {
     GROUND_INFO = 4,
 }
 
---- Window unfocus behavior - describes what the window should do when a
---- new window is layered over
---- @class WindowUnfocusEnum
-enums.WindowUnfocus = {
-    --- Nothing.
-    NONE = 0,
-    --- Simple partial unfocus.
-    UNFOCUS = 1,
-    --- Full unfocus.
-    MINIMIZE = 2,
-}
-
---- Window on-focus behavior - describes the behavior when a window is in focus
---- @class WindowOnFocusEnum
-enums.WindowOnFocus = {
-    --- Nothing.
-    NONE = 0,
-    --- Partially unfocus the top window.
-    UNFOCUS_TOP = 1,
-    --- Fullly unfocus all the other windows.
-    --MINIMIZE_ALL = 2,
-}
-
 --- AS3 key codes
 --- @class KeyEnum
 enums.Keys = {
