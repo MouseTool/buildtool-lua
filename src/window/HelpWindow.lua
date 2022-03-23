@@ -17,7 +17,7 @@ local TAB_ID = {
 --- @class HelpWindow : cookie-ui.DefaultComponent
 local HelpWindow = cookieUi.DefaultComponent:extend("HelpWindow")
 
-function HelpWindow:prerender()
+function HelpWindow:render()
     self.wrapper:addComponent(
         ImageComponent:new(IMG_BG, nil, 90, 49)
     )

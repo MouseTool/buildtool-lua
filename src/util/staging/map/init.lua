@@ -168,6 +168,7 @@ end
 --- @generic T : Map, K, V
 --- @param self T<K, V>
 --- @param key K
+--- @return boolean
 function Map:has(key)
     return self._items[key] ~= nil
 end

@@ -44,6 +44,10 @@ local KEY_EVENTS = {
         ---@param btp BtPlayer
         cb = function(btp, k)
             --WindowManager.toggle(WindowEnums.HELP, btp.name)
+            if btp.windowRegistry:isOpen(WindowEnums.HELP) then
+                btp.windowRegistry:close(WindowEnums.HELP)
+                return
+            end
             btp.windowRegistry:open(WindowEnums.HELP,
                 HelpWindow:new():wrapFor(btp.name)
             )

@@ -34,7 +34,7 @@ function WindowRegistry:open(windowId, componentWrapper)
     end
 
     componentWrapper:on("destroyed", function()
-        print(("destroy id: %s, player %s"):format(windowId, componentWrapper.playerName))
+        print(("destroy id: %s, player %s"):format(windowId, componentWrapper.playerName)) -- TODO: dbg
         -- Remove ref to the wrapper unconditionally
         self.opened:delete(windowId)
 
@@ -83,7 +83,7 @@ end
 --- @param windowId cookie-ui.WindowRegistry.windowIdType
 function WindowRegistry:close(windowId)
     if not self.opened:has(windowId) then
-        print(("closing closed %s %s"):format(windowId)) -- TODO: dbg
+        print(("closing closed %s"):format(windowId)) -- TODO: dbg
         return
     end
 
@@ -93,7 +93,7 @@ end
 
 --- @param windowId cookie-ui.WindowRegistry.windowIdType
 function WindowRegistry:isOpen(windowId)
-    return self.opened:has(windowId) ~= nil
+    return self.opened:has(windowId)
 end
 
 return exports

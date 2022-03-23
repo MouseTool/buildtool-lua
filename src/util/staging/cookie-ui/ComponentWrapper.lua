@@ -9,7 +9,7 @@
 --- All components in the wrapper end with the same state.
 --- @class cookie-ui.ComponentWrapper : mousebase.EventEmitter
 --- @field new fun(self:cookie-ui.ComponentWrapper, playerName:string):cookie-ui.ComponentWrapper
---- @field state '"inactive"' | '"rendered"' | '"unfocused"' | '"destroyed"'
+--- @field state '"inactive"' | '"rendering"' | "rendered"' | '"unfocused"' | '"destroyed"'
 --- @field components cookie-ui.IComponent[]
 --- @field playerName string
 --- @field on fun(self: cookie-ui.ComponentWrapper, eventName: cookie-ui.ComponentWrapper.Events, listener:fun())
@@ -36,10 +36,20 @@ function ComponentWrapper:addComponent(component)
     end
     component.state = "prerendered"
     component:emit("prerendered")
+
+    -- Late rendering
+    if self.state == "rendering" then
+        if component.render then
+            component:render()
+        end
+        component.state = "rendered"
+        component:emit("rendered")
+    end
 end
 
 --- Renders the component group.
 ComponentWrapper.render = function(self)
+    self.state = "rendering"
     for i = 1, #self.components do
         local c = self.components[i]
         if c.render then
