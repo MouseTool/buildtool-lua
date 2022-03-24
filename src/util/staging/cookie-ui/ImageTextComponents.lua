@@ -57,9 +57,8 @@ local function _addTextArea(playerName, textAreaId, text, x, y, width, height, b
 end
 
 --- @param self cookie-ui.TextAreaComponent
---- @param text string # the new text to display
----@diagnostic disable-next-line: unused-function
-local function _updateTextArea(self, textAreaId, text)
+
+local function _updateTextArea(self, text)
     ui.updateTextArea(self.textAreaId, text, self.wrapper.playerName)
     self.args[2] = text -- Update text
 end
@@ -80,6 +79,14 @@ end
 function TextAreaComponent:restore()
     self:destroy()
     self:render()
+end
+
+--- Updates the text content of the text area.
+--- However, it is recommended to use reactive strings with update hooks rather than having to
+--- manually call this function.
+--- @param text string
+function TextAreaComponent:updateText(text)
+    _updateTextArea(self,text)
 end
 
 return exports

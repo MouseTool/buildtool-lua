@@ -13,6 +13,19 @@ exports.WindowOnFocus = {
     --MINIMIZE_ALL = 2,
 }
 
+--- @param opened Map
+--- @return cookie-ui.ComponentWrapper|nil
+local function _getTopWrapper(opened)
+    local top
+    do
+        for _, w in opened:reversePairs() do
+            top = w
+            break
+        end
+    end
+    return top
+end
+
 --- @alias cookie-ui.WindowRegistry.windowIdType integer | string
 
 --- @class cookie-ui.WindowRegistry : Class
@@ -41,13 +54,7 @@ function WindowRegistry:open(windowId, componentWrapper)
         -- Restore the top if it isn't already focused.
 
         --- @type cookie-ui.ComponentWrapper|nil
-        local top
-        do
-            for _, w in self.opened:reversePairs() do
-                top = w
-                break
-            end
-        end
+        local top = _getTopWrapper(self.opened)
 
         if top then
             top:restore()
@@ -61,15 +68,7 @@ function WindowRegistry:open(windowId, componentWrapper)
     end)
 
     -- Unfocus old top
-
-    --- @type cookie-ui.ComponentWrapper|nil
-    local top
-    do
-        for _, w in self.opened:reversePairs() do
-            top = w
-            break
-        end
-    end
+    local top = _getTopWrapper(self.opened)
 
     if top then
         top:unfocus()

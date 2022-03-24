@@ -1,26 +1,23 @@
-local OrderedTable = require("@mousetool/ordered-table")
 local ComponentWrapper = require("ComponentWrapper")
---local ComponentWrapper = require("ComponentWrapper")
---- @module "ComponentWrapper"
 
 local exports = {}
 
 -- ! Start component interface !
 
 --- @alias cookie-ui.IComponent.Events
----| '"prerendered"'
+---| '"drawn"'
 ---| '"rendered"'
 ---| '"destroyed"'
 ---| '"unfocused"'
 ---| '"restored"'
 
 --- @class cookie-ui.IComponent : mousebase.EventEmitter
---- Wrapper used to attach text areas and images. \
+--- Wrapper used to group multiple components. \
 --- Available in all ops methods except in the constructor.
 --- @field wrapper? cookie-ui.ComponentWrapper
---- @field state? '"prerendered"' | '"rendered"' | '"unfocused"' | '"destroyed"'
---- @field prerender? fun()
---- @field render? fun()
+--- @field state? '"drawn"' | '"rendered"' | '"unfocused"' | '"destroyed"'
+--- @field draw? fun() # Defines the layout and positioning of UI elements
+--- @field render? fun() # Displays the actual UI artifact based on the drawn elements
 --- @field destroy? fun()
 --- @field unfocus? fun()
 --- @field restore? fun()
