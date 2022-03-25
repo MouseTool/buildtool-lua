@@ -1,6 +1,6 @@
 -- Controls shaman-related gameplay
 
-local linkedlist = require("@mousetool/linkedlist")
+local DoublyLinkedList = require("util.staging.linkedlist.init").DoublyLinkedList
 local btRoom = require("modules.btRoom")
 local ShamObj = require("btEnums").ShamObj
 local tfmEvent = btRoom.api.tfmEvent
@@ -20,9 +20,9 @@ tfmEvent:onCrucial('SummoningEnd', function(pn, objType, xPos, yPos, angle, objD
     and baseType ~= ShamObj.Portal then
         local pspawn = round.spawnedObjects[pn]
         if not pspawn then
-            pspawn = linkedlist:new()
+            pspawn = DoublyLinkedList:new()
             round.spawnedObjects[pn] = pspawn
         end
-        pspawn:push_back(objDesc.id)
+        pspawn:pushBack(objDesc.id)
     end
 end)

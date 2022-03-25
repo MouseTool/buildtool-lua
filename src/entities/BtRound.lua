@@ -1,5 +1,5 @@
 local mousexml = require("@mousetool/mousexml")
-local linkedlist = require("@mousetool/linkedlist")
+local DoublyLinkedList = require("util.staging.linkedlist.init").DoublyLinkedList
 local btRoom = require("modules.btRoom")
 local localis = require("localisation.localis")
 local string_split = require("util.stringlib").split
@@ -35,7 +35,7 @@ local roomGet = tfm.get.room
 --- @field xmlDoc XmlDoc|nil # The map's XML document object
 --- @field mapProp BtXmlMapProp|nil # Map properties from the XML
 --- @field grounds TfmGround[]|nil # The map's XML grounds
---- @field spawnedObjects table<string, LinkedList<number, number>> # Keeps track of all objects IDs spawned in the round per player
+--- @field spawnedObjects table<string, linkedlist.DoublyLinkedList<number, nil>> # Keeps track of all objects IDs spawned in the round per player
 --- @field _cacheMapInfoBuilder LocalisBuilder|nil # Caches the mapinfo localization builder
 --- @field mode MapModeEnum # The mode of the map
 local BtRound = require("entities.CommonRound"):extend("BtRound")
@@ -230,7 +230,7 @@ BtRound.undoObject = function(self, playerName)
     if not pspawned or pspawned.size <= 0 then return end
 
     --- @type number
-    local id = pspawned:pop_back()
+    local id = pspawned:popBack()
     tfm.exec.removeObject(id)
 end
 
@@ -252,7 +252,7 @@ BtRound.clearAllObjects = function(self, playerName)
         for _, obj_id in pspawned:ipairs() do
             tfm.exec.removeObject(obj_id)
         end
-        self.spawnedObjects[playerName] = linkedlist:new()
+        self.spawnedObjects[playerName] = DoublyLinkedList:new()
     end
 end
 

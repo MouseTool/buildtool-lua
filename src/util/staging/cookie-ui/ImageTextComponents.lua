@@ -57,7 +57,6 @@ local function _addTextArea(playerName, textAreaId, text, x, y, width, height, b
 end
 
 --- @param self cookie-ui.TextAreaComponent
-
 local function _updateTextArea(self, text)
     ui.updateTextArea(self.textAreaId, text, self.wrapper.playerName)
     self.args[2] = text -- Update text
@@ -86,7 +85,7 @@ end
 --- manually call this function.
 --- @param text string
 function TextAreaComponent:updateText(text)
-    _updateTextArea(self,text)
+    _updateTextArea(self, text)
 end
 
 return exports
