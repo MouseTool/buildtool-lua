@@ -1,85 +1,73 @@
 local Map = require("util.staging.map.init")
 
-local exports = {}
+--- @alias cookie-ui.WindowRegistry.WindowIdType integer | string
 
---- Window on-focus behavior - describes the behavior when a window is in focus
---- @class cookie-ui.WindowOnFocusEnum
-exports.WindowOnFocus = {
-    --- Nothing.
-    NONE = 0,
-    --- Partially unfocus the top window.
-    UNFOCUS_TOP = 1,
-    --- Fullly unfocus all the other windows.
-    --MINIMIZE_ALL = 2,
-}
-
---- @param opened Map
---- @return cookie-ui.ComponentWrapper|nil
-local function _getTopWrapper(opened)
-    local top
+--- @param opened Map<cookie-ui.WindowRegistry.WindowIdType, cookie-ui.ComponentController>
+--- @return cookie-ui.WindowRegistry.WindowIdType?
+--- @return cookie-ui.ComponentController?
+local function _getTopLayer(opened)
+    local type
+    local component
     do
-        for _, w in opened:reversePairs() do
-            top = w
+        for id, w in opened:reversePairs() do
+            type = id
+            component = w
             break
         end
     end
-    return top
+    return type, component
 end
 
---- @alias cookie-ui.WindowRegistry.windowIdType integer | string
 
 --- @class cookie-ui.WindowRegistry : Class
---- @field opened Map<cookie-ui.WindowRegistry.windowIdType, cookie-ui.ComponentWrapper>
+--- @field opened Map<cookie-ui.WindowRegistry.WindowIdType, cookie-ui.ComponentController>
 local WindowRegistry = require("@mousetool/mousebase").Class:extend("WindowRegistry")
-exports.WindowRegistry = WindowRegistry
 
 function WindowRegistry:_init()
     self.opened = Map:new()
 end
 
 --- Opens a component wrapper as a window.
---- @param windowId cookie-ui.WindowRegistry.windowIdType
---- @param componentWrapper cookie-ui.ComponentWrapper
-function WindowRegistry:open(windowId, componentWrapper)
+--- @param windowId cookie-ui.WindowRegistry.WindowIdType
+--- @param controller cookie-ui.ComponentController
+function WindowRegistry:open(windowId, controller)
     if self.opened:has(windowId) then
-        print(("opening opened %s %s"):format(windowId, componentWrapper.playerName)) -- TODO: dbg
+        print(("opening opened %s %s"):format(windowId, controller.playerName)) -- TODO: dbg
         return
     end
 
-    componentWrapper:on("destroyed", function()
-        print(("destroy id: %s, player %s"):format(windowId, componentWrapper.playerName)) -- TODO: dbg
+    controller:on("destroyed", function()
+        print(("destroy id: %s, player %s"):format(windowId, controller.playerName)) -- TODO: dbg
         -- Remove ref to the wrapper unconditionally
         self.opened:delete(windowId)
 
         -- Restore the top if it isn't already focused.
-
-        --- @type cookie-ui.ComponentWrapper|nil
-        local top = _getTopWrapper(self.opened)
+        local _, top = _getTopLayer(self.opened)
 
         if top then
             top:restore()
         end
     end)
 
-    componentWrapper:on("restored", function()
+    controller:on("restored", function()
         -- Bring to front
         self.opened:delete(windowId)
-        self.opened:set(windowId, componentWrapper)
+        self.opened:set(windowId, controller)
     end)
 
     -- Unfocus old top
-    local top = _getTopWrapper(self.opened)
+    local _, top = _getTopLayer(self.opened)
 
     if top then
         top:unfocus()
     end
 
-    componentWrapper:render()
-    self.opened:set(windowId, componentWrapper)
+    controller:render()
+    self.opened:set(windowId, controller)
 end
 
 --- Closes a window.
---- @param windowId cookie-ui.WindowRegistry.windowIdType
+--- @param windowId cookie-ui.WindowRegistry.WindowIdType
 function WindowRegistry:close(windowId)
     if not self.opened:has(windowId) then
         print(("closing closed %s"):format(windowId)) -- TODO: dbg
@@ -90,9 +78,17 @@ function WindowRegistry:close(windowId)
     componentWrapper:destroy()
 end
 
---- @param windowId cookie-ui.WindowRegistry.windowIdType
+--- @param windowId cookie-ui.WindowRegistry.WindowIdType
 function WindowRegistry:isOpen(windowId)
     return self.opened:has(windowId)
 end
 
-return exports
+--- Gets the focused window type on the highest layer, if any. \
+--- Useful for cases like implementing an escape key shortcut to close a window.
+--- @return cookie-ui.WindowRegistry.WindowIdType?
+function WindowRegistry:focusedWindow()
+    local type = _getTopLayer(self.opened)
+    return type
+end
+
+return WindowRegistry

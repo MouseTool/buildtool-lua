@@ -5,6 +5,6 @@ return {
     DefaultComponent = componentOps.DefaultComponent,
     ImageComponent = ImageTextComponents.ImageComponent,
     TextAreaComponent = ImageTextComponents.TextAreaComponent,
-    IComponentOps = componentOps.IComponentOps,
-    WindowRegistry = require("windowRegistry").WindowRegistry
+    IComponentOps = componentOps.IComponent,
+    WindowRegistry = require("windowRegistry")
 }

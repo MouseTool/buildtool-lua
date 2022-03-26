@@ -18,13 +18,13 @@ local TAB_ID = {
 local HelpWindow = cookieUi.DefaultComponent:extend("HelpWindow")
 
 function HelpWindow:draw()
-    self.wrapper:addComponent(
+    self.controller:addComponent(
         ImageComponent:new(IMG_BG, nil, 90, 49)
     )
-    self.wrapper:addComponent(
+    self.controller:addComponent(
         ImageComponent:new(IMG_TAB_NORMAL, nil, 120, 78)
     )
-    self.wrapper:addComponent(
+    self.controller:addComponent(
         TextAreaComponent:new(
             btIds.getNewTextAreaId(),
             "<font size='2'><a href='event:'>\n<font size='12'><p align='center'>Welcome\n</a>",

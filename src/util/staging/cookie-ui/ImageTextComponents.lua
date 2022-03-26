@@ -25,7 +25,7 @@ local function _addImage(playerName, imageUid, target, xPosition, yPosition, xSc
 end
 
 function ImageComponent:render()
-    self.imageId = _addImage(self.wrapper.playerName, table.unpack(self.args, 1, 10))
+    self.imageId = _addImage(self.controller.playerName, table.unpack(self.args, 1, 10))
 end
 
 function ImageComponent:destroy()
@@ -58,16 +58,16 @@ end
 
 --- @param self cookie-ui.TextAreaComponent
 local function _updateTextArea(self, text)
-    ui.updateTextArea(self.textAreaId, text, self.wrapper.playerName)
+    ui.updateTextArea(self.textAreaId, text, self.controller.playerName)
     self.args[2] = text -- Update text
 end
 
 function TextAreaComponent:render()
-    _addTextArea(self.wrapper.playerName, table.unpack(self.args, 1, 10))
+    _addTextArea(self.controller.playerName, table.unpack(self.args, 1, 10))
 end
 
 function TextAreaComponent:destroy()
-    ui.removeTextArea(self.textAreaId, self.wrapper.playerName)
+    ui.removeTextArea(self.textAreaId, self.controller.playerName)
 end
 
 function TextAreaComponent:unfocus()

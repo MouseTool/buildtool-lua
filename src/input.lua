@@ -49,7 +49,7 @@ local KEY_EVENTS = {
                 return
             end
             btp.windowRegistry:open(WindowEnums.HELP,
-                HelpWindow:new():wrapFor(btp.name)
+                HelpWindow:new():controlFor(btp.name)
             )
         end,
         trigger = DOWN_ONLY
@@ -89,6 +89,10 @@ local KEY_EVENTS = {
         trigger = DOWN_UP
     },
     [Keys.ESC] = {
+        ---@param btp BtPlayer
+        cb = function(btp)
+            btp.windowRegistry:close(btp.windowRegistry:focusedWindow())
+        end,
         trigger = DOWN_ONLY
     }
 }
@@ -167,10 +171,10 @@ local function deleteObject(x, y)
     if round then
         local obj_list = tfm.get.room.objectList
         for _, pspawned in pairs(round.spawnedObjects) do
-            for i, obj_id in pspawned:revipairs() do
+            for i, obj_id in pspawned:reversePairs() do
                 local object = obj_list[obj_id]
                 if mathGeometry.isPointInCircle(object.x, object.y, 16, x, y) then
-                    pspawned:remove(i)
+                    pspawned:popAt(i)
                     tfm.exec.removeObject(obj_id)
                     return
                 end

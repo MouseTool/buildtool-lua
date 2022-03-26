@@ -13,7 +13,7 @@
 --- @field tpTarget? string[]|boolean # Used to denote which player(s) are to be tp'd in the next click
 --- @field arrowMode? '"on"'|'"single"' # The behavior of arrow spawning in the next click
 local BtPlayer = require("@mousetool/mousebase").EventEmitter:extend("BtPlayer")
-local WindowRegistry = require("util.staging.cookie-ui.windowRegistry").WindowRegistry
+local WindowRegistry = require("util.staging.cookie-ui.WindowRegistry")
 
 local btRoom = require("modules.btRoom")
 local Capabilities = require("permissions.Capabilities")
