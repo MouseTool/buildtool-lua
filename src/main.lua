@@ -35,6 +35,7 @@ require("shaman")
 require("input")
 require("commands.bt-init")
 require("translations.bt-init")
+require("modules.bt-init")
 require("frankerz")
 
 for _,v in ipairs({'AfkDeath','AllShamanSkills','AutoNewGame','AutoScore','AutoTimeLeft','PhysicalConsumables'}) do

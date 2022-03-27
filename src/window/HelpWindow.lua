@@ -1,5 +1,6 @@
 local cookieUi          = require("util.staging.cookie-ui.init")
 local btIds             = require("modules.btIds")
+local InvisLink         = require("components.InvisLink")
 local ImageComponent    = cookieUi.ImageComponent
 local TextAreaComponent = cookieUi.TextAreaComponent
 
@@ -29,6 +30,17 @@ function HelpWindow:draw()
             btIds.getNewTextAreaId(),
             "<font size='2'><a href='event:'>\n<font size='12'><p align='center'>Welcome\n</a>",
             120, 84, 100, 24, 0x222222, 0x000000, .1, true
+        )
+    )
+
+    -- Close btn
+    self.controller:addComponent(
+        InvisLink:new(
+            693, 50, 22, 22, true, true
+        ):on("click",
+            function()
+                self.controller:destroy()
+            end
         )
     )
 end

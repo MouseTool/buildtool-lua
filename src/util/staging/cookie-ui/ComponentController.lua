@@ -11,7 +11,7 @@
 --- @field children cookie-ui.ComponentController[]
 --- @field component cookie-ui.IComponent
 --- @field playerName string
---- @field on fun(self: cookie-ui.ComponentController, eventName: cookie-ui.ComponentController.Events, listener:fun())
+--- @field on fun(self: cookie-ui.ComponentController, eventName: cookie-ui.ComponentController.Events, listener: fun()): cookie-ui.ComponentController
 --- @field emit fun(self: cookie-ui.ComponentController, eventName: cookie-ui.ComponentController.Events)
 local ComponentController = require("@mousetool/mousebase").EventEmitter:extend("ComponentController")
 
@@ -23,17 +23,19 @@ ComponentController._init = function(self, playerName, component)
     self.children = {}
 end
 
---- Adds a child component to the controller. Automatically creates a controller for the child. \
+--- Adds a child component to the controller. Automatically creates a controller for the child and returns it. \
 --- A child component will listen to the same set of render/destroy events as its parent component,
 --- in order of addition.
 --- @param component cookie-ui.IComponent
+--- @return cookie-ui.ComponentController # The child component's controller.
 function ComponentController:addComponent(component)
     if self.state ~= nil then
         error("Can only call addComponent while drawing.")
     end
 
-    self.children[#self.children + 1] = component
-    component:controlFor(self.playerName)
+    local controller = component:controlFor(self.playerName)
+    self.children[#self.children + 1] = controller
+    return controller
 end
 
 --- Draws the component layout. Also better known as the pre-rendering stage.
@@ -55,9 +57,7 @@ function ComponentController:render()
     end
     for i = 1, #self.children do
         local c = self.children[i]
-        if c.render then
-            c:render()
-        end
+        c:render()
     end
     self.state = "rendered"
     self:emit("rendered")
@@ -70,9 +70,7 @@ function ComponentController:destroy()
     end
     for i = 1, #self.children do
         local c = self.children[i]
-        if c.destroy then
-            c:destroy()
-        end
+        c:destroy()
     end
     self.state = "destroyed"
     self:emit("destroyed")
@@ -85,9 +83,7 @@ function ComponentController:unfocus()
     end
     for i = 1, #self.children do
         local c = self.children[i]
-        if c.unfocus then
-            c:unfocus()
-        end
+        c:unfocus()
     end
     self.state = "unfocused"
     self:emit("unfocused")

@@ -23,6 +23,7 @@ exports.IComponent = IComponent
 --- @return cookie-ui.ComponentController
 function IComponent:controlFor(playerName)
     if self.controller ~= nil then
+        print("Warning: tried calling controlFor more than once?")
         return
     end
 
