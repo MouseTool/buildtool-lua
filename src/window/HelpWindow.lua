@@ -1,6 +1,7 @@
 local cookieUi          = require("util.staging.cookie-ui.init")
 local btIds             = require("modules.btIds")
 local InvisLink         = require("components.InvisLink")
+local Reactive          = require("util.staging.reactive.init")
 local ImageComponent    = cookieUi.ImageComponent
 local TextAreaComponent = cookieUi.TextAreaComponent
 
@@ -36,13 +37,38 @@ function HelpWindow:draw()
     -- Close btn
     self.controller:addComponent(
         InvisLink:new(
-            693, 50, 22, 22, true, true
+            693, 50, 22, 22, true
         ):on("click",
             function()
                 self.controller:destroy()
             end
         )
     )
+
+    -- Just testing reactive texts until we get something, lol
+    --- @type Reactive<number, nil>
+    local counter = Reactive:new(0)
+
+    -- display counter
+    self.controller:addComponent(
+        TextAreaComponent:new(
+            btIds.getNewTextAreaId(),
+            counter,
+            400, 200, 100, 24, 0x222222, 0x000000, .1, true
+        )
+    )
+
+    -- increment counter btn
+    self.controller:addComponent(
+        InvisLink:new(
+            400, 270, 22, 22, true, true
+        ):on("click",
+            function()
+                counter:update(counter:get() + 1)
+            end
+        )
+    )
+    -- End testing
 end
 
 return HelpWindow

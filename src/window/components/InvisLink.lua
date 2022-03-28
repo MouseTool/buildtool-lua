@@ -9,12 +9,11 @@ local TextAreaComponent = cookieUi.TextAreaComponent
 --- Creates an invisible clickable text area of specified dimensions.
 --- @class components.InvisLink : cookie-ui.DefaultComponent
 --- @field linkifyId util.linkify.idType
---- @field href string
 ---
 --- @field new fun(self: components.InvisLink, x: number, y: number, height: number, width: number, isFixed?: boolean, isDebug?: boolean)
 --- @field on fun(self: components.InvisLink, eventName: InvisLink.Events, listener:fun()):components.InvisLink
 --- @field emit fun(self: components.InvisLink, eventName: InvisLink.Events)
-local Linkify = cookieUi.DefaultComponent:extend("Linkify")
+local InvisLink = cookieUi.DefaultComponent:extend("Linkify")
 
 ---@param x number
 ---@param y number
@@ -22,7 +21,7 @@ local Linkify = cookieUi.DefaultComponent:extend("Linkify")
 ---@param width number
 ---@param isFixed? boolean
 ---@param isDebug? boolean
-function Linkify:_init(x, y, height, width, isFixed, isDebug)
+function InvisLink:_init(x, y, height, width, isFixed, isDebug)
     self._parent._init(self)
 
     self.x = x
@@ -33,14 +32,15 @@ function Linkify:_init(x, y, height, width, isFixed, isDebug)
     self.isDebug = isDebug
 end
 
-function Linkify:draw()
-    self.linkifyId, self.href = linkify.newLink()
+function InvisLink:draw()
+    local linkifyId, href = linkify.newLink()
+    self.linkifyId = linkifyId
 
     -- Thx bolo!
     local component = TextAreaComponent:new(
         btIds.getNewTextAreaId(),
-        "<textformat leftmargin='1' rightmargin='1'><a href='event:linkify@"
-        .. self.href .. "'>" .. string.rep('\n', self.height / 10),
+        "<textformat leftmargin='1' rightmargin='1'><a href='"
+        .. href .. "'>" .. string.rep('\n', self.height / 10),
         self.x - 5, self.y - 5, self.width + 5, self.height + 5, 1, 1, 0,
         self.isFixed
     )
@@ -49,7 +49,7 @@ function Linkify:draw()
         component = TextAreaComponent:new(
             btIds.getNewTextAreaId(),
             "<textformat leftmargin='1' rightmargin='1'><a href='"
-            .. self.href .. "'>InvisLink@" .. self.linkifyId .. string.rep('\n', self.height / 10),
+            .. href .. "'>InvisLink?" .. self.linkifyId .. string.rep('\n', self.height / 10),
             self.x - 5, self.y - 5, self.width + 5, self.height + 5, 1, 1, 0.7,
             self.isFixed
         )
@@ -58,7 +58,7 @@ function Linkify:draw()
     self.controller:addComponent(component)
 end
 
-function Linkify:render()
+function InvisLink:render()
     -- Start listening to events on render
     linkify.refLink(self.linkifyId, function(_textAreaID, playerName)
         -- Confirm correct player and not some hacker
@@ -70,9 +70,9 @@ function Linkify:render()
     end)
 end
 
-function Linkify:destroy()
+function InvisLink:destroy()
     -- Destroy reference in listener
     linkify.unrefLink(self.linkifyId)
 end
 
-return Linkify
+return InvisLink

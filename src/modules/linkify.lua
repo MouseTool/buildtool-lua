@@ -1,7 +1,5 @@
-local cookieUi          = require("util.staging.cookie-ui.init")
-local btRoom            = require("modules.btRoom")
-local api               = btRoom.api
-
+local btRoom = require("modules.btRoom")
+local api    = btRoom.api
 
 local exports = {}
 
@@ -27,7 +25,7 @@ exports.newLink = function()
     current_id = current_id + 1
     if current_id > MAX_INT32 then current_id = 0 end
 
-    return id, "event:linkify@" .. id
+    return id, "event:linkify?" .. id
 end
 
 --- Creates a new link listener.
@@ -51,7 +49,7 @@ exports.btInit = function()
     ---@param playerName string
     ---@param callback string
     api.tfmEvent:on("TextAreaCallback", function(textAreaID, playerName, callback)
-        local id = callback:match("^linkify@(%d+)$")
+        local id = callback:match("^linkify%?(%d+)$")
         if not id then return end
 
         local cb = idToLinkfyObj[tonumber(id)]

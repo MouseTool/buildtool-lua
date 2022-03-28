@@ -41,14 +41,39 @@ end
 --- @class cookie-ui.TextAreaComponent : cookie-ui.IComponent
 --- @field args any[]
 --- @field textAreaId integer
---- @field new fun(self: cookie-ui.TextAreaComponent, textAreaId: number, text: string, x?: number, y?: number, width?: number, height?: number, backgroundColor?: number, borderColor?: number, backgroundAlpha?: number, fixedPos?: boolean)
+--- @field reactiveText? Reactive<string, nil>
+--- @field reactiveUnsub? fun() # The reactive unsubscriber
+---
+--- @field new fun(self: cookie-ui.TextAreaComponent, textAreaId: number, text: string|Reactive<string, nil>, x?: number, y?: number, width?: number, height?: number, backgroundColor?: number, borderColor?: number, backgroundAlpha?: number, fixedPos?: boolean)
 local TextAreaComponent = DefaultComponent:extend("TextAreaComponent")
 exports.TextAreaComponent = TextAreaComponent
 
+---@param textAreaId number
+---@param text string|Reactive<string, nil>
+---@param x? number
+---@param y? number
+---@param width? number
+---@param height? number
+---@param backgroundColor? number
+---@param borderColor? number
+---@param backgroundAlpha? number
+---@param fixedPos? boolean
 function TextAreaComponent:_init(textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
     ImageComponent._parent._init(self)
 
-    self.args = { textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos }
+    --- @type string
+    local actualText
+    if type(text) == "string" then
+        actualText = text
+    else
+        --- @type Reactive<string, nil>
+        local reactiveText = text
+        actualText = reactiveText:get()
+        self.reactiveText = reactiveText
+    end
+
+
+    self.args = { textAreaId, actualText, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos }
     self.textAreaId = textAreaId
 end
 
@@ -63,10 +88,19 @@ local function _updateTextArea(self, text)
 end
 
 function TextAreaComponent:render()
+    -- Start listening to reactive text updates, if any.
+    if self.reactiveText then
+        self.reactiveUnsub = self.reactiveText:subscribe(function(value)
+            self:updateText(value)
+        end)
+    end
     _addTextArea(self.controller.playerName, table.unpack(self.args, 1, 10))
 end
 
 function TextAreaComponent:destroy()
+    if (self.reactiveUnsub) then
+        self.reactiveUnsub()
+    end
     ui.removeTextArea(self.textAreaId, self.controller.playerName)
 end
 
@@ -85,6 +119,10 @@ end
 --- manually call this function.
 --- @param text string
 function TextAreaComponent:updateText(text)
+    if self.controller.state ~= "rendered" then
+        print("Warning: Tried to update text area when not rendered?")
+        return
+    end
     _updateTextArea(self, text)
 end
 

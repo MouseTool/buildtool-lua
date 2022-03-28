@@ -12,7 +12,7 @@ local exports = {}
 local DoublyLinkedList = Class:extend("DoublyLinkedList")
 exports.DoublyLinkedList = DoublyLinkedList
 
--- TODO: Watch LLS [#980](https://github.com/sumneko/lua-language-server/issues/449)
+-- TODO: Watch LLS [#980](https://github.com/sumneko/lua-language-server/issues/980)
 -- May allow generics from classes to be used in fields, and don't require a second arg (currently no-op here)
 
 -- TODO: Watch LLS [#911](https://github.com/sumneko/lua-language-server/issues/911)
