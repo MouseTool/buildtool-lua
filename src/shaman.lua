@@ -1,6 +1,6 @@
 -- Controls shaman-related gameplay
 
-local DoublyLinkedList = require("util.staging.linkedlist.init").DoublyLinkedList
+local DoublyLinkedList = require("@mousetool/linkedlist").DoublyLinkedList
 local btRoom = require("modules.btRoom")
 local ShamObj = require("btEnums").ShamObj
 local tfmEvent = btRoom.api.tfmEvent

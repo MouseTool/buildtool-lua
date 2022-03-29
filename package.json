@@ -17,10 +17,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mousetool/linkedlist": "^1.0.5",
-    "@mousetool/mousebase": "1.1.0",
+    "@mousetool/cookie-ui": "link:./src/util/staging/cookie-ui",
+    "@mousetool/linkedlist": "link:src/util/staging/linkedlist",
+    "@mousetool/mousebase": "link:src/util/staging/mousebase",
     "@mousetool/mousexml": "^1.0.3",
-    "@mousetool/ordered-table": "^1.0.1"
+    "@mousetool/map": "link:src/util/staging/map",
+    "@mousetool/reactive": "link:src/util/staging/reactive"
   },
   "devDependencies": {
     "@mousetool/onelua": "^1.1.1",

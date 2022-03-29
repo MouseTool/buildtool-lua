@@ -1,4 +1,4 @@
-local Map = require("util.staging.map.init")
+local Map = require("@mousetool/map")
 
 --- @alias cookie-ui.WindowRegistry.WindowIdType integer | string
 

@@ -1,5 +1,5 @@
 local mousexml = require("@mousetool/mousexml")
-local DoublyLinkedList = require("util.staging.linkedlist.init").DoublyLinkedList
+local DoublyLinkedList = require("@mousetool/linkedlist").DoublyLinkedList
 local btRoom = require("modules.btRoom")
 local localis = require("localisation.localis")
 local string_split = require("util.stringlib").split

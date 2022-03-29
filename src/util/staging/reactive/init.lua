@@ -1,4 +1,4 @@
-local Map = require "util.staging.map.init"
+local Map = require "@mousetool/map"
 
 -- TODO: Watch LLS [#980](https://github.com/sumneko/lua-language-server/issues/980)
 -- class Reactive<T> // actualVar: T

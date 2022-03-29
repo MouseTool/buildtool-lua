@@ -1,4 +1,4 @@
-local cookieUi          = require("util.staging.cookie-ui.init")
+local cookieUi          = require("@mousetool/cookie-ui")
 local btIds             = require("modules.btIds")
 local linkify           = require("modules.linkify")
 local TextAreaComponent = cookieUi.TextAreaComponent

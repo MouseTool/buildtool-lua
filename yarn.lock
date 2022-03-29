@@ -29,18 +29,26 @@
   resolved "https://npm.pkg.github.com/download/@mousetool/class/1.0.1/6c327ef42b10d4d3ae5d4dbfa781926d165ca664154c2c7a231cee3e88631559"
   integrity sha512-xySgNeqefYryp3EPmnQXOCpaY1ptomGWzYJjcAV0ztYZNlV2ry8XRyeZ5fU0LvGy0dnoZs3awzwnOApO1PgQ9A==
 
-"@mousetool/linkedlist@^1.0.1", "@mousetool/linkedlist@^1.0.5":
+"@mousetool/cookie-ui@link:./src/util/staging/cookie-ui":
+  version "0.0.0"
+  uid ""
+
+"@mousetool/linkedlist@^1.0.1":
   version "1.0.5"
   resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.5/f1d66e7d69ff233fc1ff4b7c20c82268445d5f29bc1aeaa8af25002b89cc6d85"
   integrity sha512-vkU9SUupGrvZ8Kek5+HpdMN8KWdlXw8BA09p9f1Tn7ZdHjrArFKqjye5GOc5KvmOa76Wt8gEQBhr7HrH99yevw==
 
-"@mousetool/mousebase@1.1.0":
-  version "1.1.0"
-  resolved "https://npm.pkg.github.com/download/@mousetool/mousebase/1.1.0/f4c676fbd5d900541c3ee68fe9123464f847fd49e2e21f26648057d7ae3651d7#0d36399367fdb3ddf3a167f780a965ab8bb2a973"
-  integrity sha512-6WpQs02PxUDGkoqxmdmsAX9BmKoXXYG5+AL41BRg3eZGjBUxdf2K3WjgimYc9s0i8YGiSA3RM4hfBMT/P01bEw==
-  dependencies:
-    "@mousetool/class" "^1.0.1"
-    "@mousetool/nickname801" "^1.0.0"
+"@mousetool/linkedlist@link:src/util/staging/linkedlist":
+  version "0.0.0"
+  uid ""
+
+"@mousetool/map@link:src/util/staging/map":
+  version "0.0.0"
+  uid ""
+
+"@mousetool/mousebase@link:src/util/staging/mousebase":
+  version "0.0.0"
+  uid ""
 
 "@mousetool/mousexml@^1.0.3":
   version "1.0.3"
@@ -70,6 +78,10 @@
   version "1.0.1"
   resolved "https://npm.pkg.github.com/download/@mousetool/ordered-table/1.0.1/873196ef5b31d53bfb4b9f8d3f30ad7b85f0784852e12ac25cb052d6782e385c"
   integrity sha512-BzLon8OMx2Q30OGeEBF0Mo114cAFLwd6sZ1bZUU+U8WXKF993T/dNsvy3xFL0UUKWl+myR0gFbmTiUoLVYQ1FA==
+
+"@mousetool/reactive@link:src/util/staging/reactive":
+  version "0.0.0"
+  uid ""
 
 "@mousetool/tfm-vscode@^2.0.4":
   version "2.0.4"

@@ -1,7 +1,7 @@
-local cookieUi          = require("util.staging.cookie-ui.init")
+local cookieUi          = require("@mousetool/cookie-ui")
+local Reactive          = require("@mousetool/reactive")
 local btIds             = require("modules.btIds")
 local InvisLink         = require("components.InvisLink")
-local Reactive          = require("util.staging.reactive.init")
 local ImageComponent    = cookieUi.ImageComponent
 local TextAreaComponent = cookieUi.TextAreaComponent
 
