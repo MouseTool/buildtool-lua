@@ -70,7 +70,10 @@ function ComponentController:destroy()
     end
     for i = 1, #self.children do
         local c = self.children[i]
-        c:destroy()
+        -- Don't double destroy
+        if c.state ~= "destroyed" then
+            c:destroy()
+        end
     end
     self.state = "destroyed"
     self:emit("destroyed")

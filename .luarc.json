@@ -1,12 +1,8 @@
 {
-    "diagnostics": {
-        "disable": [
-            "different-requires"
-        ]
-    },
-    "workspace": {
-        "userThirdParty": [
-            "./node_modules/@mousetool/tfm-vscode"
-        ]
-    }
+    "diagnostics.disable": [
+        "different-requires"
+    ],
+    "workspace.userThirdParty": [
+        "./node_modules/@mousetool/tfm-vscode"
+    ]
 }

@@ -6,5 +6,5 @@ return {
     ImageComponent = ImageTextComponents.ImageComponent,
     TextAreaComponent = ImageTextComponents.TextAreaComponent,
     IComponentOps = componentOps.IComponent,
-    WindowRegistry = require("windowRegistry")
+    WindowRegistry = require("WindowRegistry")
 }

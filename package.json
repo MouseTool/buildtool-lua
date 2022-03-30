@@ -19,13 +19,13 @@
   "dependencies": {
     "@mousetool/cookie-ui": "link:./src/util/staging/cookie-ui",
     "@mousetool/linkedlist": "link:src/util/staging/linkedlist",
+    "@mousetool/map": "link:src/util/staging/map",
     "@mousetool/mousebase": "link:src/util/staging/mousebase",
     "@mousetool/mousexml": "^1.0.3",
-    "@mousetool/map": "link:src/util/staging/map",
     "@mousetool/reactive": "link:src/util/staging/reactive"
   },
   "devDependencies": {
-    "@mousetool/onelua": "^1.1.1",
+    "@mousetool/onelua": "^1.2.0",
     "@mousetool/tfm-vscode": "^2.0.4",
     "@types/node": "^17.0.23",
     "axios": "^0.26.1",

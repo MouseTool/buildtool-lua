@@ -9,7 +9,8 @@ local exports = {}
 --- @class cookie-ui.ImageComponent : cookie-ui.IComponent
 --- @field args any[]
 --- @field imageId? integer
---- @field new fun(self: cookie-ui.ImageComponent, imageUid: integer, target?: string, xPosition: number, yPosition: number, xScale?: number, yScale?: number, angle?: number, alpha?: number, xAnchor?: number, yAnchor?: number)
+---
+--- @field new fun(self: cookie-ui.ImageComponent, imageUid: integer, target?: string, xPosition: number, yPosition: number, xScale?: number, yScale?: number, angle?: number, alpha?: number, xAnchor?: number, yAnchor?: number): cookie-ui.ImageComponent
 local ImageComponent = DefaultComponent:extend("ImageComponent")
 exports.ImageComponent = ImageComponent
 
@@ -44,7 +45,7 @@ end
 --- @field reactiveText? Reactive<string, nil>
 --- @field reactiveUnsub? fun() # The reactive unsubscriber
 ---
---- @field new fun(self: cookie-ui.TextAreaComponent, textAreaId: number, text: string|Reactive<string, nil>, x?: number, y?: number, width?: number, height?: number, backgroundColor?: number, borderColor?: number, backgroundAlpha?: number, fixedPos?: boolean)
+--- @field new fun(self: cookie-ui.TextAreaComponent, textAreaId: number, text: string|Reactive<string, nil>, x?: number, y?: number, width?: number, height?: number, backgroundColor?: number, borderColor?: number, backgroundAlpha?: number, fixedPos?: boolean): cookie-ui.TextAreaComponent
 local TextAreaComponent = DefaultComponent:extend("TextAreaComponent")
 exports.TextAreaComponent = TextAreaComponent
 
@@ -59,7 +60,7 @@ exports.TextAreaComponent = TextAreaComponent
 ---@param backgroundAlpha? number
 ---@param fixedPos? boolean
 function TextAreaComponent:_init(textAreaId, text, x, y, width, height, backgroundColor, borderColor, backgroundAlpha, fixedPos)
-    ImageComponent._parent._init(self)
+    TextAreaComponent._parent._init(self)
 
     --- @type string
     local actualText
@@ -104,10 +105,6 @@ function TextAreaComponent:destroy()
     ui.removeTextArea(self.textAreaId, self.controller.playerName)
 end
 
-function TextAreaComponent:unfocus()
-    -- Remove text area
-    self:destroy()
-end
 
 function TextAreaComponent:restore()
     self:destroy()
@@ -124,6 +121,16 @@ function TextAreaComponent:updateText(text)
         return
     end
     _updateTextArea(self, text)
+end
+
+--- A text area component that hides itself when unfocused.
+--- @class cookie-ui.TextAreaComponentWithUnfocus : cookie-ui.TextAreaComponent
+local TextAreaComponentWithUnfocus = DefaultComponent:extend("TextAreaComponentWithUnfocus")
+exports.TextAreaComponentWithUnfocus = TextAreaComponentWithUnfocus
+
+function TextAreaComponentWithUnfocus:unfocus()
+    -- Remove text area
+    self:destroy()
 end
 
 return exports

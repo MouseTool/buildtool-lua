@@ -8,7 +8,11 @@ const luaLanguages = {} as Record<string, Record<string, string>>;
 
 function encodeToLuaString(str: string) {
   // The irony
-  return JSON.stringify(str).slice(1, -1);
+  return JSON.stringify(str)
+    // Remove quotes
+    .slice(1, -1)
+    // POEditor adds backslashes to backslashes :( https://twitter.com/poeditor/status/1163367875400425472
+    .replace(/\\\\/g, '\\');
 }
 
 async function readLuaLanguages() {

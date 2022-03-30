@@ -1,10 +1,11 @@
 -- Controls user input events (mouse, keyboard, textarea, etc.)
 
-local btRoom        = require("modules.btRoom")
-local btEnums       = require("btEnums")
-local btPerms       = require("permissions.btPerms")
-local mathGeometry  = require("util.mathGeometry")
-local HelpWindow    = require("window.HelpWindow")
+local btRoom           = require("modules.btRoom")
+local btEnums          = require("btEnums")
+local btPerms          = require("permissions.btPerms")
+local mathGeometry     = require("util.mathGeometry")
+local HelpWindow       = require("window.HelpWindow")
+local GroundInfoWindow = require("window.GroundInfoWindow")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
@@ -43,7 +44,6 @@ local KEY_EVENTS = {
         -- TODO: Watch LLS [#917](https://github.com/sumneko/lua-language-server/issues/917)
         ---@param btp BtPlayer
         cb = function(btp, k)
-            --WindowManager.toggle(WindowEnums.HELP, btp.name)
             if btp.windowRegistry:isOpen(WindowEnums.HELP) then
                 btp.windowRegistry:close(WindowEnums.HELP)
                 return
@@ -218,6 +218,8 @@ tfmEvent:on('Mouse', function(pn, x, y)
                 return
             end
             if not round.grounds then return end
+
+            --- @type TfmGround
             local found_g = nil
             for i = #round.grounds, 1, -1 do
                 local ground = round.grounds[i]
@@ -227,14 +229,17 @@ tfmEvent:on('Mouse', function(pn, x, y)
                 end
             end
             if found_g then
-                WindowManager.open(WindowEnums.GROUND_INFO, btp.name)
-                --- @type GroundInfoWindow
-                local w_ginfo = WindowManager.getWindow(WindowEnums.GROUND_INFO, btp.name)
-                if w_ginfo then
-                    w_ginfo:displayGInfo(found_g, x, y)
+                if btp.windowRegistry:isOpen(WindowEnums.GROUND_INFO) then
+                    btp.windowRegistry:close(WindowEnums.GROUND_INFO)
+                    return
                 end
+                btp.windowRegistry:open(WindowEnums.GROUND_INFO,
+                    GroundInfoWindow
+                    :new(found_g, x, y)
+                    :controlFor(btp.name)
+                )
             else
-                WindowManager.close(WindowEnums.GROUND_INFO, btp.name)
+                btp.windowRegistry:close(WindowEnums.GROUND_INFO)
             end
         end
     end

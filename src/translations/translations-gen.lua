@@ -4,7 +4,6 @@ translations["zh-Hant"] = {
     ["general.language_english"] = "Chinese",
     ["general.language_native"] = "中文",
     ["chat.player_welcome"] = "<J>歡迎來到 BuildTool Beta Testing！鍵入 !help 或按 H 開放幫助窗口。",
-    ["chat.player_entered"] = "😎",
     ["ground.wood"] = "木質",
     ["ground.ice"] = "冰塊",
     ["ground.trampoline"] = "彈力",
@@ -77,13 +76,28 @@ translations["en"] = {
     ["groundinfo.mouse"] = "<CH>Mouse",
     ["groundinfo.object"] = "<CH2>Object",
     ["groundinfo.all"] = "<VP>All",
-    ["groundinfo.properties"] = "<N>Z-Index: \\t %s\n<N>Position (X,Y): \\t %s,%s\n<N>Length: \\t %s\n<N>Height: \\t %s\n<N>Friction: \\t %s\n<N>Restitution: \\t %s\n<N>Angle: \\t %s\n<N>Disappear: \\t %s\n<N>Collision: \\t %s\n<N>Color: \\t %s\n<N>Dynamic: \\t %s\n<N>Mass: \\t %s"
+    ["groundinfo.properties"] = "<N>Z-Index: \t %s\n<N>Position (X,Y): \t %s,%s\n<N>Length: \t %s\n<N>Height: \t %s\n<N>Friction: \t %s\n<N>Restitution: \t %s\n<N>Angle: \t %s\n<N>Disappear: \t %s\n<N>Collision: \t %s\n<N>Color: \t %s\n<N>Dynamic: \t %s\n<N>Mass: \t %s"
 }
 
 translations["fr"] = {
     ["general.language_english"] = "French",
-    ["general.language_native"] = "Française",
-    ["chat.player_welcome"] = "test ??? "
+    ["general.language_native"] = "Français",
+    ["chat.player_welcome"] = "<J>Bienvenue dans BuildTool Bêta Test ! Ecrivez !help ou appuyez sur H pour voir la fenêtre d'aide.",
+    ["chat.player_entered"] = "<T>%s vient d'entrer dans le salon.",
+    ["chat.player_left"] = "<T>%s vient de quitter le salon.",
+    ["chat.set_room_password"] = "<J>%s a défini un mot de passe.",
+    ["chat.unset_room_password"] = "<J>%s a désactivé le mot de passe.",
+    ["chat.enabled_arrow_mode"] = "<J>A activé le mode flèches.",
+    ["chat.disabled_arrow_mode"] = "<J>A désactivé le mode flèches.",
+    ["chat.mapinfo_summary"] = "<ROSE>[Info Carte] <J>%s <N>de %s",
+    ["chat.mapinfo_summary_properties"] = "Vent : %s | Gravité : %s | MGOC : %s",
+    ["chat.mapinfo_mirrored"] = "Inversée",
+    ["chat.mapinfo_tags"] = "Tags",
+    ["chat.mapinfo_tag_portals"] = "Portails",
+    ["chat.mapinfo_tag_opportunist"] = "Opportuniste",
+    ["chat.mapinfo_tag_noballoon"] = "Pas de ballon",
+    ["chat.mapinfo_tag_no_b"] = "Pas de B/Non B",
+    ["chat.mapinfo_tag_no_motor"] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 }
 
 translations["ko"] = {

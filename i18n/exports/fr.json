@@ -9,7 +9,7 @@
   },
   {
     "term": "general.language_native",
-    "definition": "Française",
+    "definition": "Français",
     "context": "The name of the language in the language itself",
     "term_plural": "",
     "reference": "",
@@ -17,7 +17,7 @@
   },
   {
     "term": "chat.player_welcome",
-    "definition": "test ??? ",
+    "definition": "<J>Bienvenue dans BuildTool Bêta Test ! Ecrivez !help ou appuyez sur H pour voir la fenêtre d'aide.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -25,7 +25,7 @@
   },
   {
     "term": "chat.player_entered",
-    "definition": null,
+    "definition": "<T>%s vient d'entrer dans le salon.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -33,7 +33,7 @@
   },
   {
     "term": "chat.player_left",
-    "definition": null,
+    "definition": "<T>%s vient de quitter le salon.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -41,7 +41,7 @@
   },
   {
     "term": "chat.set_room_password",
-    "definition": null,
+    "definition": "<J>%s a défini un mot de passe.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -49,7 +49,7 @@
   },
   {
     "term": "chat.unset_room_password",
-    "definition": null,
+    "definition": "<J>%s a désactivé le mot de passe.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -57,7 +57,7 @@
   },
   {
     "term": "chat.enabled_arrow_mode",
-    "definition": null,
+    "definition": "<J>A activé le mode flèches.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -65,7 +65,7 @@
   },
   {
     "term": "chat.disabled_arrow_mode",
-    "definition": null,
+    "definition": "<J>A désactivé le mode flèches.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -73,7 +73,7 @@
   },
   {
     "term": "chat.mapinfo_summary",
-    "definition": null,
+    "definition": "<ROSE>[Info Carte] <J>%s <N>de %s",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -81,7 +81,7 @@
   },
   {
     "term": "chat.mapinfo_summary_properties",
-    "definition": null,
+    "definition": "Vent : %s | Gravité : %s | MGOC : %s",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -89,7 +89,7 @@
   },
   {
     "term": "chat.mapinfo_mirrored",
-    "definition": null,
+    "definition": "Inversée",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -97,7 +97,7 @@
   },
   {
     "term": "chat.mapinfo_tags",
-    "definition": null,
+    "definition": "Tags",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -105,7 +105,7 @@
   },
   {
     "term": "chat.mapinfo_tag_portals",
-    "definition": null,
+    "definition": "Portails",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -113,7 +113,7 @@
   },
   {
     "term": "chat.mapinfo_tag_opportunist",
-    "definition": null,
+    "definition": "Opportuniste",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -121,7 +121,7 @@
   },
   {
     "term": "chat.mapinfo_tag_noballoon",
-    "definition": null,
+    "definition": "Pas de ballon",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -129,7 +129,7 @@
   },
   {
     "term": "chat.mapinfo_tag_no_b",
-    "definition": null,
+    "definition": "Pas de B/Non B",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -137,7 +137,7 @@
   },
   {
     "term": "chat.mapinfo_tag_no_motor",
-    "definition": null,
+    "definition": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "context": "",
     "term_plural": "",
     "reference": "",
