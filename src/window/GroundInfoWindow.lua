@@ -92,7 +92,7 @@ function GroundInfoWindow:draw()
     -- <N>Color: \t %s
     -- <N>Dynamic: \t %s
     -- <N>Mass: \t %s
-    text = text .. "<TG><textformat tabstops='[88]'>" ..
+    text = text .. "<TG><textformat tabstops='[77]'>" ..
         btp:tlGet("groundinfo.properties",
             ground.zIndex,
             ground.x, ground.y,

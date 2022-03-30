@@ -76,7 +76,7 @@ translations["en"] = {
     ["groundinfo.mouse"] = "<CH>Mouse",
     ["groundinfo.object"] = "<CH2>Object",
     ["groundinfo.all"] = "<VP>All",
-    ["groundinfo.properties"] = "<N>Z-Index: \t %s\n<N>Position (X,Y): \t %s,%s\n<N>Length: \t %s\n<N>Height: \t %s\n<N>Friction: \t %s\n<N>Restitution: \t %s\n<N>Angle: \t %s\n<N>Disappear: \t %s\n<N>Collision: \t %s\n<N>Color: \t %s\n<N>Dynamic: \t %s\n<N>Mass: \t %s"
+    ["groundinfo.properties"] = "<N>Z-Index: \t %s\n<N>Position: \t X: %s / Y: %s\n<N>Length: \t %s\n<N>Height: \t %s\n<N>Friction: \t %s\n<N>Restitution: \t %s\n<N>Angle: \t %s\n<N>Disappear: \t %s\n<N>Collision: \t %s\n<N>Color: \t %s\n<N>Dynamic: \t %s\n<N>Mass: \t %s"
 }
 
 translations["fr"] = {

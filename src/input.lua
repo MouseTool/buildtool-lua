@@ -6,6 +6,8 @@ local btPerms          = require("permissions.btPerms")
 local mathGeometry     = require("util.mathGeometry")
 local HelpWindow       = require("window.HelpWindow")
 local GroundInfoWindow = require("window.GroundInfoWindow")
+local SettingsWindow   = require("window.SettingsWindow")
+local MouseSpawnWindow = require("window.MouseSpawnWindow")
 
 local api = btRoom.api
 local tfmEvent = api.tfmEvent
@@ -48,7 +50,8 @@ local KEY_EVENTS = {
                 btp.windowRegistry:close(WindowEnums.HELP)
                 return
             end
-            btp.windowRegistry:open(WindowEnums.HELP,
+            btp.windowRegistry:open(
+                WindowEnums.HELP,
                 HelpWindow:new():controlFor(btp.name)
             )
         end,
@@ -64,17 +67,28 @@ local KEY_EVENTS = {
     -- Opens room settings
     [Keys.O] = {
         cb = function(btp, k)
-            WindowManager.toggle(WindowEnums.SETTINGS, btp.name)
+            if btp.windowRegistry:isOpen(WindowEnums.SETTINGS) then
+                btp.windowRegistry:close(WindowEnums.SETTINGS)
+                return
+            end
+            btp.windowRegistry:open(
+                WindowEnums.SETTINGS,
+                SettingsWindow:new():controlFor(btp.name)
+            )
         end,
         trigger = DOWN_ONLY
     },
     -- Toggles mouse spawn
     [Keys.M] = {
+        ---@param btp BtPlayer
         cb = function(btp, k, down)
             if down then
-                WindowManager.open(WindowEnums.MOUSE_SPAWN, btp.name)
+                btp.windowRegistry:open(
+                    WindowEnums.MOUSE_SPAWN,
+                    MouseSpawnWindow:new():controlFor(btp.name)
+                )
             else
-                WindowManager.close(WindowEnums.MOUSE_SPAWN, btp.name)
+                btp.windowRegistry:close(WindowEnums.MOUSE_SPAWN)
             end
         end,
         trigger = DOWN_UP

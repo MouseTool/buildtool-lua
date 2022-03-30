@@ -473,7 +473,7 @@
     "context": "",
     "plural": "",
     "created": "2022-03-09T17:18:21+0000",
-    "updated": "",
+    "updated": "2022-03-30T12:31:07+0000",
     "reference": "",
     "tags": [
       "ui",
@@ -548,10 +548,10 @@
   },
   {
     "term": "groundinfo.properties",
-    "context": "",
+    "context": "I may change the content, no need to translate this yet",
     "plural": "",
     "created": "2022-03-09T17:20:17+0000",
-    "updated": "",
+    "updated": "2022-03-30T12:31:18+0000",
     "reference": "",
     "tags": [
       "ui",

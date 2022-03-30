@@ -1,7 +1,8 @@
 local tfmcmd = require("commands.tfmcmd")
+local HelpWindow = require("window.HelpWindow")
 
 --local WindowManager = require("window.window_manager")
-local WindowEnum = require("btEnums").Window
+local WindowEnums = require("btEnums").Window
 local btRoom = require("modules.btRoom")
 
 tfmcmd.registerCommand(tfmcmd.Main {
@@ -10,13 +11,23 @@ tfmcmd.registerCommand(tfmcmd.Main {
     args = {},
     --- @param ctx tfmcmd.CmdContext
     func = function(ctx)
-        WindowManager.open(WindowEnum.HELP)
+        local btp = btRoom.players[ctx.playerName]
+        if not btp then return end
+
+        if btp.windowRegistry:isOpen(WindowEnums.HELP) then
+            btp.windowRegistry:close(WindowEnums.HELP)
+            return
+        end
+        btp.windowRegistry:open(
+            WindowEnums.HELP,
+            HelpWindow:new():controlFor(btp.name)
+        )
     end
 })
 
 tfmcmd.registerCommand(tfmcmd.Main {
     name = "mapinfo",
-    aliases = {"info"},
+    aliases = { "info" },
     allowed = true,
     visible = false,
     args = {},
