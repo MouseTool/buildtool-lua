@@ -240,7 +240,7 @@ BtRound.clearAllObjects = function(self, playerName)
     if not playerName then
         -- Target all
         for _, pspawned in pairs(self.spawnedObjects) do
-            for _, obj_id in pspawned:ipairs() do
+            for _, obj_id in pspawned:pairs() do
                 tfm.exec.removeObject(obj_id)
             end
         end
@@ -249,7 +249,7 @@ BtRound.clearAllObjects = function(self, playerName)
         -- Target player
         local pspawned = self.spawnedObjects[playerName]
         if not pspawned then return end
-        for _, obj_id in pspawned:ipairs() do
+        for _, obj_id in pspawned:pairs() do
             tfm.exec.removeObject(obj_id)
         end
         self.spawnedObjects[playerName] = DoublyLinkedList:new()

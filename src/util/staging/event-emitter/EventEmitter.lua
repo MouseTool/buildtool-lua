@@ -1,10 +1,10 @@
-local patched_xpcall = require("overloads").xpcall
 
---- Event emitter.
---- @class EventEmitter : Class
+
+--- Event emitter implementation.
+--- @class EventEmitter : IEventEmitter
 --- @field protected _crucialListeners table
 --- @field protected _listeners table
-local EventEmitter = require("@mousetool/class"):extend("EventEmitter")
+local EventEmitter = require("IEventEmitter"):extend("EventEmitter")
 
 local onFunc = function(events, eventName, listener, options)
     if not events[eventName] then
