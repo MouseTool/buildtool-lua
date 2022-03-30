@@ -111,7 +111,7 @@ TfmGround.fromXmlDoc = function(xmlDoc)
         -- Set color for colored grounds
         if ground.type == GroundType.Rectangle
         or ground.type == GroundType.Circle then
-            ground.color = attr['o'] and (tonumber(attr['o'], 16) or true)
+            ground.color = attr['o'] and (tonumber(attr['o'], 16) or nil)
         end
 
         -- Read P attribute

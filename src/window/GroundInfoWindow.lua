@@ -13,7 +13,7 @@ local TextAreaComponent = cookieUi.TextAreaComponent
 local GroundInfoWindow = cookieUi.DefaultComponent:extend("GroundInfoWindow")
 
 local COLOR_BG = 0x402A1D
-local MAX_TA_WIDTH = 168
+local MAX_TA_WIDTH = 170
 local MAX_TA_HEIGHT = 198
 
 -- used for performing space calculations
@@ -71,7 +71,7 @@ function GroundInfoWindow:draw()
     local wrapInLink = function(content, link)
         return "<a href='" .. link .. "'>" .. content .. "</a>"
     end
-    local text = "<p><textformat tabstops='[4,145]'>" .. wrapInLink(
+    local text = "<p><textformat tabstops='[4,150]'>" .. wrapInLink(
         ("\t<b>%s (ID: %s)</b> \t %s"):format(
             btp:tlGet("ground." .. groundTypeNames[ground.type] or groundTypeNames[GroundType.Wood]),
             ground.type,

@@ -57,7 +57,7 @@
   },
   {
     "term": "chat.enabled_arrow_mode",
-    "definition": "<J>A activé le mode flèches.",
+    "definition": "<J>A activé le mode flèche.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -65,7 +65,7 @@
   },
   {
     "term": "chat.disabled_arrow_mode",
-    "definition": "<J>A désactivé le mode flèches.",
+    "definition": "<J>A désactivé le mode flèche.",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -89,7 +89,7 @@
   },
   {
     "term": "chat.mapinfo_mirrored",
-    "definition": "Inversée",
+    "definition": "(inversée)",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -121,7 +121,7 @@
   },
   {
     "term": "chat.mapinfo_tag_noballoon",
-    "definition": "Pas de ballon",
+    "definition": "Sans ballon",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -137,7 +137,7 @@
   },
   {
     "term": "chat.mapinfo_tag_no_motor",
-    "definition": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "definition": "Sans Moteur/Pas de moteur ??????????",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -161,7 +161,7 @@
   },
   {
     "term": "ground.wood",
-    "definition": null,
+    "definition": "Bois",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -169,7 +169,7 @@
   },
   {
     "term": "ground.ice",
-    "definition": null,
+    "definition": "Glace",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -177,7 +177,7 @@
   },
   {
     "term": "ground.trampoline",
-    "definition": null,
+    "definition": "Trampoline",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -185,7 +185,7 @@
   },
   {
     "term": "ground.lava",
-    "definition": null,
+    "definition": "Lave",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -193,7 +193,7 @@
   },
   {
     "term": "ground.chocolate",
-    "definition": null,
+    "definition": "Chocolat",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -201,7 +201,7 @@
   },
   {
     "term": "ground.earth",
-    "definition": null,
+    "definition": "Terre",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -209,7 +209,7 @@
   },
   {
     "term": "ground.grass",
-    "definition": null,
+    "definition": "Herbe",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -217,7 +217,7 @@
   },
   {
     "term": "ground.sand",
-    "definition": null,
+    "definition": "Sable",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -225,7 +225,7 @@
   },
   {
     "term": "ground.cloud",
-    "definition": null,
+    "definition": "Nuage",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -233,7 +233,7 @@
   },
   {
     "term": "ground.water",
-    "definition": null,
+    "definition": "Eau",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -241,7 +241,7 @@
   },
   {
     "term": "ground.stone",
-    "definition": null,
+    "definition": "Pierre",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -249,7 +249,7 @@
   },
   {
     "term": "ground.snow",
-    "definition": null,
+    "definition": "Neige",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -257,7 +257,7 @@
   },
   {
     "term": "ground.rectangle",
-    "definition": null,
+    "definition": "Rectangle",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -265,7 +265,7 @@
   },
   {
     "term": "ground.circle",
-    "definition": null,
+    "definition": "Rond",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -273,7 +273,7 @@
   },
   {
     "term": "ground.invisible",
-    "definition": null,
+    "definition": "Invisible",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -281,7 +281,7 @@
   },
   {
     "term": "ground.cobweb",
-    "definition": null,
+    "definition": "Toile d'araignées",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -289,7 +289,7 @@
   },
   {
     "term": "ground.grass2",
-    "definition": null,
+    "definition": "Herbe jaune",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -297,7 +297,7 @@
   },
   {
     "term": "ground.grass3",
-    "definition": null,
+    "definition": "Herbe rose",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -305,7 +305,7 @@
   },
   {
     "term": "ground.acid",
-    "definition": null,
+    "definition": "Acide",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -313,7 +313,7 @@
   },
   {
     "term": "groundinfo.true",
-    "definition": null,
+    "definition": "<VP>Vrai",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -321,7 +321,7 @@
   },
   {
     "term": "groundinfo.false",
-    "definition": null,
+    "definition": "<N2>Faux",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -329,7 +329,7 @@
   },
   {
     "term": "groundinfo.invisible",
-    "definition": null,
+    "definition": "<N2>Invisible",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -337,7 +337,7 @@
   },
   {
     "term": "groundinfo.mouse",
-    "definition": null,
+    "definition": "<CH>Souris",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -345,7 +345,7 @@
   },
   {
     "term": "groundinfo.object",
-    "definition": null,
+    "definition": "<CH2>Objet",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -353,7 +353,7 @@
   },
   {
     "term": "groundinfo.all",
-    "definition": null,
+    "definition": "<VP>Tout",
     "context": "",
     "term_plural": "",
     "reference": "",
@@ -361,7 +361,7 @@
   },
   {
     "term": "groundinfo.properties",
-    "definition": null,
+    "definition": "<N>Z-Index: \\t %s\n<N>Position : \\t X: %s / Y: %s\n<N>Longueur : \\t %s\n<N>Hauteur : \\t %s\n<N>Frottement : \\t %s\n<N>Restitution : \\t %s\n<N>Angle : \\t %s\n<N>Disparaît : \\t %s\n<N>Collision : \\t %s\n<N>Couleur : \\t %s\n<N>Dynamique : \\t %s\n<N>Masse : \\t %s",
     "context": "I may change the content, no need to translate this yet",
     "term_plural": "",
     "reference": "",

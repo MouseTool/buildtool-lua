@@ -70,7 +70,7 @@ end
 --- @param windowId cookie-ui.WindowRegistry.WindowIdType
 function WindowRegistry:close(windowId)
     if not self.opened:has(windowId) then
-        print(("closing closed %s"):format(windowId)) -- TODO: dbg
+        print(("closing closed %s"):format(windowId or "-")) -- TODO: dbg
         return
     end
 

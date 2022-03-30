@@ -44,7 +44,7 @@ function MouseSpawnWindow:draw()
             )
         )
         self.controller:addComponent(
-            ImageComponent:new(IMG_SHAMAN, "!0", s.x, s.y,
+            ImageComponent:new(IMG_MOUSE, "!0", s.x, s.y,
                 .5, .5, 0, 1, 0.58641975308, 0.63131313131)
         )
     end
