@@ -32,6 +32,7 @@ function IEventEmitter:removeAllListeners(eventName) end
 
 --- @generic T : IEventEmitter
 --- @param eventName string The name of the event
+--- @return boolean # Returns `true` if the event had listeners, `false` otherwise.
 function IEventEmitter:emit(eventName, ...) end
 
 --- @generic T : IEventEmitter

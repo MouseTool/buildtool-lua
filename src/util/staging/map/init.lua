@@ -30,6 +30,10 @@
 --- @field _items table<string, any> # A fast reference to a key's value.
 local Map = require("@mousetool.class"):extend("Map")
 
+--! Note: not part / not equivalent of the official JS spec: !
+-- 1. `isReverse` parameter of `set()`
+-- 2. `reverseKeysIter()` & `reversePairs()`
+
 --- @class Map.KeyNode
 --- @field _item string @The key
 --- @field _next? Map.KeyNode @The next linked node
@@ -119,32 +123,63 @@ local _reverseNextKey = function(tbl, index)
     return prev_key
 end
 
+--- Returns the number of elements in the `Map` object.
+--- @return integer
+function Map:size()
+    return self._keys.length
+end
+
 --- @generic T : Map, K : Map.KeyType, V
 --- @param self T # T<K, V>
 --- @param key K
 --- @param val V
+--- @param isReverse? boolean # If `true`, the key-value pair will be inserted in the front position, as though it were inserted first.
 --- @return T
-function Map:set(key, val)
+function Map:set(key, val, isReverse)
     if not self._keyNodes[key] then
-        -- Add new key
         local keys = self._keys
-        local node = {
-            _next = nil,
-            _prev = keys._back,
-            _item = key
-        }
-        if keys._back then
-            keys._back._next = node
-            keys._back = node
-        end
-        if not keys._front then
-            keys._front = node
-            keys._back = node
+        --- @type Map.KeyNode
+        local node
+
+        if not isReverse then
+            -- Add new key behind, per usual
+            node = {
+                _next = nil,
+                _prev = keys._back,
+                _item = key
+            }
+            if keys._back then
+                -- Old back
+                keys._back._next = node
+                keys._back = node
+            end
+            if not keys._front then
+                keys._front = node
+                keys._back = node
+            end
+        else
+            -- Add new key in front
+            node = {
+                _next = keys._front,
+                _prev = nil,
+                _item = key
+            }
+            if keys._front then
+                -- Old front
+                keys._front._prev = node
+                keys._front = node
+            end
+            if not keys._back then
+                keys._back = node
+                keys._front = node
+            end
         end
         self._keyNodes[key] = node
         keys.length = keys.length + 1
-        self._items[key] = val
     end
+
+    -- Override value unconditionally
+    self._items[key] = val
     return self
 end
 
@@ -259,7 +294,7 @@ end
 --- @param self T
 --- @return fun(map: Map<K, V>, index?: K):K
 --- @return T
-function Map:reverseKeysIter(self)
+function Map:reverseKeysIter()
     -- if not (self and self._keys) then
     --     error("Expected table of type Map, got " .. type(self))
     --     return
