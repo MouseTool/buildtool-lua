@@ -33,6 +33,10 @@
   version "0.0.0"
   uid ""
 
+"@mousetool/event-emitter@link:src/util/staging/event-emitter":
+  version "0.0.0"
+  uid ""
+
 "@mousetool/linkedlist@^1.0.1":
   version "1.0.5"
   resolved "https://npm.pkg.github.com/download/@mousetool/linkedlist/1.0.5/f1d66e7d69ff233fc1ff4b7c20c82268445d5f29bc1aeaa8af25002b89cc6d85"

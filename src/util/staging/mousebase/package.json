@@ -6,13 +6,19 @@
   "onelua": {
     "main": "init.lua"
   },
+  "scripts": {
+    "generate": "ts-node generate/main.ts"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@mousetool/class": "^1.0.1",
+    "@mousetool/event-emitter": "file:../event-emitter",
     "@mousetool/nickname801": "^1.0.0"
   },
   "devDependencies": {
-    "@mousetool/tfm-vscode": "^2.0.0"
+    "@cassolette/luahelpparser": "^1.0.0",
+    "@mousetool/tfm-vscode": "^2.0.6",
+    "ts-node": "^10.7.0"
   }
 }

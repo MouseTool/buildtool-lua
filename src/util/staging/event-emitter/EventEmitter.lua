@@ -119,9 +119,7 @@ function EventEmitter:emit(eventName, ...)
     end
 
     for i = 1, cachedCount do
-        local listener = toEmit[i]
-
-        local status, err = pcall(listener, ...)
+        local status, err = pcall(toEmit[i], ...)
         if not status then
             if eventName ~= "error"
                 and self:listenerCount("error") > 0 then

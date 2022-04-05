@@ -22,7 +22,8 @@
     "@mousetool/map": "link:src/util/staging/map",
     "@mousetool/mousebase": "link:src/util/staging/mousebase",
     "@mousetool/mousexml": "^1.0.3",
-    "@mousetool/reactive": "link:src/util/staging/reactive"
+    "@mousetool/reactive": "link:src/util/staging/reactive",
+    "@mousetool/event-emitter": "link:src/util/staging/event-emitter"
   },
   "devDependencies": {
     "@mousetool/onelua": "^1.2.0",

@@ -5,13 +5,7 @@ local btRoom = require("modules.btRoom")
 local ShamObj = require("btEnums").ShamObj
 local tfmEvent = btRoom.api.tfmEvent
 
---- @param pn string
---- @param objType integer
---- @param xPos integer
---- @param yPos integer
---- @param angle integer
---- @param objDesc tfm.ShamanObject
-tfmEvent:onCrucial('SummoningEnd', function(pn, objType, xPos, yPos, angle, objDesc)
+tfmEvent:on('SummoningEnd', function(pn, objType, xPos, yPos, angle, objDesc)
     -- Add on to the list of spawns
     local round = btRoom.currentRound
     local baseType = objDesc.baseType

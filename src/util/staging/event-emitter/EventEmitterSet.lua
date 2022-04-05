@@ -98,14 +98,15 @@ function EventEmitterSet:emit(eventName, ...)
     end
 
     for i = 1, toEmitCount do
-        xpcall(toEmit[i], function(err)
+        local status, err = pcall(toEmit[i], ...)
+        if not status then
             if eventName ~= "error"
                 and self:listenerCount("error") > 0 then
                 self:emit("error", err)
             else
                 error(err, 2)
             end
-        end, ...)
+        end
     end
 end
 

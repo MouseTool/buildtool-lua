@@ -1,0 +1,28 @@
+--- @field on fun(self:mousebase.TfmEvents, eventName:mousebase.TfmEvents.Events, listener:function)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"ChatCommand"', listener:fun(playerName:string, command:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"ChatMessage"', listener:fun(playerName:string, message:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"EmotePlayed"', listener:fun(playerName:string, emoteType:integer, emoteParam:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"FileLoaded"', listener:fun(fileNumber:string, fileData:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"FileSaved"', listener:fun(fileNumber:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"Keyboard"', listener:fun(playerName:string, keyCode:integer, down:boolean, xPlayerPosition:integer, yPlayerPosition:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"Mouse"', listener:fun(playerName:string, xMousePosition:integer, yMousePosition:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"Loop"', listener:fun(elapsedTime:integer, remainingTime:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"NewGame"', listener:fun()):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"NewPlayer"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerDataLoaded"', listener:fun(playerName:string, playerData:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerDied"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerGetCheese"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerBonusGrabbed"', listener:fun(playerName:string, bonusId:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerLeft"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerVampire"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerWon"', listener:fun(playerName:string, timeElapsed:integer, timeElapsedSinceRespawn:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerRespawn"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PlayerMeep"', listener:fun(playerName:string, xPosition:integer, yPosition:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"PopupAnswer"', listener:fun(popupId:integer, playerName:string, answer:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"SummoningStart"', listener:fun(playerName:string, objectType:integer, xPosition:integer, yPosition:integer, angle:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"SummoningCancel"', listener:fun(playerName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"SummoningEnd"', listener:fun(playerName:string, objectType:integer, xPosition:integer, yPosition:integer, angle:integer, objectDescription:tfm.ShamanObject)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"TextAreaCallback"', listener:fun(textAreaId:integer, playerName:string, eventName:string)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"ColorPicked"', listener:fun(colorPickerId:integer, playerName:string, color:integer)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"ContactListener"', listener:fun(playerName:string, groundId:integer, contactInfos:tfm.ContactDef)):mousebase.TfmEvents
+--- @field on fun(self:mousebase.TfmEvents, eventName:'"TalkToNPC"', listener:fun(playerName:string, npcName:string)):mousebase.TfmEvents

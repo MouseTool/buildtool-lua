@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "@mousetool/class": "^1.0.1",
-    "@mousetool/map": "^1.0.0"
+    "@mousetool/map": "link:../map"
   }
 }
